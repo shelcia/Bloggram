@@ -14,10 +14,16 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul className="navbar-nav ml-auto pr-5">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/blog">Blogs</NavLink>
+                            <NavLink className="nav-link" to="/dashboard/feed">Feed</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                            <NavLink className="nav-link" to="/dashboard/myblogs">My Blogs</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/dashboard/myprofile">My Profile</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/">Logout</NavLink>
                         </li>
                     </ul>
                 </div>

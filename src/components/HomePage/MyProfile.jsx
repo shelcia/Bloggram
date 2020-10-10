@@ -1,11 +1,7 @@
 import React from 'react';
 import Navbar from "./Navbar";
 
-
-
-
-const Dashboard  = () =>{
-
+const MyProfile = () =>{
 
     return(
         <React.Fragment>
@@ -15,4 +11,4 @@ const Dashboard  = () =>{
 }
 
 
-export default Dashboard;
+export default MyProfile;
