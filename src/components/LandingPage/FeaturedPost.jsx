@@ -5,7 +5,7 @@ const FeaturedPost = ()=>{
 
     return(
         <React.Fragment>
-            <div className="container border" style={{marginTop:"4.5rem"}}>
+            <div className="container border" id="container">
                 <h1>Featured Blog</h1>
                 <h1>hi</h1>
             </div>
