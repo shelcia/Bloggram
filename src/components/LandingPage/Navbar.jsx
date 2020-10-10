@@ -1,33 +1,30 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 
-const Navbar = ()=> {
+const Navbar = () => {
 
-    return(
+    return (
         <React.Fragment>
-            <nav className="navbar navbar-expand-md bg-dark navbar-dark">
-                <a className="navbar-brand" href="/">Blog Gram</a>
+            <nav className="navbar navbar-expand-md bg-light navbar-light fixed-top">
+                <a className="navbar-brand pl-5" href="/">Blog Gram</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-
-            <div className="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul className="navbar-nav">
-                <li className="nav-item">
-                    <a className="nav-link" href="/">Link</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="/">Link</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="/">Link</a>
-                </li>
-            </ul>
-            </div>
-        </nav>
+                <div className="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul className="navbar-nav ml-auto pr-5">
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/blog">Blogs</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </React.Fragment>
     )
-} 
+}
 
 
 export default Navbar;

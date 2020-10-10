@@ -1,4 +1,10 @@
 * {
   font-family: "Josefin Sans", sans-serif;
 }
+
+.bg-light {
+  background-color: #fff !important;
+  -webkit-box-shadow: 0px 3px 8px #00000015;
+          box-shadow: 0px 3px 8px #00000015;
+}
 /*# sourceMappingURL=style.css.map */
