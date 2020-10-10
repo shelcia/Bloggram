@@ -1,11 +1,12 @@
 import React from 'react';
 import './styles/style.css';
 
+import LandinPage from "./components/LandingPage/LandingPage";
+
 const App = () => {
   return (
     <div>
-      <h1>kbhbh</h1>
-      <h1>kbhbh</h1>
+      <LandinPage/>
     </div>
   );
 }
