@@ -1,11 +1,14 @@
 import React from 'react';
 import BlogLogin from "../../assets/bloglogin.png"
 import {Link} from "react-router-dom";
+import Navbar from "../LandingPage/Navbar";
+
 
 
 const Signin = () => {
   return (
     <React.Fragment>
+      <Navbar/>
       <div className="container border" id="container">
         <div className="row">
           <div className="col-sm-6">
