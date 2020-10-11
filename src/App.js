@@ -4,10 +4,12 @@ import './styles/style.css';
 import LandinPage from "./components/LandingPage/LandingPage";
 import Login from "./components/Login/Login";
 import Signup from "./components/Login/Signup";
-import Blogs from "./components/LandingPage/Blog";
+import BlogsPage from "./components/LandingPage/Blog";
 import Feed from "./components/HomePage/Feed";
 import MyBlog from "./components/HomePage/MyBlogs";
 import MyProfile from "./components/HomePage/MyProfile";
+import AddNewBlog from "./components/HomePage/AddNewBlog.jsx";
+import Blog from "./components/LandingPage/Blogs";
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -19,9 +21,11 @@ const App = () => {
         <Route path="/" exact component={LandinPage}/> 
         <Route path="/login" exact component={Login}/> 
         <Route path="/signup" exact component={Signup}/> 
-         <Route path="/blog" exact component={Blogs}/> 
+         <Route path="/blog" exact component={BlogsPage}/> 
+         <Route path="/blog/:id" component={Blog}/> 
          <Route path="/dashboard/feed" exact component={Feed}/> 
          <Route path="/dashboard/myblogs" exact component={MyBlog}/> 
+         <Route path="/dashboard/myblogs/newblog" exact component={AddNewBlog}/> 
          <Route path="/dashboard/myprofile" exact component={MyProfile}/> 
       </Switch>
     </Router>

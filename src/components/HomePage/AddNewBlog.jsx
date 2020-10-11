@@ -27,7 +27,7 @@ const AddNewBlog = ({ setIsLoading }) => {
 
     const addBlog = async(e) =>{
         e.preventDefault();
-        setIsLoading(true);
+        // setIsLoading(true);
 
         const LINK = process.env.REACT_APP_HEROKU_LINK;
         
@@ -60,7 +60,7 @@ const AddNewBlog = ({ setIsLoading }) => {
             body: JSON.stringify(response),
         });
         dispatch(AddPost(response));
-        setIsLoading(false);
+        // setIsLoading(false);
         successNotify('Blog added succesfully !!');
         } catch (error) {
             console.log(error);
@@ -72,49 +72,38 @@ const AddNewBlog = ({ setIsLoading }) => {
     return(
         <React.Fragment>
             <ToastContainer/>
-            <div className="modal fade" id="myModal">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h4 className="modal-title">Share your thoughts !!</h4>
-                            <button type="button" className="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div className="modal-body">
-                            <form onSubmit={addBlog}>
-                                <div className="form-group">
-                                    <label htmlFor="imglink">Image Link:</label>
-                                    <input type="text" ref={imgText} className="form-control" placeholder="Enter image link" id="imglink" required />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="title">Title:</label>
-                                    <input type="text" ref={titleText} className="form-control" placeholder="Enter title" id="title" required/>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="content">Content:</label>
-                                    <textarea type="text" rows="15" ref={contentText} className="form-control" placeholder="Enter content" id="content" required/>
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="content">Category:</label>
-                                    <select className="form-control" ref={categoryText} id="content" placeholder="Enter content" required>
-                                        <option>Life Style</option>
-                                        <option>Web Development</option>
-                                        <option>Technology</option>
-                                        <option>Architecture</option>
-                                        <option>Fashion Design</option>
-                                        <option>Automobile</option>
-                                        <option>Others</option>
-                                    </select>
-                                </div>
-                                <div className="text-center">
-                                    <button type="submit" className="btn btn-primary">Add Blog</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
-                        </div>
+            <div className="container" id="container">
+                <h4>Share your thoughts !!</h4>
+                <hr></hr>
+                <form onSubmit={addBlog}>
+                    <div className="form-group">
+                        <label htmlFor="imglink">Image Link:</label>
+                        <input type="text" ref={imgText} className="form-control" placeholder="Enter image link" id="imglink" required />
                     </div>
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="title">Title:</label>
+                        <input type="text" ref={titleText} className="form-control" placeholder="Enter title" id="title" required/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="content">Content:</label>
+                        <textarea type="text" rows="15" ref={contentText} className="form-control" placeholder="Enter content" id="content" required/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="content">Category:</label>
+                        <select className="form-control" ref={categoryText} id="content" placeholder="Enter content" required>
+                            <option>Life Style</option>
+                            <option>Web Development</option>
+                            <option>Technology</option>
+                            <option>Architecture</option>
+                            <option>Fashion Design</option>
+                            <option>Automobile</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                    <div className="text-center">
+                        <button type="submit" className="btn btn-primary">Add Blog</button>
+                    </div>
+                </form>
             </div>
         </React.Fragment>
     )

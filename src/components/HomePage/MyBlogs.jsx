@@ -3,8 +3,8 @@ import Navbar from "./Navbar";
 import { Link } from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis'
 import axios from "axios";
-import AddNewBlog from "./AddNewBlog";
 import Loading from "../Loading";
+import { useHistory } from "react-router-dom";
 
 const MyBlog = () =>{
 
@@ -12,13 +12,16 @@ const MyBlog = () =>{
   const[isLoading, setIsLoading] = useState(false);
   const LINK = process.env.REACT_APP_HEROKU_LINK;
   const id = localStorage.getItem("BlogGram-UserId");
+  const history = useHistory();
 
   useEffect(() => {
     const getMyPost = () => {
+      setIsLoading(true);
       axios
         .get(`${LINK}myblogs/${id}`)
         .then((response) => {
           setBlogs(response.data);
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -32,10 +35,9 @@ const MyBlog = () =>{
         <React.Fragment>
             {!isLoading ? 
             <React.Fragment>
-            <AddNewBlog setIsLoading={setIsLoading}/>
             <Navbar/>
             <div className="container" id="container" style={{maxWidth: "450px"}}>
-            <button className="btn btn-primary w-100 mb-3" data-toggle="modal" data-target="#myModal">Add new Blog</button>
+            <button className="btn btn-primary w-100 mb-3" onClick={() => history.push('myblogs/newblog')}>Add new Blog</button>
             <div style={{ flexDirection: "column-reverse" }} className="d-flex">
             {blogs.map((post)=>(
                 <div className="card w-100 mt-2" key={post.id}>
