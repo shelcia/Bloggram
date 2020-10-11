@@ -36,7 +36,7 @@ const Login = () => {
         console.log(res);
         localStorage.setItem(`${PREFIX}Token`, res.data.token);
         localStorage.setItem(`${PREFIX}UserId`, res.data.userId);
-        localStorage.setItem(`${PREFIX}UserId`, res.data.name);
+        localStorage.setItem(`${PREFIX}name`, res.data.name);
         setIsLoading(false);
         sucessNotify("Login succesfulll");
 

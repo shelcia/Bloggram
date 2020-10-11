@@ -79,3 +79,20 @@ $noOpacity: rgba(0, 0, 0, 0);
     transform: translateX(-50%);
   }
 }
+
+#icon-container {
+  @include displayFlex(center, center);
+  img {
+    height: 20px;
+    cursor: pointer;
+    &:hover {
+      transform: rotateZ(-10deg);
+    }
+  }
+  p {
+    display: block;
+    margin-block-end: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0.5rem;
+  }
+}

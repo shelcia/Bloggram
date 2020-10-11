@@ -1,16 +1,19 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../LandingPage/Navbar";
 // import axios from "axios";
 import { LoadPost } from "../actions/index";
 import { Link } from "react-router-dom";
-import LinesEllipsis from 'react-lines-ellipsis'
-
+import LinesEllipsis from 'react-lines-ellipsis';
+import Like from "../../assets/like.png";
+import Dislike from "../../assets/dislike.png";
+import Heart from "../../assets/heart.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Blog = () => {
   
-
     const LINK = process.env.REACT_APP_HEROKU_LINK;
     const allPost = useSelector((state) => state.posts);
     const dispatch = useDispatch();
@@ -27,34 +30,47 @@ const Blog = () => {
         getPost();
     }, [LINK, dispatch]);
 
-   
-
+    const errorNotify = (message) => {
+        toast.error(message);
+    };
 
   return (
     <React.Fragment>
+    <ToastContainer/>
     <Navbar/>
-
-      <div className="container" id="container">
-        <div className="card-columns">
-          {allPost.map((blog)=>(
-            <div className="card" key={blog.id}>
-              <div className="row">
-                <div className="col-sm-5 p-0"><img src={blog.image} alt="" className="card-img-top" style={{filter: 'grayscale(100%)'}}/></div>
-                <div className="col-sm-7">
-                  <h4 className="card-title mt-2">{blog.title}</h4>
-                     <LinesEllipsis
-                            text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
-                            maxLine='3'
+        <div className="container" id="container" style={{maxWidth: "450px"}}>
+            {allPost.map((post)=>(
+                <div className="card w-100 mt-2" key={post.id}>
+                    <img className="img-fluid"  src={post.image} alt="Card" style={{filter: 'grayscale(100%)'}}/>
+                    <div className="card-body">
+                        <h4 className="card-title">{post.title}</h4>
+                            <LinesEllipsis
+                            text={post.content}
+                            maxLine='4'
                             ellipsis='...'
                             trimRight
                             basedOn='letters'
-                        />
-                    <Link to = {`/blog/${blog.id}`} className="card-link">See More &#62;&#62; </Link></div>
-              </div>
-            </div>
+                            />
+                        <Link to={`/blog/${post.id}`} className="btn btn-primary mt-3">See More &#62;&#62;</Link>
+                        <hr></hr>
+                        <div className="row">
+                          <div className="col-sm-4" id="icon-container">
+                            <img src={Like} alt="" onClick={()=>errorNotify('You have to login to like')}/>
+                            <p>{post.likes}</p>
+                          </div>
+                          <div className="col-sm-4" id="icon-container">
+                            <img src={Dislike} alt="" onClick={()=>errorNotify('You have to login to dislike')}/>
+                             <p>{post.dislikes}</p>
+                          </div>
+                          <div className="col-sm-4" id="icon-container">
+                            <img src={Heart} alt="" onClick={()=>errorNotify('You have to login to add heart')}/>
+                              <p>{post.hearts}</p>
+                          </div>
+                        </div>
+                    </div>
+                </div>  
             ))}
-        </div>
-      </div>
+            </div>
     </React.Fragment>
   )
 }
