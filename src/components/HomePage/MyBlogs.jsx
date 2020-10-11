@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis'
 import axios from "axios";
 import AddNewBlog from "./AddNewBlog";
+import Loading from "../Loading";
 
 const MyBlog = () =>{
 
   const [blogs, setBlogs] = useState([]);
+  const[isLoading, setIsLoading] = useState(false);
   const LINK = process.env.REACT_APP_HEROKU_LINK;
   const id = localStorage.getItem("BlogGram-UserId");
 
@@ -28,13 +30,16 @@ const MyBlog = () =>{
 
     return(
         <React.Fragment>
-            <AddNewBlog/>
+            {!isLoading ? 
+            <React.Fragment>
+            <AddNewBlog setIsLoading={setIsLoading}/>
             <Navbar/>
             <div className="container" id="container" style={{maxWidth: "450px"}}>
             <button className="btn btn-primary w-100 mb-3" data-toggle="modal" data-target="#myModal">Add new Blog</button>
+            <div style={{ flexDirection: "column-reverse" }} className="d-flex">
             {blogs.map((post)=>(
-                <div className="card w-100" key={post.id}>
-                    <img className="img-fluid"  src={post.image} alt="Card" />
+                <div className="card w-100 mt-2" key={post.id}>
+                    <img className="img-fluid"  src={post.image} alt="Card" style={{filter: 'grayscale(100%)'}}/>
                     <div className="card-body">
                         <h4 className="card-title">{post.title}</h4>
                             <LinesEllipsis
@@ -61,6 +66,9 @@ const MyBlog = () =>{
                 </div>  
             ))}
             </div>
+            </div>
+            </React.Fragment> : <Loading/>}
+            
             
         </React.Fragment>
     )

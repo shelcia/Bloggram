@@ -39,6 +39,7 @@ const Blog = () => {
     <ToastContainer/>
     <Navbar/>
         <div className="container" id="container" style={{maxWidth: "450px"}}>
+          <div style={{ flexDirection: "column-reverse" }} className="d-flex">
             {allPost.map((post)=>(
                 <div className="card w-100 mt-2" key={post.id}>
                     <img className="img-fluid"  src={post.image} alt="Card" style={{filter: 'grayscale(100%)'}}/>
@@ -70,6 +71,7 @@ const Blog = () => {
                     </div>
                 </div>  
             ))}
+            </div>
             </div>
     </React.Fragment>
   )

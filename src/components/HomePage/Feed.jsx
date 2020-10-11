@@ -52,7 +52,7 @@ const Feed = () => {
             return post;
           });
           dispatch(AddLike(newAllPost));
-          console.log(res);
+        //   console.log(res);
         })
         .catch((error) => {
           console.log(error);
@@ -82,7 +82,7 @@ const Feed = () => {
             return post;
           });
           dispatch(AddDislike(newAllPost));
-          console.log(res);
+        //   console.log(res);
         })
         .catch((error) => {
           console.log(error);
@@ -112,7 +112,7 @@ const Feed = () => {
             return post;
           });
           dispatch(AddHearts(newAllPost));
-          console.log(res);
+        //   console.log(res);
         })
         .catch((error) => {
           console.log(error);
@@ -127,6 +127,7 @@ const Feed = () => {
     <ToastContainer/>
     <Navbar/>
         <div className="container" id="container" style={{maxWidth: "450px"}}>
+            <div style={{ flexDirection: "column-reverse" }} className="d-flex">
             {allPost.map((post)=>(
                 <div className="card w-100 mt-2" key={post.id}>
                     <img className="img-fluid"  src={post.image} alt="Card" style={{filter: 'grayscale(100%)'}}/>
@@ -158,6 +159,7 @@ const Feed = () => {
                     </div>
                 </div>  
             ))}
+            </div>
             </div>
     </React.Fragment>
   )
