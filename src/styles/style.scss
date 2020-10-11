@@ -63,6 +63,7 @@ $noOpacity: rgba(0, 0, 0, 0);
 }
 
 #footer {
+  position: relative;
   margin-top: 3rem;
   background-color: $textColor;
   color: $bgColor;
@@ -70,5 +71,11 @@ $noOpacity: rgba(0, 0, 0, 0);
   .row {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+  #footerTag {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

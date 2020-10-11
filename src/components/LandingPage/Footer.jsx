@@ -6,7 +6,7 @@ const Footer = () =>{
 
     return(
         <React.Fragment>
-            <div className="container-fluid" id="footer">
+            <div className="container-fluid pt-3" id="footer">
                 <div className="row">
                     <div className="col-sm-6">
                         <h4>Categories</h4>
@@ -15,7 +15,7 @@ const Footer = () =>{
                         <h4>Social Handles</h4>
                     </div>
                 </div>
-                <div className="text-center">
+                <div className="text-center" id="footerTag">
                     <p>Developed by Shelcia</p>
                 </div>
             </div> 

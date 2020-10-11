@@ -12,8 +12,8 @@ const Categories = ()=>{
 
     return(
         <React.Fragment>
-            <div className="container border" style={{ marginTop:"2rem" }}>
-                <h1>Categories</h1>
+            <div className="container" style={{ marginTop:"2rem" }}>
+                <h1 className="pb-3">Categories</h1>
                 <div className="card-columns">
                     {categories.map((category)=>(
                     <div className="card" key={category.id}>
@@ -24,6 +24,9 @@ const Categories = ()=>{
                         </div>
                     </div>
                     ))}
+                </div>
+                <div className="text-right">
+                    <Link to="/category" >See all Categories &#62;&#62;</Link>
                 </div>
             </div>
         </React.Fragment>

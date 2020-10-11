@@ -72,6 +72,7 @@
 }
 
 #footer {
+  position: relative;
   margin-top: 3rem;
   background-color: black;
   color: #fff;
@@ -81,5 +82,13 @@
 #footer .row {
   padding-left: 4rem;
   padding-right: 4rem;
+}
+
+#footer #footerTag {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 /*# sourceMappingURL=style.css.map */
