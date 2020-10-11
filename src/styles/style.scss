@@ -2,6 +2,8 @@ $secondaryFont: "Josefin Sans", sans-serif;
 $primaryFont: "Spectral", serif;
 $bgColor: #fff;
 $shadow: 0px 3px 8px #00000015;
+$textColor: rgb(0, 0, 0);
+
 
 * {
   font-family: $secondaryFont;
@@ -14,4 +16,17 @@ $shadow: 0px 3px 8px #00000015;
 
 #container {
   margin-top: 4.5rem !important;
+}
+
+.btn-primary{
+  color: $textColor;
+  background-color: $bgColor;
+  border: 1.8px solid $textColor;
+  transition: all 0.2s ease-in;
+  border-radius: 0.25rem;
+  &:hover{
+    color: $bgColor;
+    border: 1.8px solid $textColor;
+    background-color: $textColor;
+  }
 }
