@@ -36,7 +36,7 @@ const Signin = () => {
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
             </form>
-            <div className="text-center">
+            <div className="text-center mt-5">
                 Already have an account? then  <Link to="/login">Login</Link>
             </div>
           </div>

@@ -3,10 +3,16 @@ $primaryFont: "Spectral", serif;
 $bgColor: #fff;
 $shadow: 0px 3px 8px #00000015;
 $textColor: rgb(0, 0, 0);
-
+$noOpacity: rgba(0, 0, 0, 0);
 
 * {
   font-family: $secondaryFont;
+}
+
+@mixin displayFlex($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
 }
 
 .bg-light {
@@ -18,15 +24,51 @@ $textColor: rgb(0, 0, 0);
   margin-top: 4.5rem !important;
 }
 
-.btn-primary{
+.btn-primary {
   color: $textColor;
-  background-color: $bgColor;
+  background-color: $noOpacity;
   border: 1.8px solid $textColor;
   transition: all 0.2s ease-in;
   border-radius: 0.25rem;
-  &:hover{
+
+  &:hover {
     color: $bgColor;
     border: 1.8px solid $textColor;
     background-color: $textColor;
+  }
+}
+
+.card-columns .card {
+  border: none;
+  box-shadow: $shadow;
+  .card-img-overlay {
+    background-color: #00000055;
+    @include displayFlex(center, center);
+    flex-direction: column;
+    h4.card-title {
+      font-size: 1.8rem;
+      color: $bgColor;
+    }
+    .card-link {
+      color: $bgColor;
+      transition: all 0.2s ease-in;
+      &:hover {
+        transform: scale(1.2, 1.2);
+      }
+    }
+  }
+  &:hover {
+    box-shadow: 5px 5px 15px #00000015;
+  }
+}
+
+#footer {
+  margin-top: 3rem;
+  background-color: $textColor;
+  color: $bgColor;
+  min-height: 200px;
+  .row {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }

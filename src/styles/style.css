@@ -14,7 +14,7 @@
 
 .btn-primary {
   color: black;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0);
   border: 1.8px solid black;
   -webkit-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
@@ -25,5 +25,61 @@
   color: #fff;
   border: 1.8px solid black;
   background-color: black;
+}
+
+.card-columns .card {
+  border: none;
+  -webkit-box-shadow: 0px 3px 8px #00000015;
+          box-shadow: 0px 3px 8px #00000015;
+}
+
+.card-columns .card .card-img-overlay {
+  background-color: #00000055;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.card-columns .card .card-img-overlay h4.card-title {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.card-columns .card .card-img-overlay .card-link {
+  color: #fff;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.card-columns .card .card-img-overlay .card-link:hover {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+
+.card-columns .card:hover {
+  -webkit-box-shadow: 5px 5px 15px #00000015;
+          box-shadow: 5px 5px 15px #00000015;
+}
+
+#footer {
+  margin-top: 3rem;
+  background-color: black;
+  color: #fff;
+  min-height: 200px;
+}
+
+#footer .row {
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 /*# sourceMappingURL=style.css.map */
