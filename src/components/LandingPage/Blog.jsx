@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState } from 'react';
-import { useDispatch } from "react-redux";
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../LandingPage/Navbar";
 // import axios from "axios";
 import { LoadPost } from "../actions/index";
@@ -9,11 +9,10 @@ import LinesEllipsis from 'react-lines-ellipsis'
 
 
 const Blog = () => {
-
-
-    const [blog,setBlog] = useState([]);
+  
 
     const LINK = process.env.REACT_APP_HEROKU_LINK;
+    const allPost = useSelector((state) => state.posts);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,7 +20,6 @@ const Blog = () => {
         try {
             const posts = await fetch(`${LINK}blog`);
             dispatch(LoadPost(await posts.json()));
-            setBlog(await posts.json());
         } catch (error) {
         console.log(error);
         }
@@ -29,28 +27,16 @@ const Blog = () => {
         getPost();
     }, [LINK, dispatch]);
 
-     const search  = useRef('');
-
-     const handleSearch = (e)=>{
-       e.preventDefault();
-        const searchBlogs = blog.filter((blog) => blog.title === search.current.value);
-        setBlog(searchBlogs)
-     }
-        
+   
 
 
   return (
     <React.Fragment>
     <Navbar/>
+
       <div className="container" id="container">
-        <form className="form-inline mx-auto" onSubmit={handleSearch}>
-            <input type="type" ref={search} className="form-control" placeholder="Search any Blog" id="blog" style={{ width: "80%"}}/>
-            <button type="submit" className="btn btn-primary ml-3" >Submit</button>
-        </form>
-      </div>
-      <div className="container mt-5">
         <div className="card-columns">
-          {blog.map((blog)=>(
+          {allPost.map((blog)=>(
             <div className="card" key={blog.id}>
               <div className="row">
                 <div className="col-sm-5 p-0"><img src={blog.image} alt="" className="card-img-top" style={{filter: 'grayscale(100%)'}}/></div>
