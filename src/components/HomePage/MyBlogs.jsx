@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 const MyBlog = () =>{
 
-  const [blogs, setBlogs] = useState([]);
+  const[posts, setPosts] = useState([]);
   const[isLoading, setIsLoading] = useState(false);
   const LINK = process.env.REACT_APP_HEROKU_LINK;
   const id = localStorage.getItem("BlogGram-UserId");
@@ -20,12 +20,14 @@ const MyBlog = () =>{
       axios
         .get(`${LINK}myblogs/${id}`)
         .then((response) => {
-          setBlogs(response.data);
-          setIsLoading(false);
+          // console.log(response)
+          // console.log(response.data)
+          setPosts(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
+        setIsLoading(false);
     };
 
     getMyPost();
@@ -39,7 +41,7 @@ const MyBlog = () =>{
             <div className="container" id="container" style={{maxWidth: "450px"}}>
             <button className="btn btn-primary w-100 mb-3" onClick={() => history.push('myblogs/newblog')}>Add new Blog</button>
             <div style={{ flexDirection: "column-reverse" }} className="d-flex">
-            {blogs.map((post)=>(
+            { posts.map((post)=>(
                 <div className="card w-100 mt-2" key={post.id}>
                     <img className="img-fluid"  src={post.image} alt="Card" style={{filter: 'grayscale(100%)'}}/>
                     <div className="card-body">

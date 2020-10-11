@@ -32,14 +32,14 @@ const Signin = () => {
       email: email.current.value,
       password: password.current.value,
     };
-    console.log(response);
+    // console.log(response);
 
     axios
       .post(`${LINK}register`, response)
       .then((res) => {
-        console.log(res);
-        sucessNotify('Account created succesfully ! you can go ahead and login.')
+        // console.log(res);
         setIsLoading(false);
+        sucessNotify('Account created succesfully ! you can go ahead and login.')
       })
       .catch((error) => {
         setIsLoading(false);
@@ -76,7 +76,7 @@ const Signin = () => {
                 <div className="invalid-feedback">Your password must contain atleast 6 characters.</div>
               </div>
               <div className="text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
               </div>
             </form>
             <div className="text-center mt-5">

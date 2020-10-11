@@ -9,7 +9,7 @@ import Feed from "./components/HomePage/Feed";
 import MyBlog from "./components/HomePage/MyBlogs";
 import MyProfile from "./components/HomePage/MyProfile";
 import AddNewBlog from "./components/HomePage/AddNewBlog.jsx";
-import Blog from "./components/LandingPage/Blogs";
+import Blog from "./components/Blogs/Blogs";
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";

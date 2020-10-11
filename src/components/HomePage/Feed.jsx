@@ -64,7 +64,7 @@ const Feed = () => {
 
   const disLikes = useCallback(
     (id, value) => {
-      console.log("clicked");
+      // console.log("clicked");
       const response = {
         dislikes: value + 1,
       };
@@ -94,7 +94,7 @@ const Feed = () => {
 
   const hearts = useCallback(
     (id, value) => {
-      console.log(id);
+      // console.log(id);
       const response = {
         hearts: value + 1,
       };

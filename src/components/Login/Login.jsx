@@ -33,13 +33,12 @@ const Login = () => {
         password: password.current.value,
       })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
+        setIsLoading(false);
         localStorage.setItem(`${PREFIX}Token`, res.data.token);
         localStorage.setItem(`${PREFIX}UserId`, res.data.userId);
         localStorage.setItem(`${PREFIX}name`, res.data.name);
-        setIsLoading(false);
         sucessNotify("Login succesfulll");
-
         history.push("/dashboard/feed");
       })
       .catch((error) => {

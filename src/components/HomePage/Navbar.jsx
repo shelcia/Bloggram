@@ -1,13 +1,26 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 
 const Navbar = () => {
 
+    const history = useHistory();
+
+    const logout = (e) => {
+
+        e.preventDefault();
+        const PREFIX = 'BlogGram-'
+        localStorage.removeItem(`${PREFIX}UserId`);
+        localStorage.removeItem(`${PREFIX}Token`);
+        localStorage.removeItem(`${PREFIX}Email`);
+        localStorage.removeItem(`${PREFIX}name`);
+        history.push('/');
+    }
+
     return (
         <React.Fragment>
             <nav className="navbar navbar-expand-md bg-light navbar-light fixed-top">
-                <NavLink className="navbar-brand pl-5" to="/">Blog Gram</NavLink>
+                <NavLink className="navbar-brand pl-5" to="/dashboard/feed">BlogGram</NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -23,7 +36,7 @@ const Navbar = () => {
                             <NavLink className="nav-link" to="/dashboard/myprofile">My Profile</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Logout</NavLink>
+                            <NavLink className="nav-link" to="/" onClick={(e)=>logout(e)}>Logout</NavLink>
                         </li>
                     </ul>
                 </div>

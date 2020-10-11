@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <React.Fragment>
             <nav className="navbar navbar-expand-md bg-light navbar-light fixed-top">
-                <NavLink className="navbar-brand pl-5" to="/">Blog Gram</NavLink>
+                <NavLink className="navbar-brand pl-5" to="/">BlogGram</NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>
