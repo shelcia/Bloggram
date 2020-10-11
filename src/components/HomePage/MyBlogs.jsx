@@ -53,7 +53,8 @@ const MyBlog = () =>{
                             trimRight
                             basedOn='letters'
                             />
-                        <Link to={`/blog/${id}`} className="btn btn-primary mt-3">See More &#62;&#62;</Link>
+                        <Link to={`/blog/${post.id}`} className="btn btn-primary mt-3">See More &#62;&#62;</Link>
+                        <Link to={`myblogs/edit/${post.id}`} className="btn btn-primary mt-3 ml-3">Edit</Link>
                         <hr></hr>
                          <div className="row">
                           <div className="col-sm-4" id="icon-container">
