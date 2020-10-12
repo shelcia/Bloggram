@@ -11,7 +11,8 @@ import MyProfile from "./components/HomePage/MyProfile";
 import AddNewBlog from "./components/HomePage/AddNewBlog.jsx";
 import Blog from "./components/Blogs/Blogs";
 import BlogEdit from "./components/Blogs/EditBlog";
-
+import CategoryPage from "./components/LandingPage/CategoriesPage";
+import SubCategoryPage from "./components/LandingPage/SubCategoris";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -22,13 +23,15 @@ const App = () => {
         <Route path="/" exact component={LandinPage}/> 
         <Route path="/login" exact component={Login}/> 
         <Route path="/signup" exact component={Signup}/> 
-         <Route path="/blog" exact component={BlogsPage}/> 
-         <Route path="/blog/:id" component={Blog}/> 
-         <Route path="/dashboard/feed" exact component={Feed}/> 
-         <Route path="/dashboard/myblogs" exact component={MyBlog}/> 
-         <Route path="/dashboard/myblogs/edit/:id" component={BlogEdit}/> 
-         <Route path="/dashboard/myblogs/newblog" exact component={AddNewBlog}/> 
-         <Route path="/dashboard/myprofile" exact component={MyProfile}/> 
+        <Route path="/blog" exact component={BlogsPage}/> 
+        <Route path="/blog/:id" component={Blog}/> 
+        <Route path="/category" exact component={CategoryPage}/> 
+        <Route path="/category/:id" component={SubCategoryPage}/> 
+        <Route path="/dashboard/feed" exact component={Feed}/> 
+        <Route path="/dashboard/myblogs" exact component={MyBlog}/> 
+        <Route path="/dashboard/myblogs/edit/:id" component={BlogEdit}/> 
+        <Route path="/dashboard/myblogs/newblog" exact component={AddNewBlog}/> 
+        <Route path="/dashboard/myprofile" exact component={MyProfile}/> 
       </Switch>
     </Router>
   );

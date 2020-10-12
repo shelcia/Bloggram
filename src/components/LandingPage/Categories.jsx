@@ -26,7 +26,7 @@ const Categories = ()=>{
                     ))}
                 </div>
                 <div className="text-right">
-                    <Link to="/category" >See all Categories &#62;&#62;</Link>
+                    <Link to="/category" id="link" >See all Categories &#62;&#62;</Link>
                 </div>
             </div>
         </React.Fragment>

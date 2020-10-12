@@ -1,65 +1,84 @@
-import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-// import { ToastContainer, toast } from 'react-toastify';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { LoadPost } from "../actions/index";
 import Navbar from "../HomePage/Navbar";
 import axios from "axios";
-
+import Loading from "../Loading";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 
 const BlogEdit = ({ match }) =>{
 
-   
+    const [isLoading , setIsLoading] = useState(false);
+    
+    const results = useSelector((state) => state.posts);
+    const blog = results.filter((result) => result.id === match.params.id);
 
-    // console.log(match);
-
-    // console.log(match.params.id);
-
-    const allPost = useSelector((state) => state.posts);
+    const id = match.params.id;
     const LINK = process.env.REACT_APP_HEROKU_LINK;
 
-    const blog = allPost.filter((post)=> post.id === match.params.id );
-    console.log(blog);
+    const[title, setTitle] = useState(blog[0].title);
+    const[content, setContent] = useState(blog[0].content);
+    const[image, setImage] = useState(blog[0].image);
 
-    const[title, setTitle] = useState(blog.title);
-    const[content, setContent] = useState(blog.content);
-    const[image, setImage] = useState(blog.image);
-    
-    // if(blog){
-    //     setTitle(blog.title);
-    //     setContent(blog.content);
-    //     setImage(blog.image);     
-    // }
+    const history = useHistory();
 
-    const dispatch = useDispatch();
+    const errorNotify = (message) => {
+        toast.error(message);
+    };
 
-    useEffect(() => {
-        const getPost = async () => {
-        try {
-            const posts = await fetch(`${LINK}blog`);
-            dispatch(LoadPost(await posts.json()));
-        } catch (error) {
-        console.log(error);
-        }
-        };
-        getPost();
-    }, [LINK, dispatch]); 
+    const succesNotify = (message) => {
+        toast.success(message);
+    };
     
     const editBlog = (e) =>{
         e.preventDefault();
-        const userid = localStorage.getItem("BlogGram-UserId");
-
-        const response = { title: title, content:content,  image:image};
+        setIsLoading(true);
+        
+        const response = { title: title, content: content,  image: image};
         axios
-            .put(`${LINK}userdetails/edit/${userid}`, response)
-            .then((res) => console.log(res))
-            .catch((error) => console.log(error));
+            .put(`${LINK}myblogs/edit/${id}`, response)
+            .then((res) => {
+                setIsLoading(false);
+                succesNotify('Succesfully edited !!');
+            })
+            .catch((error) => {
+                errorNotify('Error editing the blog')
+                console.log(error);
+            });
+    }
+
+    const deleteBlog = (e) => {
+
+        e.preventDefault();
+        const token = localStorage.getItem("BlogGram-Token");
+
+        fetch(`${LINK}myblogs/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                "auth-token": token,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            history.push('/dashboard/myblogs')
+            succesNotify('Succesfully edited !!');
+
+        })
+        .catch((error) => {
+            errorNotify(error);
+        });
     }
 
     return(
         <React.Fragment>
-            {/* <ToastContainer/> */}
+            {isLoading ? <Loading/> :
+           
+            <React.Fragment>
+            <ToastContainer/>
             <Navbar/>
             <div className="container" id="container">
                 <h4>Edit your blog</h4>
@@ -79,10 +98,13 @@ const BlogEdit = ({ match }) =>{
                     </div>
                     <div className="text-center mb-5">
                         <button type="submit" className="btn btn-primary">Edit Blog</button>
-                        <button type="submit" className="btn btn-primary">Delete Blog</button>
+                        <button type="button" className="btn btn-primary ml-2" onClick={(e)=>deleteBlog(e)}>Delete Blog</button>
                     </div>
                 </form>
             </div>
+            </React.Fragment>
+            }
+            
         </React.Fragment>
     )
 

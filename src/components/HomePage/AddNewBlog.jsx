@@ -100,7 +100,7 @@ const AddNewBlog = ({ setIsLoading }) => {
                             <option>Others</option>
                         </select>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center mt-5">
                         <button type="submit" className="btn btn-primary">Add Blog</button>
                     </div>
                 </form>

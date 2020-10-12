@@ -129,4 +129,15 @@
   margin-bottom: 0rem;
   margin-left: 0.5rem;
 }
+
+#link {
+  color: black;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+#link:hover {
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
 /*# sourceMappingURL=style.css.map */

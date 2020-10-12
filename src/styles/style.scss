@@ -102,3 +102,11 @@ $noOpacity: rgba(0, 0, 0, 0);
     margin-left: 0.5rem;
   }
 }
+
+#link {
+  color: $textColor;
+  transition: all 0.2s ease-in;
+  &:hover {
+    transform: scale(1.2, 1.2);
+  }
+}
