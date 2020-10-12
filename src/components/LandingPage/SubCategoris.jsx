@@ -44,18 +44,18 @@ const SubCategoriesPage = ({ match }) =>{
         { id:"7", name:"Others", img:"https://picsum.photos/id/528/180/200" , link:"others"},
     ]
     const topic = Categories.filter((category)=>category.link === match.params.id)
-    console.log('topic',topic[0].name);
+    // console.log('topic',topic[0].name);
     const allPost = useSelector((state) => state.posts);
-    console.log('allPost',allPost);
+    // console.log('allPost',allPost);
     const blogs = allPost.filter((post)=> post.category === topic[0].name);
-    console.log('blogs',blogs);
+    // console.log('blogs',blogs);
 
 
     return(
         <React.Fragment>
             <ToastContainer/>
             <Navbar/>
-            <div className="container" id="container">
+            <div className="container" id="container" style={{width:"450px"}}>
                 <div className="text-center">
                     <div className="card-deck">
                     {topic.map((category)=>(
@@ -65,7 +65,6 @@ const SubCategoriesPage = ({ match }) =>{
                     </div>
                 </div>
                 <hr></hr>
-
                 <div style={{ flexDirection: "column-reverse" }} className="d-flex">
                 {blogs.map((post)=>(
                 <div className="card w-100 mt-2" key={post.id}>
