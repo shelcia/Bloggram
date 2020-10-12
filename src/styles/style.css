@@ -87,6 +87,18 @@
   min-height: 200px;
 }
 
+#footer a {
+  color: #fff;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+#footer a:hover {
+  text-decoration: none;
+  -webkit-transform: translateX(5px);
+          transform: translateX(5px);
+}
+
 #footer .row {
   padding-left: 4rem;
   padding-right: 4rem;

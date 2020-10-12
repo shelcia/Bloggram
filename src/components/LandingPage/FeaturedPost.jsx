@@ -23,7 +23,7 @@ const FeaturedPost = ()=>{
                             basedOn='letters'
                         />
                         <div className="text-right">
-                            <Link to="/" id="link">See more &#62;&#62;</Link>
+                            <Link to="/blog/1234455556" id="link">See more &#62;&#62;</Link>
                         </div>
                     </div>
                 </div>

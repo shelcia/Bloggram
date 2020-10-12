@@ -36,7 +36,7 @@ const SubCategoriesPage = ({ match }) =>{
 
     const Categories = [
         { id:"1", name:"Lifestyle", img:"https://picsum.photos/id/163/180/200", link:"lifestyle" },
-        { id:"2", name:"Web Develpment", img:"https://picsum.photos/id/1/180/200", link:"webdev" },
+        { id:"2", name:"Web Development", img:"https://picsum.photos/id/1/180/200", link:"webdev" },
         { id:"3", name:"Technology", img:"https://picsum.photos/id/160/180/200" , link:"technology"},
         { id:"4", name:"Architecture", img:"https://picsum.photos/id/405/180/200" , link:"architecture"},
         { id:"5", name:"Fashion Design", img:"https://picsum.photos/id/513/180/200" , link:"fashiondesign"},

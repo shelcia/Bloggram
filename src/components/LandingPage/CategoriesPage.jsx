@@ -7,7 +7,7 @@ const CategoriesPage = () =>{
 
     const firstColumn = [
         { id:"1", name:"Lifestyle", img:"https://picsum.photos/id/163/180/200", link:"lifestyle" },
-        { id:"2", name:"Web Develpment", img:"https://picsum.photos/id/1/180/200", link:"webdev" },
+        { id:"2", name:"Web Development", img:"https://picsum.photos/id/1/180/200", link:"webdev" },
         { id:"3", name:"Technology", img:"https://picsum.photos/id/160/180/200" , link:"technology"},
     ]
     const secondColumn = [

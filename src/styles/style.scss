@@ -74,6 +74,14 @@ $noOpacity: rgba(0, 0, 0, 0);
   background-color: $textColor;
   color: $bgColor;
   min-height: 200px;
+  a {
+    color: $bgColor;
+    transition: all 0.2s ease-in;
+    &:hover {
+      text-decoration: none;
+      transform: translateX(5px);
+    }
+  }
   .row {
     padding-left: 4rem;
     padding-right: 4rem;
