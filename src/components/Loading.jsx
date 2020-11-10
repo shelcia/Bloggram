@@ -2,7 +2,7 @@ import React from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 
-const Loading = ({ children }) => {
+const Loading = ({ text }) => {
   return (
     <div
       className="w-100 h-100 d-flex"
@@ -11,11 +11,12 @@ const Loading = ({ children }) => {
       <Loader
         type="Hearts"
         color="#000000"
-        height={100}
-        width={100}
+        className="img-fluid"
+        height={300}
+        width={300}
         timeout={3000}
       >
-        {children}
+        <h6>{text}</h6>
       </Loader>
     </div>
   );

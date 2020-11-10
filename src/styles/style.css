@@ -2,6 +2,12 @@
   font-family: "Josefin Sans", sans-serif;
 }
 
+p,
+a,
+.btn {
+  font-size: 1.2rem;
+}
+
 .bg-light {
   background-color: #fff !important;
   -webkit-box-shadow: 0px 3px 8px #00000015;
