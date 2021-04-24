@@ -7,7 +7,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.5",
     "axios": "^0.21.1",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "react-lines-ellipsis": "^0.14.1",
     "react-loader-spinner": "^4.0.0",
