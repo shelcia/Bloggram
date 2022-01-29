@@ -3,20 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-lines-ellipsis": "^0.15.0",
-    "react-loader-spinner": "^4.0.0",
+    "react-loader-spinner": "^5.1.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.2",
-    "react-toastify": "^7.0.4",
+    "react-toastify": "^8.1.0",
     "redux": "^4.1.2"
-
   },
   "scripts": {
     "start": "react-scripts start",
