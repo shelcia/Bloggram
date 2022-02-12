@@ -8412,10 +8412,10 @@ react-lines-ellipsis@^0.15.0:
   resolved "https://registry.yarnpkg.com/react-lines-ellipsis/-/react-lines-ellipsis-0.15.0.tgz#07ecc8095f7d598e676ee662c637bd373f3552f4"
   integrity sha512-8kWpEmu7ijmB6Gz5t+eSjNux2SpVXZBsmfeFE8LjMS7tU3H8ai475CyNc0dH0RDTwt4Esr7c06Xq4SB7Gpl9yQ==
 
-react-loader-spinner@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/react-loader-spinner/-/react-loader-spinner-5.1.0.tgz#d0d927ba554ad16fc2cc4e09955df8fdbb54491c"
-  integrity sha512-+t6Fo0HQH0/8pGRcyE18V9D2kPcnNIe2LBBfuE+9jsRqE+g66lt+BkEo8TY23tP5gmCcyUxIW3efn92YhoSLWQ==
+react-loader-spinner@^5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/react-loader-spinner/-/react-loader-spinner-5.1.3.tgz#fe1dd77be5894b73cdc14b146326403de8311399"
+  integrity sha512-wYDB9wNER7Q3oXBMso/k1ryhTsQdjzvCTWJmiGrVH8bsufwkpVix1C4jiULzthR6YECzaPxFEKR/RQ8JSArhOA==
 
 react-redux@^7.2.6:
   version "7.2.6"
