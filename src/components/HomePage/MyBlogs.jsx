@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import LinesEllipsis from "react-lines-ellipsis";
 import axios from "axios";
 import Loading from "../Loading";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const MyBlog = () => {
   const [posts, setPosts] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const LINK = process.env.REACT_APP_HEROKU_LINK;
   const id = localStorage.getItem("BlogGram-UserId");
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     const getMyPost = () => {
@@ -43,7 +43,7 @@ const MyBlog = () => {
           >
             <button
               className="btn btn-primary w-100 mb-3"
-              onClick={() => history.push("myblogs/newblog")}
+              // onClick={() => history.push("myblogs/newblog")}
             >
               Add new Blog
             </button>

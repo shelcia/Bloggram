@@ -7,8 +7,8 @@ import LinesEllipsis from "react-lines-ellipsis";
 import Like from "../../assets/like.png";
 import Dislike from "../../assets/dislike.png";
 import Heart from "../../assets/heart.png";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import Loading from "../Loading";
 
 const SubCategoriesPage = ({ match }) => {
@@ -32,7 +32,7 @@ const SubCategoriesPage = ({ match }) => {
   }, [LINK, dispatch]);
 
   const errorNotify = (message) => {
-    toast.error(message);
+    // toast.error(message);
   };
 
   const Categories = [
@@ -87,7 +87,7 @@ const SubCategoriesPage = ({ match }) => {
 
   return (
     <React.Fragment>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Navbar />
       {isLoading ? (
         <Loading text="Loading Blogs" />

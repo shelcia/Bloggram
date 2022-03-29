@@ -1,126 +1,184 @@
-$secondaryFont: "Josefin Sans", sans-serif;
-$primaryFont: "Spectral", serif;
-$bgColor: #fff;
-$shadow: 0px 3px 8px #00000015;
-$textColor: rgb(0, 0, 0);
-$noOpacity: rgba(0, 0, 0, 0);
+// $secondaryFont: "Josefin Sans", sans-serif;
+// $primaryFont: "Spectral", serif;
+
+@import url("./bootstrap/bootstrap.css");
+
+// $primaryFont: "Alegreya", "Times New Roman", Times, serif;
+// $secondaryFont: "Inter", Verdana, Geneva, Tahoma, sans-serif;
+
+// $bgColor: #fff;
+// $shadow: 0px 3px 8px #00000015;
+// $textColor: rgb(0, 0, 0);
+// $noOpacity: rgba(0, 0, 0, 0);
+
+// $primaryColor: #ffa17f;
 
 * {
-  font-family: $secondaryFont;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", Verdana, Geneva, Tahoma, sans-serif;
 }
 
-p,
-a,
-.btn {
-  font-size: 1.2rem;
+$primaryColor: #000000;
+$secondaryColor: #747474;
+
+.text,
+.social-icons {
+  background: linear-gradient(to right, $secondaryColor 0%, $primaryColor 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hue 10s infinite linear alternate;
+  overflow-y: hidden;
 }
 
-@mixin displayFlex($justify, $align) {
-  display: flex;
-  justify-content: $justify;
-  align-items: $align;
-}
+$r: #dadada;
 
-.bg-light {
-  background-color: $bgColor !important;
-  box-shadow: $shadow;
-}
+// p,
+// div {
+//   font-family: $secondaryFont;
+// }
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   font-family: $primaryFont;
+// }
+// $bgColor: #eeeff14d;
 
-#container {
-  margin-top: 4.5rem !important;
-}
+// body {
+//   background-color: $bgColor;
+//   background: linear-gradient(to right, $bgColor, $bgColor),
+//     url("https://grainy-gradients.vercel.app/noise.svg");
+// }
 
-.btn-primary {
-  color: $textColor;
-  background-color: $noOpacity;
-  border: 1.8px solid $textColor;
-  transition: all 0.2s ease-in;
-  border-radius: 0.25rem;
-  &:hover {
-    color: $bgColor;
-    border: 1.8px solid $textColor !important;
-    background-color: $textColor !important;
-  }
-  &:active,
-  &:focus {
-    color: $bgColor;
-    border: 1.8px solid $textColor !important;
-    background-color: $textColor !important;
-    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
-  }
-}
+// .blob-1 {
+//   position: absolute;
+//   width: 40%;
+//   max-height: 40%;
+//   min-height: 40%;
+//   min-width: 40%;
+//   border-radius: 10000000px;
+//   filter: blur(100px);
+//   z-index: -1;
+//   bottom: 0;
+//   right: -100px;
+//   background-color: $primaryColor;
+// }
 
-.card-columns .card {
-  border: none;
-  box-shadow: $shadow;
-  .card-img-overlay {
-    background-color: #00000055;
-    @include displayFlex(center, center);
-    flex-direction: column;
-    h4.card-title {
-      font-size: 1.8rem;
-      color: $bgColor;
-    }
-    .card-link {
-      color: $bgColor;
-      transition: all 0.2s ease-in;
-      &:hover {
-        transform: scale(1.2, 1.2);
-      }
-    }
-  }
-  &:hover {
-    box-shadow: 5px 5px 15px #00000015;
-  }
-}
+// p,
+// a,
+// .btn {
+//   font-size: 1.2rem;
+// }
 
-#footer {
-  position: relative;
-  margin-top: 3rem;
-  background-color: $textColor;
-  color: $bgColor;
-  min-height: 200px;
-  a {
-    color: $bgColor;
-    transition: all 0.2s ease-in;
-    &:hover {
-      text-decoration: none;
-      transform: translateX(5px);
-    }
-  }
-  .row {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-  #footerTag {
-    position: absolute;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
+// @mixin displayFlex($justify, $align) {
+//   display: flex;
+//   justify-content: $justify;
+//   align-items: $align;
+// }
 
-#icon-container {
-  @include displayFlex(center, center);
-  img {
-    height: 20px;
-    cursor: pointer;
-    &:hover {
-      transform: rotateZ(-10deg);
-    }
-  }
-  p {
-    display: block;
-    margin-block-end: 0rem;
-    margin-bottom: 0rem;
-    margin-left: 0.5rem;
-  }
-}
+// .bg-light {
+//   background-color: $bgColor !important;
+//   box-shadow: $shadow;
+// }
 
-#link {
-  color: $textColor;
-  transition: all 0.2s ease-in;
-  &:hover {
-    transform: scale(1.2, 1.2);
-  }
-}
+// #container {
+//   margin-top: 4.5rem !important;
+// }
+
+// .btn-primary {
+//   color: $textColor;
+//   background-color: $noOpacity;
+//   border: 1.8px solid $textColor;
+//   transition: all 0.2s ease-in;
+//   border-radius: 0.25rem;
+//   &:hover {
+//     color: $bgColor;
+//     border: 1.8px solid $textColor !important;
+//     background-color: $textColor !important;
+//   }
+//   &:active,
+//   &:focus {
+//     color: $bgColor;
+//     border: 1.8px solid $textColor !important;
+//     background-color: $textColor !important;
+//     box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
+//   }
+// }
+
+// .card-columns .card {
+//   border: none;
+//   box-shadow: $shadow;
+//   .card-img-overlay {
+//     background-color: #00000055;
+//     @include displayFlex(center, center);
+//     flex-direction: column;
+//     h4.card-title {
+//       font-size: 1.8rem;
+//       color: $bgColor;
+//     }
+//     .card-link {
+//       color: $bgColor;
+//       transition: all 0.2s ease-in;
+//       &:hover {
+//         transform: scale(1.2, 1.2);
+//       }
+//     }
+//   }
+//   &:hover {
+//     box-shadow: 5px 5px 15px #00000015;
+//   }
+// }
+
+// #footer {
+//   position: relative;
+//   margin-top: 3rem;
+//   background-color: $textColor;
+//   color: $bgColor;
+//   min-height: 200px;
+//   a {
+//     color: $bgColor;
+//     transition: all 0.2s ease-in;
+//     &:hover {
+//       text-decoration: none;
+//       transform: translateX(5px);
+//     }
+//   }
+//   .row {
+//     padding-left: 4rem;
+//     padding-right: 4rem;
+//   }
+//   #footerTag {
+//     position: absolute;
+//     bottom: 0px;
+//     left: 50%;
+//     transform: translateX(-50%);
+//   }
+// }
+
+// #icon-container {
+//   @include displayFlex(center, center);
+//   img {
+//     height: 20px;
+//     cursor: pointer;
+//     &:hover {
+//       transform: rotateZ(-10deg);
+//     }
+//   }
+//   p {
+//     display: block;
+//     margin-block-end: 0rem;
+//     margin-bottom: 0rem;
+//     margin-left: 0.5rem;
+//   }
+// }
+
+// #link {
+//   color: $textColor;
+//   transition: all 0.2s ease-in;
+//   &:hover {
+//     transform: scale(1.2, 1.2);
+//   }
+// }

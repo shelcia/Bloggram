@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import ProfileTable from "./PorfileTable";
 import Loading from "../Loading";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const MyProfile = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -20,7 +20,7 @@ const MyProfile = () => {
     date: "",
   });
 
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,7 +48,7 @@ const MyProfile = () => {
       .then((res) => {
         setIsLoading(false);
         setIsEdit(false);
-        history.push("/dashboard/myprofile");
+        // history.push("/dashboard/myprofile");
       })
       .catch((error) => console.log(error));
   };

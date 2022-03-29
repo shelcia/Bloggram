@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Navbar from "../LandingPage/Navbar";
 // import axios from "axios";
-import { LoadPost } from "../actions/index";
+import { LoadPost } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import LinesEllipsis from "react-lines-ellipsis";
 import Like from "../../assets/like.png";
 import Dislike from "../../assets/dislike.png";
 import Heart from "../../assets/heart.png";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import Loading from "../Loading";
 
@@ -35,12 +35,12 @@ const Blog = () => {
   }, [LINK, dispatch]);
 
   const errorNotify = (message) => {
-    toast.error(message);
+    // toast.error(message);
   };
 
   return (
     <React.Fragment>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
       <Navbar />
       {isLoading ? (
         <Loading text="Loading Blogs...." />

@@ -1,40 +1,67 @@
-import React from 'react';
-import './styles/style.css';
+import React from "react";
+import "./styles/style.css";
 
-import LandinPage from "./components/LandingPage/LandingPage";
-import Login from "./components/Login/Login";
-import Signup from "./components/Login/Signup";
-import BlogsPage from "./components/LandingPage/Blog";
-import Feed from "./components/HomePage/Feed";
-import MyBlog from "./components/HomePage/MyBlogs";
-import MyProfile from "./components/HomePage/MyProfile";
-import AddNewBlog from "./components/HomePage/AddNewBlog.jsx";
-import Blog from "./components/Blogs/Blogs";
-import BlogEdit from "./components/Blogs/EditBlog";
-import CategoryPage from "./components/LandingPage/CategoriesPage";
-import SubCategoryPage from "./components/LandingPage/SubCategoris";
+import routes from "./routes";
+import { useRoutes } from "react-router-dom";
+import { customTheme } from "./theme";
+import {
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider,
+} from "@mui/material";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Toaster } from "react-hot-toast";
+
+AOS.init({
+  // Global settings:
+  disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+  startEvent: "DOMContentLoaded", // name of the event dispatched on the document, that AOS should initialize on
+  initClassName: "aos-init", // class applied after initialization
+  animatedClassName: "aos-animate", // class applied on animation
+  useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+  disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+  debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
+  throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
+
+  // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+  offset: 120, // offset (in px) from the original trigger point
+  delay: 0, // values from 0 to 3000, with step 50ms
+  duration: 400, // values from 0 to 3000, with step 50ms
+  easing: "ease", // default easing for AOS animations
+  once: false, // whether animation should happen only once - while scrolling down
+  mirror: false, // whether elements should animate out while scrolling past them
+  anchorPlacement: "top-bottom", // defines which position of the element regarding to window should trigger the animation
+});
 
 const App = () => {
+  const allPages = useRoutes(routes);
+
+  const appTheme = customTheme({
+    theme: "light",
+    direction: "ltr",
+    // responsiveFontSizes: settings.responsiveFontSizes
+  }); // toaster options
+
+  const toasterOptions = {
+    style: {
+      fontWeight: 500,
+      fontFamily: "'Poppins', sans-serif",
+    },
+  };
+
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={LandinPage}/> 
-        <Route path="/login" exact component={Login}/> 
-        <Route path="/signup" exact component={Signup}/> 
-        <Route path="/blog" exact component={BlogsPage}/> 
-        <Route path="/blog/:id" component={Blog}/> 
-        <Route path="/category" exact component={CategoryPage}/> 
-        <Route path="/category/:id" component={SubCategoryPage}/> 
-        <Route path="/dashboard/feed" exact component={Feed}/> 
-        <Route path="/dashboard/myblogs" exact component={MyBlog}/> 
-        <Route path="/dashboard/myblogs/edit/:id" component={BlogEdit}/> 
-        <Route path="/dashboard/myblogs/newblog" exact component={AddNewBlog}/> 
-        <Route path="/dashboard/myprofile" exact component={MyProfile}/> 
-      </Switch>
-    </Router>
+    <React.Fragment>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={appTheme}>
+          <CssBaseline />
+          <Toaster toastOptions={toasterOptions} />
+          {allPages}
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
