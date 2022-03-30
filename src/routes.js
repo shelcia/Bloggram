@@ -11,6 +11,7 @@ const Loadable = (Component) => (props) =>
 
 const LandingPage = Loadable(lazy(() => import("./pages/home/LandingPage")));
 const Login = Loadable(lazy(() => import("./pages/auth/Login")));
+const BlogPage = Loadable(lazy(() => import("./pages/common/BlogPage")));
 const Dashboard = Loadable(
   lazy(() => import("./pages/dashboard/dashboard/Dashboard"))
 );
@@ -32,8 +33,8 @@ const routes = [
     element: <Login />,
   },
   {
-    path: "feed",
-    element: <Login />,
+    path: "blog/:id",
+    element: <BlogPage />,
   },
   {
     path: "dashboard",

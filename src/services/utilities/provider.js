@@ -173,11 +173,26 @@ const postFormData = async (
 
 /** @param {string} resource */
 /** @param {object} model */
-const put = async (resource, model, signal, isAuthorized = false) => {
+const put = async (resource, model, additionalParams, isAuthorized = false) => {
+  const token = localStorage.getItem("BlogGram-Token");
+  const headers = isAuthorized ? { "auth-token": token } : {};
+
   try {
-    const response = await axios.put(`${BASE_URL}/${resource}`, model, {
-      signal: signal,
-    });
+    let response;
+    if (additionalParams === "") {
+      response = await axios.put(`${BASE_URL}/${resource}`, model, {
+        headers: headers,
+      });
+    } else {
+      response = await axios.put(
+        `${BASE_URL}/${resource}/${additionalParams}`,
+        model,
+        {
+          headers: headers,
+        }
+      );
+    }
+
     return handleResponse(response);
   } catch (error) {
     return handleError(error);

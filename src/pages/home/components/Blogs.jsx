@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { apiBlog } from "../../../services/models/BlogModel";
-import BlogCard from "../../common/BlogCard";
+import { BlogCard } from "../../common/BlogDisplay";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);

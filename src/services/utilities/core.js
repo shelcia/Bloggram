@@ -62,11 +62,10 @@ export class ApiCore {
     }
 
     if (options.put) {
-      this.put = (model, signal, additionalParam, isAuthorized) => {
+      this.put = (model, additionalParam, isAuthorized) => {
         return apiProvider.put(
           options.url,
           model,
-          signal,
           additionalParam,
           isAuthorized
         );
