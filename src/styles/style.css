@@ -15,4 +15,8 @@
           animation: hue 10s infinite linear alternate;
   overflow-y: hidden;
 }
+
+.se-image-container.__se__float-center {
+  text-align: center;
+}
 /*# sourceMappingURL=style.css.map */

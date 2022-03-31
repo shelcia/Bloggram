@@ -25,16 +25,16 @@ export const AddLike = (newAllPost) => {
   };
 };
 
-export const AddDislike = (newAllPost) => {
+export const LoadDrafts = (result) => {
   return {
-    type: `ADD_DISLIKE`,
-    result: newAllPost,
+    type: `LOAD_DRAFTS`,
+    result: result,
   };
 };
 
-export const AddHearts = (newAllPost) => {
+export const LoadPublished = (result) => {
   return {
-    type: `ADD_HEART`,
-    result: newAllPost,
+    type: `LOAD_PUBLISHED`,
+    result: result,
   };
 };

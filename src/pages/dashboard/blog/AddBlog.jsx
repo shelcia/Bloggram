@@ -4,6 +4,9 @@ import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import { TextField, Chip, Button } from "@mui/material";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { toast } from "react-hot-toast";
+import { BlogShapes } from "../../common/Shapes";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
   const BUTTONLIST = [
@@ -26,6 +29,8 @@ const AddBlog = () => {
     setBlog({ ...blog, content: content });
   };
 
+  const [loading, setLoading] = useState(false);
+
   const [blog, setBlog] = useState({
     title: "",
     desc: "",
@@ -37,7 +42,10 @@ const AddBlog = () => {
     setBlog({ ...blog, [e.target.name]: e.target.value });
   };
 
+  const navigate = useNavigate();
+
   const createBlog = (type) => {
+    setLoading(true);
     const userId = localStorage.getItem("BlogGram-UserId");
     const body = {
       userId: userId,
@@ -49,7 +57,7 @@ const AddBlog = () => {
       tags: blog.tags,
       type: type,
     };
-    console.log(body);
+    // console.log(body);
     apiBlog.post(body).then((res) => {
       if (res.status === "200") {
         toast.success(res.message);
@@ -57,77 +65,98 @@ const AddBlog = () => {
         toast.error(res.message);
       }
     });
+    navigate("/dashboard/home");
   };
 
   return (
-    <section className="p-5">
-      <div className="text-end">
-        <Button
-          onClick={() => createBlog("DRAFT")}
-          variant="outlined"
-          color="primary"
-          size="small"
-          className="me-2"
-        >
-          Save as Draft
-        </Button>
-        <Button
-          onClick={() => createBlog("PUBLISHED")}
-          variant="outlined"
-          color="success"
-          size="small"
-        >
-          Publish
-        </Button>
-      </div>
-      <TextField
-        name="title"
-        value={blog.title}
-        onChange={handleInputs}
-        label="Title"
-        variant="standard"
-        className="w-100"
-      />
-      <TextField
-        name="desc"
-        value={blog.desc}
-        onChange={handleInputs}
-        label="Description"
-        variant="standard"
-        className="w-100 my-3"
-        multiline
-        rows={4}
-      />
-      {blog.tags?.map((tag, index) => (
-        <Chip
-          label={tag}
-          key={index}
-          // onClick={handleClick}
-          onDelete={() =>
-            setBlog({ ...blog, tags: blog.tags.filter((item) => item !== tag) })
-          }
+    <>
+      <BlogShapes />
+      <section className="p-5">
+        <div className="text-end">
+          {!loading ? (
+            <>
+              <Button
+                onClick={() => createBlog("DRAFT")}
+                variant="outlined"
+                color="primary"
+                size="small"
+                className="me-2"
+              >
+                Save as Draft
+              </Button>
+              <Button
+                onClick={() => createBlog("PUBLISHED")}
+                variant="outlined"
+                color="success"
+                size="small"
+              >
+                Publish
+              </Button>
+            </>
+          ) : (
+            <>
+              <LoadingButton
+                loading
+                loadingIndicator="Loading..."
+                variant="outlined"
+              >
+                Loading
+              </LoadingButton>
+            </>
+          )}
+        </div>
+        <TextField
+          name="title"
+          value={blog.title}
+          onChange={handleInputs}
+          label="Title"
+          variant="standard"
+          className="w-100"
         />
-      ))}
+        <TextField
+          name="desc"
+          value={blog.desc}
+          onChange={handleInputs}
+          label="Description"
+          variant="standard"
+          className="w-100 my-3"
+          multiline
+          rows={4}
+        />
+        {blog.tags?.map((tag, index) => (
+          <Chip
+            label={tag}
+            key={index}
+            // onClick={handleClick}
+            onDelete={() =>
+              setBlog({
+                ...blog,
+                tags: blog.tags.filter((item) => item !== tag),
+              })
+            }
+          />
+        ))}
 
-      <TextField
-        name="tags"
-        label="tags"
-        variant="standard"
-        className="w-100 my-3"
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            setBlog({ ...blog, tags: [...blog.tags, e.target.value] });
-          }
-        }}
-      />
-      <SunEditor
-        onChange={handleChange}
-        setOptions={{
-          height: "80vh",
-          buttonList: BUTTONLIST,
-        }}
-      />
-    </section>
+        <TextField
+          name="tags"
+          label="tags"
+          variant="standard"
+          className="w-100 my-3"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setBlog({ ...blog, tags: [...blog.tags, e.target.value] });
+            }
+          }}
+        />
+        <SunEditor
+          onChange={handleChange}
+          setOptions={{
+            height: "80vh",
+            buttonList: BUTTONLIST,
+          }}
+        />
+      </section>
+    </>
   );
 };
 

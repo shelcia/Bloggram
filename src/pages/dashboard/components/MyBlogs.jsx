@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Tab, Tabs } from "@mui/material";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { TabContext, TabPanel } from "@mui/lab";
 import { BlogList } from "../../common/BlogDisplay";
+import { useSelector, useDispatch } from "react-redux";
+import { LoadDrafts, LoadPublished } from "../../../redux/actions";
 
 const MyBlogs = () => {
   const [value, setValue] = React.useState("1");
@@ -11,8 +13,13 @@ const MyBlogs = () => {
     setValue(newValue);
   };
 
-  const [drafts, setDrafts] = useState([]);
-  const [published, setPublished] = useState([]);
+  //   const [drafts, setDrafts] = useState([]);
+  //   const [published, setPublished] = useState([]);
+
+  const drafts = useSelector((state) => state.drafts);
+  const published = useSelector((state) => state.published);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const ac = new AbortController();
@@ -20,13 +27,17 @@ const MyBlogs = () => {
     apiBlog.getSingle(userId, ac.signal, "myBlogs").then((res) => {
       console.log(res);
       if (res.status === "200") {
-        setDrafts(res.message.filter((blog) => blog.type === "DRAFT"));
-        setPublished(res.message.filter((blog) => blog.type !== "DRAFT"));
+        dispatch(
+          LoadDrafts(res.message.filter((blog) => blog.type === "DRAFT"))
+        );
+        dispatch(
+          LoadPublished(res.message.filter((blog) => blog.type !== "DRAFT"))
+        );
       }
     });
 
     return () => ac.abort();
-  }, []);
+  }, [dispatch]);
 
   return (
     <React.Fragment>

@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiAuth } from "../../services/models/AuthModel";
 import toast from "react-hot-toast";
-import { Donut } from "react-awesome-shapes/dist/shapes/donut";
-import { Diamond } from "react-awesome-shapes/dist/shapes/diamond";
-import { Circle } from "react-awesome-shapes/dist/shapes/circle";
 import {
   Button,
   Card,
@@ -13,7 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { CircleGrid } from "react-awesome-shapes/dist/shapes/circlegrid";
+import { AuthShapes } from "../common/Shapes";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -57,27 +54,7 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <Donut
-        color="#24EFC8"
-        size="180px"
-        width={["40px", "40px", "60px", "60px"]}
-        top="130px"
-        left="-20px"
-      />
-      <Diamond
-        color="linear-gradient(135deg, #6FB3FF, #2499EF)"
-        size="100px"
-        right="0"
-        top="50px"
-      />
-      <Circle
-        color="linear-gradient(135deg, #24EFC8, #24D0EF)"
-        size={["150px", "150px", "180px", "180px"]}
-        top="200px"
-        right="70px"
-      />
-      <CircleGrid color="#24D0EF" size="175px" top="40px" left="200px" />
-
+      <AuthShapes />
       <div className="container h-100 p-5 d-flex justify-content-center align-items-center">
         <Card>
           <CardContent sx={{ padding: 4 }}>

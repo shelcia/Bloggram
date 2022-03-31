@@ -1,11 +1,13 @@
 import postReducer from "./postReducer";
-import dummyReducer from "./DummyReducer";
+import draftsReducer from "./draftReducer";
+import publishedReducer from "./publishedReducer";
 
 import { combineReducers } from "redux";
 
 const rootReducers = combineReducers({
   posts: postReducer,
-  dummy: dummyReducer,
+  drafts: draftsReducer,
+  published: publishedReducer,
 });
 
 export default rootReducers;

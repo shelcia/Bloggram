@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import CustomMenuList from "../pages/common/CustomMenuList";
 
 const DashboardLayout = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,6 +26,11 @@ const DashboardLayout = () => {
   const id = open ? "simple-popover" : undefined;
 
   const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
     <React.Fragment>
@@ -56,7 +62,7 @@ const DashboardLayout = () => {
                 }}
                 PaperProps={{
                   sx: {
-                    minWidth: 200 || 250,
+                    minWidth: 160,
                     maxWidth: 230 || 375,
                     width: "100%",
                     padding: "0.5rem 0",
@@ -64,14 +70,13 @@ const DashboardLayout = () => {
                 }}
               >
                 <div>
-                  <Typography
-                    sx={{ p: 2 }}
+                  <CustomMenuList
                     onClick={() => navigate("/dashboard/profile")}
                   >
                     Profile
-                  </Typography>
+                  </CustomMenuList>
                   <Divider />
-                  <Typography sx={{ p: 2 }}>Logout</Typography>
+                  <CustomMenuList onClick={logout}>Logout</CustomMenuList>
                 </div>
               </Popover>
             </div>
