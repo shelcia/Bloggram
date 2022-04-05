@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Fab } from "@mui/material";
+import { Box, Fab, SwipeableDrawer } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { apiBlog } from "../../services/models/BlogModel";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+// import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 const parse = require("html-react-parser");
 
 const BlogPage = () => {
@@ -18,6 +19,7 @@ const BlogPage = () => {
     type: "DRAFT",
     userId: "",
     _id: "",
+    comments: [],
   });
 
   useEffect(() => {
@@ -34,6 +36,8 @@ const BlogPage = () => {
     };
   }, [id]);
 
+  const [drawer, setDrawer] = useState(false);
+
   return (
     <section className="container p-5">
       <h1 className="display-3 text">{blog.title}</h1>
@@ -42,18 +46,70 @@ const BlogPage = () => {
       </p>
       {parse(blog.content)}
       <div style={style}>
-        <Fab color="primary" aria-label="edit">
-          <ModeCommentIcon />
+        <Fab
+          color="primary"
+          aria-label="edit"
+          className="me-2 flex-column"
+          onClick={() => setDrawer(true)}
+        >
+          <ModeCommentIcon className="d-block" />
+          <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
+            {blog.comments.length}
+          </span>
         </Fab>
-        <Fab color="success" aria-label="edit">
-          <ThumbUpIcon />
+        <Fab color="error" aria-label="love" className="flex-column">
+          <FavoriteRoundedIcon />
+          <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
+            {blog.likes}
+          </span>
         </Fab>
       </div>
+      <CommentSection
+        drawer={drawer}
+        setDrawer={setDrawer}
+        comments={blog.comments}
+      />
     </section>
   );
 };
 
 export default BlogPage;
+
+const CommentSection = ({ drawer, setDrawer, comments }) => {
+  const toggleDrawer = (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setDrawer(false);
+  };
+
+  return (
+    <SwipeableDrawer
+      anchor={"right"}
+      open={drawer}
+      onClose={() => setDrawer(false)}
+      onOpen={() => setDrawer(true)}
+    >
+      <Box
+        sx={{ width: 250 }}
+        role="presentation"
+        onClick={toggleDrawer}
+        onKeyDown={toggleDrawer}
+      >
+        {/* {comments.map((comment, index)=>
+          
+
+          
+          )} */}
+      </Box>
+    </SwipeableDrawer>
+  );
+};
 
 const style = {
   margin: 0,

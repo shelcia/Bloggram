@@ -1,4 +1,5 @@
 @import url("./bootstrap/bootstrap.css");
+@import url("./components/_loader.scss");
 * {
   padding: 0;
   margin: 0;

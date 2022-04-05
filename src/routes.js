@@ -1,16 +1,18 @@
 import React, { lazy, Suspense } from "react"; // , { lazy, Suspense }
 import AuthGuard from "./components/AuthGuard";
 import DashboardLayout from "./components/DashboardLayout";
+import LoadingPage from "./components/Loading";
 
 const Loadable = (Component) => (props) =>
   (
-    <Suspense fallback={<p>mrmr</p>}>
+    <Suspense fallback={<LoadingPage />}>
       <Component {...props} />
     </Suspense>
   );
 
 const LandingPage = Loadable(lazy(() => import("./pages/home/LandingPage")));
 const Login = Loadable(lazy(() => import("./pages/auth/Login")));
+const Signup = Loadable(lazy(() => import("./pages/auth/Signup")));
 const BlogPage = Loadable(lazy(() => import("./pages/common/BlogPage")));
 const Dashboard = Loadable(
   lazy(() => import("./pages/dashboard/dashboard/Dashboard"))
@@ -31,6 +33,10 @@ const routes = [
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
   },
   {
     path: "blog/:id",

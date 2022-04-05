@@ -18,7 +18,7 @@ const Topbar = () => {
               Bloggram
             </Typography>
             <div>
-              <Button color="inherit" onClick={() => navigate("/signin")}>
+              <Button color="inherit" onClick={() => navigate("/signup")}>
                 Register
               </Button>
               <Button color="inherit" onClick={() => navigate("/login")}>

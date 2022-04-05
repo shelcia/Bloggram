@@ -1,4 +1,3 @@
-// import { Button } from "@mui/material";
 import React from "react";
 import SearchInput from "../../../components/SearchInput";
 
@@ -26,9 +25,6 @@ const Hero = () => {
         </h1>
         <div className="text-center mt-3">
           <SearchInput />
-          {/* <Button variant="outlined" size="large" onClick={gotoBlog}>
-            Read More
-          </Button> */}
         </div>
       </section>
     </React.Fragment>

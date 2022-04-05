@@ -12,7 +12,8 @@ import {
 import LoadingButton from "@mui/lab/LoadingButton";
 import { AuthShapes } from "../common/Shapes";
 
-const Login = () => {
+const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,13 +28,14 @@ const Login = () => {
     // event.preventDefault();
 
     const body = {
+      name: name,
       email: email,
       password: password,
     };
 
     console.log(body);
 
-    apiAuth.post(body, "signin").then((res) => {
+    apiAuth.post(body, "register").then((res) => {
       console.log(res);
       setIsLoading(false);
 
@@ -42,10 +44,11 @@ const Login = () => {
         localStorage.setItem(`${PREFIX}UserId`, res.userId);
         localStorage.setItem(`${PREFIX}name`, res.name);
         // sucessNotify("Login succesfulll");
-        toast.success("Login successfuly");
+        toast.success("Signup succesfull");
         navigate("/dashboard/home");
       } else {
         toast.error(res.message);
+        localStorage.removeItem(`${PREFIX}Email`);
       }
     });
   };
@@ -58,10 +61,19 @@ const Login = () => {
       <div className="container h-100 p-5 d-flex justify-content-center align-items-center">
         <Card>
           <CardContent sx={{ padding: 4 }}>
-            <h3 className="text my-3 text-center">Login</h3>
+            <h3 className="text my-3 text-center">Signup</h3>
+            <TextField
+              label="Name"
+              variant="standard"
+              sx={{ minWidth: matches ? 450 : 200 }}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <br />
             <TextField
               label="Email"
               variant="standard"
+              className="mt-4"
               sx={{ minWidth: matches ? 450 : 200 }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -88,12 +100,12 @@ const Login = () => {
                 </LoadingButton>
               ) : (
                 <Button onClick={onSubmit} variant="outlined" size="small">
-                  Login
+                  Signup
                 </Button>
               )}
             </div>
             <div className="text-center mt-5">
-              Don't have an account? then <Link to="/signup">Signup</Link>
+              Have an account already? then <Link to="/login">Login</Link>
             </div>
           </CardContent>
         </Card>
@@ -102,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
-import { TextField, Chip, Button } from "@mui/material";
+import { TextField, Chip, Button, IconButton } from "@mui/material";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { toast } from "react-hot-toast";
 import { BlogShapes } from "../../common/Shapes";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const AddBlog = () => {
   const BUTTONLIST = [
@@ -45,6 +46,23 @@ const AddBlog = () => {
   const navigate = useNavigate();
 
   const createBlog = (type) => {
+    if (blog.title === "") {
+      toast.error("Fill in the title");
+      return;
+    }
+    if (blog.desc === "") {
+      toast.error("Fill in the Description");
+      return;
+    }
+    if (blog.content === "") {
+      toast.error("Fill in the Content");
+      return;
+    }
+    if (blog.tags === []) {
+      toast.error("Fill in the tags");
+      return;
+    }
+
     setLoading(true);
     const userId = localStorage.getItem("BlogGram-UserId");
     const body = {
@@ -72,9 +90,17 @@ const AddBlog = () => {
     <>
       <BlogShapes />
       <section className="p-5">
-        <div className="text-end">
+        <div className="d-flex justify-content-between">
+          <div>
+            <IconButton onClick={() => navigate(-1)}>
+              <ArrowBackIcon sx={{ fontSize: "0.9rem" }} />
+            </IconButton>
+            <span className="mb-0" style={{ fontSize: "0.9rem" }}>
+              Go Back
+            </span>
+          </div>
           {!loading ? (
-            <>
+            <div>
               <Button
                 onClick={() => createBlog("DRAFT")}
                 variant="outlined"
@@ -86,13 +112,13 @@ const AddBlog = () => {
               </Button>
               <Button
                 onClick={() => createBlog("PUBLISHED")}
-                variant="outlined"
-                color="success"
+                variant="contained"
+                color="secondary"
                 size="small"
               >
                 Publish
               </Button>
-            </>
+            </div>
           ) : (
             <>
               <LoadingButton
@@ -109,7 +135,7 @@ const AddBlog = () => {
           name="title"
           value={blog.title}
           onChange={handleInputs}
-          label="Title"
+          label="Title*"
           variant="standard"
           className="w-100"
         />
@@ -117,7 +143,7 @@ const AddBlog = () => {
           name="desc"
           value={blog.desc}
           onChange={handleInputs}
-          label="Description"
+          label="Description*"
           variant="standard"
           className="w-100 my-3"
           multiline
@@ -139,7 +165,7 @@ const AddBlog = () => {
 
         <TextField
           name="tags"
-          label="tags"
+          label="Tags*"
           variant="standard"
           className="w-100 my-3"
           onKeyDown={(e) => {
