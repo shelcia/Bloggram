@@ -1,12 +1,12 @@
 import React from "react";
 
-const Loading = ({ text }) => {
+const LoadingPage = ({ text }) => {
   return (
     <div
       className="w-100 h-100 d-flex"
       style={{ alignItems: "center", justifyContent: "center" }}
     >
-      <div class="loader">
+      <div className="loader">
         <div>
           <ul>
             <li>
@@ -53,4 +53,4 @@ const Loading = ({ text }) => {
   );
 };
 
-export default Loading;
+export default LoadingPage;

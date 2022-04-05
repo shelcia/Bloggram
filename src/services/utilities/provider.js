@@ -136,7 +136,7 @@ const post = async (
 const postFormData = async (
   resource,
   model,
-  additionalParam,
+  additionalParam = "",
   isAuthorized = false
 ) => {
   const token = localStorage.getItem("BlogGram-Token");
@@ -144,11 +144,9 @@ const postFormData = async (
   const headers = isAuthorized
     ? {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
+        "auth-token": `${token}`,
       }
     : { "Content-Type": "multipart/form-data" };
-
-  // console.log({ headers });
 
   try {
     let response;
@@ -165,6 +163,7 @@ const postFormData = async (
         }
       );
     }
+    // console.log(await response);
     return handleResponse(response);
   } catch (error) {
     return handleError(error);

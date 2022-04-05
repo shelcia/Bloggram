@@ -1,9 +1,9 @@
 import React from "react";
-import Footer from "../common/Footer";
-import { LandingPageShapes } from "../common/Shapes";
+import { LandingPageShapes } from "../../components/Shapes";
 import Blogs from "./components/Blogs";
 import Hero from "./components/Hero";
 import Topbar from "./components/Topbar";
+import Footer from "../../components/Footer";
 
 const LandingPage = () => {
   return (

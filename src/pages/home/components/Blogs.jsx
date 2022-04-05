@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { apiBlog } from "../../../services/models/BlogModel";
-import { BlogCard } from "../../common/BlogDisplay";
+import { BlogCard } from "../../../components/BlogDisplay";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -8,7 +8,8 @@ const Blogs = () => {
   useEffect(() => {
     const ac = new AbortController();
 
-    apiBlog.getAll(ac.signal, "").then((res) => {
+    apiBlog.getSingle("featuredposts", ac.signal, "").then((res) => {
+      console.log(res);
       setBlogs(
         res.message.sort((a, b) =>
           a.likes > b.likes ? 1 : b.likes > a.likes ? -1 : 0

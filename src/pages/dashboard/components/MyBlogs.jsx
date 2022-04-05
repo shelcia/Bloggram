@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Tab, Tabs } from "@mui/material";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { TabContext, TabPanel } from "@mui/lab";
-import { BlogList } from "../../common/BlogDisplay";
 import { useSelector, useDispatch } from "react-redux";
 import { LoadDrafts, LoadPublished } from "../../../redux/actions";
+import { BlogList } from "../../../components/BlogDisplay";
 
 const MyBlogs = () => {
   const [value, setValue] = React.useState("1");

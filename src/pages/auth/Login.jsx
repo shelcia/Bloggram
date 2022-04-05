@@ -10,7 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { AuthShapes } from "../common/Shapes";
+import { AuthShapes } from "../../components/Shapes";
 
 const Login = () => {
   const [email, setEmail] = useState("");

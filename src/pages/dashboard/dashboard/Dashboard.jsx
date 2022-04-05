@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import MyBlogs from "../components/MyBlogs";
 import { useNavigate } from "react-router-dom";
-import { DashboardShapes } from "../../common/Shapes";
+import { DashboardShapes } from "../../../components/Shapes";
 
 const Dashboard = () => {
   const navigate = useNavigate();

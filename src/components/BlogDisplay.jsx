@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Img from "../../assets/Bloggram_placeholder.png";
+import Img from "../assets/Bloggram_placeholder.png";
 import {
   Avatar as MuiAvatar,
   Button,
@@ -12,11 +12,12 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LinesEllipsis from "react-lines-ellipsis";
-import { apiUsers } from "../../services/models/UserModel";
+import { apiUsers } from "../services/models/UserModel";
 import Avatar from "avataaars";
 import IosShareIcon from "@mui/icons-material/IosShareRounded";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { ShareSocial } from "react-share-social";
+import { convertSimpleDate } from "../helpers/convertDate";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ const BlogCard = ({ blog }) => {
           <div className="text-end my-2">
             {blog.type === "PUBLISHED" && (
               <small className="mb-0 fw-light text-muted ms-2">
-                Published on {user?.date}
+                Published on {convertSimpleDate(user?.date)}
               </small>
             )}
           </div>
@@ -173,7 +174,11 @@ const BlogList = ({ blog }) => {
       >
         <CardContent className="mt-3 d-flex align-items-center">
           <img
-            src={blog.image ? blog.image : Img}
+            src={
+              blog.image
+                ? `http://localhost:8000/api/blog/image/${blog._id}`
+                : Img
+            }
             alt=""
             style={{ width: 100, height: 100, objectFit: "cover" }}
             className="me-4"
@@ -223,7 +228,7 @@ const BlogList = ({ blog }) => {
                 .
                 {blog.type === "PUBLISHED" && (
                   <small className="mb-0 fw-light text-muted ms-2">
-                    Published on {user?.date}
+                    Published on {convertSimpleDate(user?.date)}
                   </small>
                 )}
               </div>

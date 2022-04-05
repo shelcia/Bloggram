@@ -2,14 +2,15 @@ import {
   AppBar,
   Box,
   Divider,
-  Popover,
   Toolbar,
   Typography,
-  Avatar,
+  IconButton,
 } from "@mui/material";
 import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import CustomMenuList from "../pages/common/CustomMenuList";
+import CustomMenuList from "./CustomMenuList";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import CustomPopover from "./Popover";
 
 const DashboardLayout = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -18,18 +19,12 @@ const DashboardLayout = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
   const navigate = useNavigate();
 
   const logout = () => {
     localStorage.clear();
     navigate("/");
+    setAnchorEl(null);
   };
 
   return (
@@ -45,40 +40,23 @@ const DashboardLayout = () => {
               Bloggram
             </Typography>
             <div>
-              <Avatar
-                src="/broken-image.jpg"
-                aria-describedby={id}
-                onClick={handleClick}
-                sx={{ width: 30, height: 30 }}
-              />
-              <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                PaperProps={{
-                  sx: {
-                    minWidth: 160,
-                    maxWidth: 230 || 375,
-                    width: "100%",
-                    padding: "0.5rem 0",
-                  },
-                }}
-              >
-                <div>
+              <IconButton onClick={handleClick}>
+                <MoreVertIcon />
+              </IconButton>
+              <CustomPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
+                <>
                   <CustomMenuList
-                    onClick={() => navigate("/dashboard/profile")}
+                    onClick={() => {
+                      navigate("/dashboard/profile");
+                      setAnchorEl(null);
+                    }}
                   >
                     Profile
                   </CustomMenuList>
                   <Divider />
                   <CustomMenuList onClick={logout}>Logout</CustomMenuList>
-                </div>
-              </Popover>
+                </>
+              </CustomPopover>
             </div>
           </Toolbar>
         </AppBar>
