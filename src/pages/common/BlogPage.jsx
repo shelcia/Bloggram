@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box, Fab, SwipeableDrawer } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Box, Fab, SwipeableDrawer, Tooltip } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
 import { apiBlog } from "../../services/models/BlogModel";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
-// import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { ViewBlogShapes } from "../../components/Shapes";
 import LoadingPage from "./LoadingPage";
 import BackToTop from "../../components/ScrollToTop";
+import EditIcon from "@mui/icons-material/Edit";
 const parse = require("html-react-parser");
 
 const BlogPage = () => {
@@ -46,19 +46,25 @@ const BlogPage = () => {
 
   const [drawer, setDrawer] = useState(false);
 
+  const navigate = useNavigate();
+
+  const userId = localStorage.getItem("BlogGram-UserId");
+
   return loading ? (
     <LoadingPage />
   ) : (
     <>
       <ViewBlogShapes />
       <section className="container p-5">
-        {blog.image && (
-          <img
-            src={`http://localhost:8000/api/blog/image/${blog._id}`}
-            alt=""
-            className="me-4 img-fluid"
-          />
-        )}
+        <div className="text-center mb-4">
+          {blog.image && (
+            <img
+              src={`http://localhost:8000/api/blog/image/${blog._id}`}
+              alt=""
+              className="me-4 img-fluid"
+            />
+          )}
+        </div>
 
         <h1 className="display-3 text" id="blog-top">
           {blog.title}
@@ -70,7 +76,7 @@ const BlogPage = () => {
         <div style={style}>
           <Fab
             color="primary"
-            aria-label="edit"
+            aria-label="comments"
             className="me-2 flex-column"
             onClick={() => setDrawer(true)}
           >
@@ -86,6 +92,21 @@ const BlogPage = () => {
             </span>
           </Fab>
         </div>
+        {userId === blog.userId && (
+          <div style={editstyle}>
+            <Tooltip title="Edit Blog">
+              <Fab
+                color="secondary"
+                aria-label="edit"
+                onClick={() => navigate(`/dashboard/edit-blog/${blog._id}`)}
+                variant="extended"
+              >
+                <EditIcon sx={{ mr: 1 }} /> Edit Blog
+              </Fab>
+            </Tooltip>
+          </div>
+        )}
+
         <CommentSection
           drawer={drawer}
           setDrawer={setDrawer}
@@ -141,6 +162,16 @@ const style = {
   right: "50%",
   transform: "translateX(50%)",
   bottom: 20,
+  left: "auto",
+  position: "fixed",
+};
+
+const editstyle = {
+  margin: 0,
+  bottom: "auto",
+  transform: "translateX(50%)",
+  top: 20,
+  right: 100,
   left: "auto",
   position: "fixed",
 };

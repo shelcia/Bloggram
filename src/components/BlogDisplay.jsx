@@ -18,6 +18,8 @@ import IosShareIcon from "@mui/icons-material/IosShareRounded";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { ShareSocial } from "react-share-social";
 import { convertSimpleDate } from "../helpers/convertDate";
+import CustomPopover from "./Popover";
+import CustomMenuList from "./CustomMenuList";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
@@ -56,7 +58,11 @@ const BlogCard = ({ blog }) => {
     <React.Fragment>
       <Card sx={{ height: "500px" }}>
         <img
-          src={blog.image ? blog.image : Img}
+          src={
+            blog.image
+              ? `http://localhost:8000/api/blog/image/${blog._id}`
+              : Img
+          }
           alt=""
           style={{ width: "100%", height: "200px", objectFit: "cover" }}
         />
@@ -160,6 +166,13 @@ const BlogList = ({ blog }) => {
 
   const gotoBlog = () => navigate(`/blog/${blog._id}`);
 
+  // for popover blog list
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
     <React.Fragment>
       <Card
@@ -233,12 +246,32 @@ const BlogList = ({ blog }) => {
                 )}
               </div>
               <div>
-                <IconButton aria-label="share" onClick={() => setOpen(true)}>
-                  <IosShareIcon />
-                </IconButton>
-                <IconButton aria-label="menu">
+                {blog.type === "PUBLISHED" && (
+                  <IconButton aria-label="share" onClick={() => setOpen(true)}>
+                    <IosShareIcon />
+                  </IconButton>
+                )}
+
+                <IconButton aria-label="menu" onClick={handleClick}>
                   <MoreHorizIcon />
                 </IconButton>
+                <CustomPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
+                  <>
+                    {blog.type === "PUBLISHED" ? (
+                      <CustomMenuList>Unpublish</CustomMenuList>
+                    ) : (
+                      <CustomMenuList>Publish</CustomMenuList>
+                    )}
+                    <CustomMenuList
+                      onClick={() =>
+                        navigate(`/dashboard/edit-blog/${blog._id}`)
+                      }
+                    >
+                      Edit
+                    </CustomMenuList>
+                    <CustomMenuList>Remove</CustomMenuList>
+                  </>
+                </CustomPopover>
               </div>
             </div>
           </div>

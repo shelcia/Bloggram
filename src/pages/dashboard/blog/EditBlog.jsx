@@ -51,7 +51,7 @@ const EditBlog = () => {
 
   const navigate = useNavigate();
 
-  const createBlog = (type) => {
+  const editBlog = (type) => {
     if (blog.title === "") {
       toast.error("Fill in the title");
       return;
@@ -85,7 +85,8 @@ const EditBlog = () => {
     formData.append("tags", JSON.stringify(blog.tags));
     formData.append("type", type);
 
-    apiBlog.postFormData(formData).then((res) => {
+    apiBlog.putFormData(formData, `blog/${blog._id}`).then((res) => {
+      console.log(res);
       if (res.status === "200") {
         toast.success(res.message);
       } else {
@@ -136,7 +137,7 @@ const EditBlog = () => {
           {!loading ? (
             <div>
               <Button
-                onClick={() => createBlog("DRAFT")}
+                onClick={() => editBlog("DRAFT")}
                 variant="outlined"
                 color="primary"
                 size="small"
@@ -145,7 +146,7 @@ const EditBlog = () => {
                 Save as Draft
               </Button>
               <Button
-                onClick={() => createBlog("PUBLISHED")}
+                onClick={() => editBlog("PUBLISHED")}
                 variant="contained"
                 color="secondary"
                 size="small"
@@ -252,6 +253,7 @@ const EditBlog = () => {
             height: "80vh",
             buttonList: BUTTONLIST,
           }}
+          defaultValue={blog.content}
         />
       </section>
     </>

@@ -20,8 +20,8 @@ const CustomPopover = ({ children, setAnchorEl, anchorEl }) => {
       }}
       PaperProps={{
         sx: {
-          minWidth: 160,
-          maxWidth: 230 || 375,
+          minWidth: 140,
+          maxWidth: 230,
           width: "100%",
           padding: "0.5rem 0",
         },

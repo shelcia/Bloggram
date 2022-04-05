@@ -213,6 +213,46 @@ const putById = async (resource, id, model, signal, isAuthorized = false) => {
 
 /** @param {string} resource */
 /** @param {object} model */
+
+const putFormData = async (
+  resource,
+  model,
+  additionalParam = "",
+  isAuthorized = false
+) => {
+  const token = localStorage.getItem("BlogGram-Token");
+  // console.log("invoked");
+  const headers = isAuthorized
+    ? {
+        "Content-Type": "multipart/form-data",
+        "auth-token": `${token}`,
+      }
+    : { "Content-Type": "multipart/form-data" };
+
+  try {
+    let response;
+    if (additionalParam === "") {
+      response = await axios.put(`${BASE_URL}/${resource}`, model, {
+        headers: headers,
+      });
+    } else {
+      response = await axios.put(
+        `${BASE_URL}/${resource}/${additionalParam}`,
+        model,
+        {
+          headers: headers,
+        }
+      );
+    }
+    // console.log(await response);
+    return handleResponse(response);
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
+/** @param {string} resource */
+/** @param {object} model */
 const patch = async (resource, model, signal, isAuthorized = false) => {
   const token = localStorage.getItem("BlogGram-Token");
   try {
@@ -287,6 +327,7 @@ export const apiProvider = {
   postFormData,
   put,
   putById,
+  putFormData,
   patch,
   patchByParams,
   remove,

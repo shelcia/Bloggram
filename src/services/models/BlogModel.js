@@ -10,6 +10,7 @@ export const apiBlog = new ApiCore({
   postFormData: true,
   put: true,
   putById: true,
+  putFormData: true,
   patch: true,
   remove: true,
   url: url,
