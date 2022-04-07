@@ -25,7 +25,7 @@ const MyBlogs = () => {
     const ac = new AbortController();
     const userId = localStorage.getItem("BlogGram-UserId");
     apiBlog.getSingle(userId, ac.signal, "myBlogs").then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status === "200") {
         dispatch(
           LoadDrafts(res.message.filter((blog) => blog.type === "DRAFT"))

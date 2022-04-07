@@ -33,10 +33,10 @@ const Signup = () => {
       password: password,
     };
 
-    console.log(body);
+    // console.log(body);
 
     apiAuth.post(body, "register").then((res) => {
-      console.log(res);
+      // console.log(res);
       setIsLoading(false);
 
       if (res.status === "200") {

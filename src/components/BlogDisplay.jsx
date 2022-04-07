@@ -20,6 +20,10 @@ import { ShareSocial } from "react-share-social";
 import { convertSimpleDate } from "../helpers/convertDate";
 import CustomPopover from "./Popover";
 import CustomMenuList from "./CustomMenuList";
+import { apiBlog } from "../services/models/BlogModel";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { LoadDrafts, LoadPublished } from "../redux/actions";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
@@ -130,6 +134,22 @@ const BlogCard = ({ blog }) => {
 };
 
 const BlogList = ({ blog }) => {
+  const dispatch = useDispatch();
+
+  const fetchBlog = () => {
+    const userId = localStorage.getItem("BlogGram-UserId");
+    apiBlog.getSingle(userId, undefined, "myBlogs").then((res) => {
+      if (res.status === "200") {
+        dispatch(
+          LoadDrafts(res.message.filter((blog) => blog.type === "DRAFT"))
+        );
+        dispatch(
+          LoadPublished(res.message.filter((blog) => blog.type !== "DRAFT"))
+        );
+      }
+    });
+  };
+
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
@@ -171,6 +191,18 @@ const BlogList = ({ blog }) => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handlePublish = (type) => {
+    apiBlog.put({ type: type }, `type/${blog._id}`).then((res) => {
+      console.log(res);
+      if (res.status === "200") {
+        toast.success(res.message);
+        fetchBlog();
+      } else {
+        toast.error(res.message);
+      }
+    });
   };
 
   return (
@@ -258,9 +290,15 @@ const BlogList = ({ blog }) => {
                 <CustomPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
                   <>
                     {blog.type === "PUBLISHED" ? (
-                      <CustomMenuList>Unpublish</CustomMenuList>
+                      <CustomMenuList onClick={() => handlePublish("DRAFT")}>
+                        Unpublish
+                      </CustomMenuList>
                     ) : (
-                      <CustomMenuList>Publish</CustomMenuList>
+                      <CustomMenuList
+                        onClick={() => handlePublish("PUBLISHED")}
+                      >
+                        Publish
+                      </CustomMenuList>
                     )}
                     <CustomMenuList
                       onClick={() =>

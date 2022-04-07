@@ -96,6 +96,8 @@ const AddBlog = () => {
     navigate("/dashboard/home");
   };
 
+  const [tag, setTag] = useState("");
+
   return (
     <>
       <BlogShapes />
@@ -213,12 +215,15 @@ const AddBlog = () => {
 
         <TextField
           name="tags"
+          value={tag}
+          onChange={(e) => setTag(e.target.value)}
           label="Tags*"
           variant="standard"
           className="w-100 my-3"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               setBlog({ ...blog, tags: [...blog.tags, e.target.value] });
+              setTag("");
             }
           }}
         />
