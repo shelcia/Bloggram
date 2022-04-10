@@ -24,39 +24,74 @@ import { apiBlog } from "../services/models/BlogModel";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { LoadDrafts, LoadPublished } from "../redux/actions";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: "",
-    avatar: {
-      // topType: "LongHairMiaWallace",
-      // accessoriesType: "Prescription02",
-      // hairColor: "BrownDark",
-      // facialHairType: "Blank",
-      // clotheType: "Hoodie",
-      // clotheColor: "PastelBlue",
-      // eyeType: "Happy",
-      // eyebrowType: "Default",
-      // mouthType: "Smile",
-      // skinColor: "Light",
-    },
+    avatar: {},
     date: "",
+    likedBlogs: [],
   });
 
-  useEffect(() => {
-    const ac = new AbortController();
-    apiUsers.getSingle(blog.userId, ac.signal).then((res) => {
+  const handleLike = () => {
+    const userId = localStorage.getItem("BlogGram-UserId");
+    if (!userId) {
+      toast.error("Only logged in users can like");
+      return;
+    }
+    // console.log(blog);
+
+    const response = {
+      userId: userId,
+      likes: [
+        ...blog.likes,
+        {
+          userId: userId,
+        },
+      ],
+      likedBlogs: [...user?.likedBlogs, blog._id],
+    };
+    console.log(response);
+
+    apiBlog.put(response, `likes/${blog._id}`).then((res) => {
+      // console.log(res);
+      if (res.status === "200") {
+        toast.success(res.message);
+        // fetchBlog();
+        _getUser();
+      } else {
+        toast.error(res.message);
+      }
+    });
+  };
+
+  const _getUser = (id, signal) => {
+    apiUsers.getSingle(blog.userId, signal).then((res) => {
       if (res.status === "200") {
         setUser(res.message);
       }
     });
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+    _getUser(blog.userId, ac.signal);
 
     return () => {
       ac.abort();
     };
-  }, [blog.userId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // console.log(blog._id);
+  // console.log(user?.likedBlogs);
+
+  // console.log(user?.likedBlogs?.includes(blog._id));
 
   return (
     <React.Fragment>
@@ -64,35 +99,61 @@ const BlogCard = ({ blog }) => {
         <img
           src={
             blog.image
-              ? `http://localhost:8000/api/blog/image/${blog._id}`
+              ? `https://bloggram-backend.herokuapp.com/api/blog/image/${blog._id}`
               : Img
           }
           alt=""
           style={{ width: "100%", height: "200px", objectFit: "cover" }}
         />
         <CardContent className="mt-3">
-          <div className="d-flex align-items-center">
-            {user.avatar === undefined || user.avatar === {} ? (
-              <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
-            ) : (
-              <Avatar
-                style={{ width: 30, height: 30 }}
-                avatarStyle="Circle"
-                topType={user?.avatar?.topType}
-                accessoriesType={user?.avatar?.accessoriesType}
-                hairColor={user?.avatar?.hairColor}
-                facialHairType={user?.avatar?.facialHairType}
-                clotheType={user?.avatar?.clotheType}
-                clotheColor={user?.avatar?.clotheColor}
-                eyeType={user?.avatar?.eyeType}
-                eyebrowType={user?.avatar?.eyebrowType}
-                mouthType={user?.avatar?.mouthType}
-                skinColor={user?.avatar?.skinColor}
-              />
-            )}
-            <small className="mb-0 fst-italic text-muted ms-2">
-              {user?.name}
-            </small>{" "}
+          <div className="d-flex align-items-center justify-content-between">
+            <div className="d-flex align-items-center">
+              {user.avatar === undefined || user.avatar === {} ? (
+                <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
+              ) : (
+                <Avatar
+                  style={{ width: 30, height: 30 }}
+                  avatarStyle="Circle"
+                  topType={user?.avatar?.topType}
+                  accessoriesType={user?.avatar?.accessoriesType}
+                  hairColor={user?.avatar?.hairColor}
+                  facialHairType={user?.avatar?.facialHairType}
+                  clotheType={user?.avatar?.clotheType}
+                  clotheColor={user?.avatar?.clotheColor}
+                  eyeType={user?.avatar?.eyeType}
+                  eyebrowType={user?.avatar?.eyebrowType}
+                  mouthType={user?.avatar?.mouthType}
+                  skinColor={user?.avatar?.skinColor}
+                />
+              )}
+              <small className="mb-0 fst-italic text-muted ms-2">
+                {user?.name}
+              </small>{" "}
+            </div>
+            <div>
+              {/* {blog.type === "PUBLISHED" && (
+                  <IconButton aria-label="share" >
+                    <IosShareIcon />
+                  </IconButton>
+                )} */}
+              {user?.likedBlogs?.includes(blog._id) ? (
+                <IconButton
+                  aria-label="like"
+                  color="error"
+                  onClick={handleLike}
+                >
+                  <FavoriteIcon />
+                </IconButton>
+              ) : (
+                <IconButton aria-label="like" onClick={handleLike}>
+                  <FavoriteBorderIcon />
+                </IconButton>
+              )}
+
+              <IconButton aria-label="save">
+                <BookmarkBorderIcon />
+              </IconButton>
+            </div>
           </div>
           <Typography variant="h5" className="my-3">
             <LinesEllipsis
@@ -154,18 +215,7 @@ const BlogList = ({ blog }) => {
 
   const [user, setUser] = useState({
     name: "",
-    avatar: {
-      // topType: "LongHairMiaWallace",
-      // accessoriesType: "Prescription02",
-      // hairColor: "BrownDark",
-      // facialHairType: "Blank",
-      // clotheType: "Hoodie",
-      // clotheColor: "PastelBlue",
-      // eyeType: "Happy",
-      // eyebrowType: "Default",
-      // mouthType: "Smile",
-      // skinColor: "Light",
-    },
+    avatar: {},
     date: "",
   });
 
@@ -195,7 +245,7 @@ const BlogList = ({ blog }) => {
 
   const handlePublish = (type) => {
     apiBlog.put({ type: type }, `type/${blog._id}`).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status === "200") {
         toast.success(res.message);
         fetchBlog();
@@ -221,7 +271,7 @@ const BlogList = ({ blog }) => {
           <img
             src={
               blog.image
-                ? `http://localhost:8000/api/blog/image/${blog._id}`
+                ? `https://bloggram-backend.herokuapp.com/api/blog/image/${blog._id}`
                 : Img
             }
             alt=""

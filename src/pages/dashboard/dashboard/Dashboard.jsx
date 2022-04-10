@@ -17,14 +17,6 @@ const Dashboard = () => {
             <h2 className="display-3 text" style={{ fontWeight: 600 }}>
               Write Something Today !
             </h2>
-            {/* <div className="text-center my-3">
-              <Button
-                color="primary"
-                onClick={() => navigate("/dashboard/add-blog")}
-              >
-                Start Writing..
-              </Button>
-            </div> */}
             <MyBlogs />
           </div>
         </div>
