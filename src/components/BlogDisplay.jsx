@@ -368,7 +368,7 @@ const BlogList = ({ blog }) => {
       <SocialModal
         open={open}
         setOpen={setOpen}
-        url={`http://localhost:3001/blog/${blog._id}`}
+        url={`https://bloggram.netlify.app/blog/${blog._id}`}
         name={blog.title}
       />
     </React.Fragment>
