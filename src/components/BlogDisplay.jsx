@@ -56,7 +56,7 @@ const BlogCard = ({ blog }) => {
       ],
       likedBlogs: [...user?.likedBlogs, blog._id],
     };
-    console.log(response);
+    // console.log(response);
 
     apiBlog.put(response, `likes/${blog._id}`).then((res) => {
       // console.log(res);

@@ -86,7 +86,7 @@ const EditBlog = () => {
     formData.append("type", type);
 
     apiBlog.putFormData(formData, `blog/${blog._id}`).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status === "200") {
         toast.success(res.message);
       } else {
