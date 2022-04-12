@@ -39,9 +39,8 @@ const BlogPage = () => {
 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const ac = new AbortController();
-    apiBlog.getSingle(id, ac.signal).then((res) => {
+  const _getBlog = (id, signal) => {
+    apiBlog.getSingle(id, signal).then((res) => {
       //   console.log(res);
       if (res.status === "200") {
         setBlog(res.message);
@@ -50,6 +49,11 @@ const BlogPage = () => {
         setLoading(false);
       }
     });
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+    _getBlog(id, ac.signal);
 
     return () => {
       ac.abort();
@@ -61,6 +65,67 @@ const BlogPage = () => {
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("BlogGram-UserId");
+
+  const [user, setUser] = useState({
+    name: "",
+    avatar: {},
+    date: "",
+    likedBlogs: [],
+  });
+
+  const handleLike = () => {
+    const userId = localStorage.getItem("BlogGram-UserId");
+    if (!userId) {
+      toast.error("Only logged in users can like");
+      return;
+    }
+    // console.log(blog);
+
+    const response = {
+      userId: userId,
+      likes: [
+        ...blog.likes,
+        {
+          userId: userId,
+        },
+      ],
+      likedBlogs: [...user?.likedBlogs, blog._id],
+    };
+    console.log(response);
+
+    apiBlog.put(response, `likes/${blog._id}`).then((res) => {
+      // console.log(res);
+      if (res.status === "200") {
+        toast.success(res.message);
+        // fetchBlog();
+        _getUser(blog.userId);
+        _getBlog(id);
+      } else {
+        toast.error(res.message);
+      }
+    });
+  };
+
+  const _getUser = (id, signal) => {
+    if (!blog.userId) {
+      return;
+    }
+    apiUsers.getSingle(id, signal).then((res) => {
+      if (res.status === "200") {
+        setUser(res.message);
+      }
+    });
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+    _getUser(blog.userId, ac.signal);
+
+    return () => {
+      ac.abort();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return loading ? (
     <LoadingPage />
@@ -97,7 +162,12 @@ const BlogPage = () => {
               {blog.comments.length}
             </span>
           </Fab>
-          <Fab color="error" aria-label="love" className="flex-column">
+          <Fab
+            color="error"
+            aria-label="love"
+            className="flex-column"
+            onClick={handleLike}
+          >
             <FavoriteRoundedIcon />
             <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
               {blog.likes?.length}
