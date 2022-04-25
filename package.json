@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^14.1.1",
     "aos": "^2.3.4",
     "avataaars": "^2.0.0",
-    "axios": "^0.26.1",
+    "axios": "^0.27.0",
     "html-react-parser": "^1.4.12",
     "react": "^17.0.2",
     "react-awesome-shapes": "^0.1.12",
