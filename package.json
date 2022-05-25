@@ -10,7 +10,7 @@
     "@mui/material": "^5.8.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
-    "@testing-library/user-event": "^14.1.1",
+    "@testing-library/user-event": "^14.2.0",
     "aos": "^2.3.4",
     "avataaars": "^2.0.0",
     "axios": "^0.26.1",
