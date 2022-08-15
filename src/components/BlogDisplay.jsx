@@ -97,11 +97,11 @@ const BlogCard = ({ blog }) => {
     <React.Fragment>
       <Card sx={{ height: "500px" }}>
         <img
-          src={
-            blog.image
-              ? `https://bloggram-backend.herokuapp.com/api/blog/image/${blog._id}`
-              : Img
-          }
+          src={`https://bloggram-backend.herokuapp.com/api/blog/image/${blog._id}`}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = Img;
+          }}
           alt=""
           style={{ width: "100%", height: "200px", objectFit: "cover" }}
         />
