@@ -18,7 +18,7 @@
     "react": "^18.2.0",
     "react-awesome-shapes": "^0.1.12",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.3.0",
+    "react-hot-toast": "^2.4.0",
     "react-lines-ellipsis": "^0.15.2",
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.3.0",
