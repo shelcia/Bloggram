@@ -27,6 +27,7 @@ import { LoadDrafts, LoadPublished } from "../redux/actions";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import { CYCLIC_BASE_URL } from "../services/api";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
@@ -97,7 +98,7 @@ const BlogCard = ({ blog }) => {
     <React.Fragment>
       <Card sx={{ height: "500px" }}>
         <img
-          src={`https://bloggram-backend.herokuapp.com/api/blog/image/${blog._id}`}
+          src={`${CYCLIC_BASE_URL}/blog/image/${blog._id}`}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = Img;
@@ -269,11 +270,7 @@ const BlogList = ({ blog }) => {
       >
         <CardContent className="mt-3 d-flex align-items-center">
           <img
-            src={
-              blog.image
-                ? `https://bloggram-backend.herokuapp.com/api/blog/image/${blog._id}`
-                : Img
-            }
+            src={blog.image ? `${CYCLIC_BASE_URL}/blog/image/${blog._id}` : Img}
             alt=""
             style={{ width: 100, height: 100, objectFit: "cover" }}
             className="me-4"

@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { apiUsers } from "../../services/models/UserModel";
 import Avatar from "avataaars";
 import { convertSimpleDate } from "../../helpers/convertDate";
+import { CYCLIC_BASE_URL } from "../../services/api";
 const parse = require("html-react-parser");
 
 const BlogPage = () => {
@@ -136,7 +137,7 @@ const BlogPage = () => {
         <div className="text-center mb-4">
           {blog.image && (
             <img
-              src={`https://bloggram-backend.herokuapp.com/api/blog/image/${blog._id}`}
+              src={`${CYCLIC_BASE_URL}/blog/image/${blog._id}`}
               alt=""
               className="me-4 img-fluid"
             />

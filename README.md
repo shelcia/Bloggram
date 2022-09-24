@@ -30,7 +30,7 @@ https://bloggram-beta.vercel.app/
 
 ## Backend Deployment Link
 
-https://bloggram-backend.herokuapp.com/
+https://long-cyan-spider-tux.cyclic.app/
 
 ## Backend
 
