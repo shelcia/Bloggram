@@ -25,7 +25,7 @@
     "react-scripts": "^5.0.1",
     "react-share-social": "^0.1.48",
     "redux": "^4.2.0",
-    "suneditor": "^2.44.2",
+    "suneditor": "^2.44.3",
     "suneditor-react": "^3.4.1"
   },
   "scripts": {
