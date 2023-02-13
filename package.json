@@ -14,7 +14,7 @@
     "aos": "^2.3.4",
     "avataaars": "^2.0.0",
     "axios": "^1.2.2",
-    "html-react-parser": "^3.0.6",
+    "html-react-parser": "^3.0.9",
     "react": "^18.2.0",
     "react-awesome-shapes": "^0.1.12",
     "react-dom": "^18.2.0",
