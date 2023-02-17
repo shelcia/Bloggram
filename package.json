@@ -9,7 +9,7 @@
     "@mui/lab": "^5.0.0-alpha.120",
     "@mui/material": "^5.11.5",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "aos": "^2.3.4",
     "avataaars": "^2.0.0",
