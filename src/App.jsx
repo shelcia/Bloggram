@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/bootstrap/bootstrap.css";
 import "./styles/style.css";
 
 import routes from "./routes";

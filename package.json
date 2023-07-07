@@ -22,17 +22,17 @@
     "react-lines-ellipsis": "^0.15.3",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",
-    "react-scripts": "^5.0.1",
     "react-share-social": "^0.1.55",
     "redux": "^4.2.1",
+    "sass": "^1.63.6",
     "suneditor": "^2.45.1",
     "suneditor-react": "^3.6.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.jsx"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.2",
+    "vite": "^4.4.1"
   }
 }
