@@ -12,7 +12,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { apiBlog } from "../../services/models/BlogModel";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import { ViewBlogShapes } from "../../components/Shapes";
 import LoadingPage from "./LoadingPage";
 import BackToTop from "../../components/ScrollToTop";
 import EditIcon from "@mui/icons-material/Edit";
@@ -21,7 +20,7 @@ import { apiUsers } from "../../services/models/UserModel";
 import Avatar from "avataaars";
 import { convertSimpleDate } from "../../helpers/convertDate";
 import { CYCLIC_BASE_URL } from "../../services/api";
-const parse = require("html-react-parser");
+import parse from "html-react-parser";
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -132,7 +131,6 @@ const BlogPage = () => {
     <LoadingPage />
   ) : (
     <>
-      <ViewBlogShapes />
       <section className="container p-5">
         <div className="text-center mb-4">
           {blog.image && (
@@ -144,7 +142,7 @@ const BlogPage = () => {
           )}
         </div>
 
-        <h1 className="display-3 text" id="blog-top">
+        <h1 className="display-3" id="blog-top">
           {blog.title}
         </h1>
         <p className="lead text-grey mb-4" style={{ fontStyle: "italic" }}>
@@ -351,7 +349,7 @@ const Comment = ({ comment }) => {
         {/* <Tooltip title={user?.name}> */}
         {loading ? (
           <></>
-        ) : user.avatar === undefined || user.avatar === {} ? (
+        ) : user.avatar ? (
           <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
         ) : (
           <Avatar

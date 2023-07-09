@@ -2,7 +2,6 @@ import React from "react";
 import { Fab, Tooltip } from "@mui/material";
 import MyBlogs from "../components/MyBlogs";
 import { useNavigate } from "react-router-dom";
-import { DashboardShapes } from "../../../components/Shapes";
 import EditIcon from "@mui/icons-material/Edit";
 
 const Dashboard = () => {
@@ -10,11 +9,10 @@ const Dashboard = () => {
 
   return (
     <>
-      <DashboardShapes />
-      <section className="container p-5">
+      <section className="container pt-4">
         <div className="row">
           <div className="col-md-12">
-            <h2 className="display-3 text" style={{ fontWeight: 600 }}>
+            <h2 className="display-3" style={{ fontWeight: 600 }}>
               Write Something Today !
             </h2>
             <MyBlogs />

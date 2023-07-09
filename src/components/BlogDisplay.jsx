@@ -9,11 +9,11 @@ import {
   Modal,
   Typography,
   Box,
+  Avatar,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LinesEllipsis from "react-lines-ellipsis";
 import { apiUsers } from "../services/models/UserModel";
-import Avatar from "avataaars";
 import IosShareIcon from "@mui/icons-material/IosShareRounded";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { ShareSocial } from "react-share-social";
@@ -45,7 +45,6 @@ const BlogCard = ({ blog }) => {
       toast.error("Only logged in users can like");
       return;
     }
-    // console.log(blog);
 
     const response = {
       userId: userId,
@@ -109,24 +108,7 @@ const BlogCard = ({ blog }) => {
         <CardContent className="mt-3">
           <div className="d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
-              {user.avatar === undefined || user.avatar === {} ? (
-                <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
-              ) : (
-                <Avatar
-                  style={{ width: 30, height: 30 }}
-                  avatarStyle="Circle"
-                  topType={user?.avatar?.topType}
-                  accessoriesType={user?.avatar?.accessoriesType}
-                  hairColor={user?.avatar?.hairColor}
-                  facialHairType={user?.avatar?.facialHairType}
-                  clotheType={user?.avatar?.clotheType}
-                  clotheColor={user?.avatar?.clotheColor}
-                  eyeType={user?.avatar?.eyeType}
-                  eyebrowType={user?.avatar?.eyebrowType}
-                  mouthType={user?.avatar?.mouthType}
-                  skinColor={user?.avatar?.skinColor}
-                />
-              )}
+              <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
               <small className="mb-0 fst-italic text-muted ms-2">
                 {user?.name}
               </small>{" "}
@@ -256,15 +238,24 @@ const BlogList = ({ blog }) => {
     });
   };
 
+  const _deleteUser = (id) => {
+    apiBlog.remove(id).then((res) => {
+      console.log(res);
+      if (res.status === "200") {
+        toast.success("Blog Deleted");
+        fetchBlog();
+        // setUser(res.message);
+      } else {
+        toast.error("Blog deletion failed !");
+      }
+    });
+  };
+
   return (
     <React.Fragment>
       <Card
         sx={{
-          boxShadow: "none",
-          borderBottom: "1px solid rgb(148, 164, 196)",
           width: "100%",
-          borderBottomRightRadius: 0,
-          borderBottomLeftRadius: 0,
           cursor: "pointer",
         }}
       >
@@ -280,47 +271,19 @@ const BlogList = ({ blog }) => {
             <Typography variant="h5" className="mt-3 mb-1" onClick={gotoBlog}>
               {blog?.title}
             </Typography>
-            <Typography
-              variant="h6"
-              style={{ fontWeight: 400 }}
-              className="mb-2"
-              onClick={gotoBlog}
-            >
-              <LinesEllipsis
-                text={blog?.desc}
-                maxLine="3"
-                ellipsis="..."
-                trimRight
-                basedOn="letters"
-              />
-            </Typography>
             <div className="d-flex justify-content-between w-100">
               <div className="d-flex align-items-center">
-                {user.avatar === undefined || user.avatar === {} ? (
-                  <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
-                ) : (
-                  <Avatar
-                    style={{ width: 30, height: 30 }}
-                    avatarStyle="Circle"
-                    topType={user?.avatar?.topType}
-                    accessoriesType={user?.avatar?.accessoriesType}
-                    hairColor={user?.avatar?.hairColor}
-                    facialHairType={user?.avatar?.facialHairType}
-                    clotheType={user?.avatar?.clotheType}
-                    clotheColor={user?.avatar?.clotheColor}
-                    eyeType={user?.avatar?.eyeType}
-                    eyebrowType={user?.avatar?.eyebrowType}
-                    mouthType={user?.avatar?.mouthType}
-                    skinColor={user?.avatar?.skinColor}
-                  />
-                )}
+                <Avatar src="/broken-image.jpg" />
                 <small className="mb-0 fst-italic text-muted ms-2">
                   {user?.name}
                 </small>{" "}
-                .
-                {blog.type === "PUBLISHED" && (
+                {blog.type === "PUBLISHED" ? (
                   <small className="mb-0 fw-light text-muted ms-2">
                     Published on {convertSimpleDate(user?.date)}
+                  </small>
+                ) : (
+                  <small className="mb-0 fw-light text-muted ms-2">
+                    Last Saved on {convertSimpleDate(user?.date)}
                   </small>
                 )}
               </div>
@@ -354,7 +317,9 @@ const BlogList = ({ blog }) => {
                     >
                       Edit
                     </CustomMenuList>
-                    <CustomMenuList>Remove</CustomMenuList>
+                    <CustomMenuList onClick={() => _deleteUser(blog._id)}>
+                      Remove
+                    </CustomMenuList>
                   </>
                 </CustomPopover>
               </div>

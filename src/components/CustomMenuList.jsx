@@ -10,12 +10,12 @@ const Small = ({
 }) => {
   return (
     <StyledBox
-      textTransformStyle={textTransform}
+      // textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={className}
       style={{ fontStyle: italic ? "italic" : "normal" }}
       component="small"
-      fontSize="12px"
+      fontSize="14px"
       fontWeight="500"
       lineHeight="1.5"
       {...props}
