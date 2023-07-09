@@ -224,7 +224,7 @@ const baseOptions = {
     MuiButtonBase: {
       styleOverrides: {
         root: {
-          fontFamily: "'Poppins', sans-serif",
+          fontFamily: "'Satoshi', sans-serif",
         },
       },
     },
@@ -248,7 +248,7 @@ const baseOptions = {
     button: {
       fontWeight: 600,
     },
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Satoshi', sans-serif",
     h1: {
       fontWeight: 800,
       fontSize: "4.25rem",
@@ -271,7 +271,8 @@ const baseOptions = {
     },
     h6: {
       fontWeight: 600,
-      fontSize,
+      fontSize: "1.1rem",
+      // fontSize,
     },
     overline: {
       fontWeight: 600,
@@ -295,8 +296,9 @@ const themesOptions = {
       info,
       divider: secondary[300],
       background: {
-        // default: "#f3f4f9",
-        default: "#fff",
+        default: "#f3f4f9",
+        paper: "#f3f4f9",
+        // default: "#fff",
       },
       text: {
         primary: secondary[500],
@@ -327,8 +329,10 @@ const themesOptions = {
       success,
       info,
       background: {
-        default: "#1e2732",
-        paper: "#222b36",
+        // default: "#1e2732",
+        default: "#091922",
+        paper: "#091922",
+        // paper: "#222b36",
       },
       mode: "dark",
     },
@@ -346,6 +350,14 @@ const themesOptions = {
             "& .MuiPopover-paper": {
               border: "1px solid rgba(255, 255, 255, 0.12)",
             },
+          },
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            // border: "1px solid hsla(0,0%,100%,.2)",
+            boxShadow: "20px 20px 60px #08151d, -20px -20px 60px #0a1d27",
           },
         },
       },
