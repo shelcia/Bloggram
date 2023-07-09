@@ -1,5 +1,5 @@
 import React from "react";
-import SearchInput from "../../../components/SearchInput";
+// import SearchInput from "../../../components/SearchInput";
 
 const Hero = () => {
   //   const gotoBlog = () => {
@@ -15,17 +15,18 @@ const Hero = () => {
 
   return (
     <React.Fragment>
-      <section className="container p-5" style={{ height: "90vh" }}>
+      <section className="container pt-5" style={{ height: "90vh" }}>
         <h1
-          className="display-2 text mt-5"
+          className="display-2 mt-5"
           style={{ fontWeight: 600 }}
           data-aos="fade-up"
         >
-          Write Passionate Blogs about Tech, Design, Art, Cinema and much more
+          Write Passionate Blogs about Tech
+          {/* , Design, Art, Cinema and much more */}
         </h1>
-        <div className="text-center mt-3">
+        {/* <div className="text-center mt-3">
           <SearchInput />
-        </div>
+        </div> */}
       </section>
     </React.Fragment>
   );

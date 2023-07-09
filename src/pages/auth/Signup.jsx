@@ -2,15 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiAuth } from "../../services/models/AuthModel";
 import toast from "react-hot-toast";
-import {
-  Button,
-  Card,
-  CardContent,
-  TextField,
-  useMediaQuery,
-} from "@mui/material";
+import { Button, TextField, useMediaQuery } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { AuthShapes } from "../../components/Shapes";
+import AuthLayout from "../../layout/AuthLayout";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -57,59 +51,53 @@ const Signup = () => {
 
   return (
     <React.Fragment>
-      <AuthShapes />
-      <div className="container h-100 p-5 d-flex justify-content-center align-items-center">
-        <Card>
-          <CardContent sx={{ padding: 4 }}>
-            <h3 className="text my-3 text-center">Signup</h3>
-            <TextField
-              label="Name"
-              variant="standard"
-              sx={{ minWidth: matches ? 450 : 200 }}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <br />
-            <TextField
-              label="Email"
-              variant="standard"
-              className="mt-4"
-              sx={{ minWidth: matches ? 450 : 200 }}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <br />
-            <TextField
-              label="Password"
-              variant="standard"
-              sx={{ minWidth: matches ? 450 : 200 }}
-              className="mt-4"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-            />
-            <div className="text-center mt-4">
-              {isLoading ? (
-                <LoadingButton
-                  loading
-                  loadingIndicator="Loading..."
-                  variant="outlined"
-                  size="small"
-                >
-                  Loading
-                </LoadingButton>
-              ) : (
-                <Button onClick={onSubmit} variant="outlined" size="small">
-                  Signup
-                </Button>
-              )}
-            </div>
-            <div className="text-center mt-5">
-              Have an account already? then <Link to="/login">Login</Link>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <AuthLayout title="Signup">
+        <TextField
+          label="Name"
+          variant="standard"
+          sx={{ minWidth: matches ? 450 : 200 }}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <TextField
+          label="Email"
+          variant="standard"
+          className="mt-4"
+          sx={{ minWidth: matches ? 450 : 200 }}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
+        <TextField
+          label="Password"
+          variant="standard"
+          sx={{ minWidth: matches ? 450 : 200 }}
+          className="mt-4"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+        />
+        <div className="text-center mt-4">
+          {isLoading ? (
+            <LoadingButton
+              loading
+              loadingIndicator="Loading..."
+              variant="outlined"
+              size="small"
+            >
+              Loading
+            </LoadingButton>
+          ) : (
+            <Button onClick={onSubmit} variant="outlined" size="small">
+              Signup
+            </Button>
+          )}
+        </div>
+        <div className="text-center mt-5">
+          Have an account already? then <Link to="/login">Login</Link>
+        </div>
+      </AuthLayout>
     </React.Fragment>
   );
 };

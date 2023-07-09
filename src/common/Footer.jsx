@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="container my-5">
       <Divider />
-      <p className="my-5 pb-5">Developed by Shelcia</p>
+      <h6 className="my-5 pb-5">Developed by Shelcia</h6>
     </footer>
   );
 };

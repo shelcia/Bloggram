@@ -1,17 +1,15 @@
 import React from "react";
-import { LandingPageShapes } from "../../components/Shapes";
-import Blogs from "./components/Blogs";
+// import Blogs from "./components/Blogs";
 import Hero from "./components/Hero";
-import Topbar from "./components/Topbar";
-import Footer from "../../components/Footer";
+import AuthTopbar from "../../layout/AuthTopbar";
+import Footer from "../../common/Footer";
 
 const LandingPage = () => {
   return (
     <React.Fragment>
-      <LandingPageShapes />
-      <Topbar />
+      <AuthTopbar />
       <Hero />
-      <Blogs />
+      {/* <Blogs /> */}
       <Footer />
     </React.Fragment>
   );

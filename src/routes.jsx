@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react"; // , { lazy, Suspense }
-import AuthGuard from "./components/AuthGuard";
-import DashboardLayout from "./components/DashboardLayout";
+import AuthGuard from "./common/AuthGuard";
+import DashboardLayout from "./layout/DashboardLayout";
 import LoadingPage from "./pages/common/LoadingPage";
 
 const Loadable = (Component) => (props) =>
