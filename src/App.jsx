@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./styles/bootstrap/bootstrap.css";
 import "./styles/style.css";
 
@@ -6,6 +6,7 @@ import routes from "./routes";
 import { useRoutes } from "react-router-dom";
 import { customTheme } from "./theme";
 import {
+  Box,
   CssBaseline,
   StyledEngineProvider,
   ThemeProvider,
@@ -14,6 +15,7 @@ import {
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Toaster } from "react-hot-toast";
+import { ThemeContext } from "./context/ThemeContext";
 
 AOS.init({
   // Global settings:
@@ -39,8 +41,10 @@ AOS.init({
 const App = () => {
   const allPages = useRoutes(routes);
 
+  const [darkTheme] = useContext(ThemeContext);
+
   const appTheme = customTheme({
-    theme: "light",
+    theme: darkTheme ? "dark" : "light",
     direction: "ltr",
     // responsiveFontSizes: settings.responsiveFontSizes
   }); // toaster options
@@ -48,12 +52,12 @@ const App = () => {
   const toasterOptions = {
     style: {
       fontWeight: 500,
-      fontFamily: "'Poppins', sans-serif",
+      fontFamily: "'Satoshi', sans-serif",
     },
   };
 
   return (
-    <React.Fragment>
+    <Box className={darkTheme ? `dark-theme` : `light-theme`}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={appTheme}>
           <CssBaseline />
@@ -61,7 +65,7 @@ const App = () => {
           {allPages}
         </ThemeProvider>
       </StyledEngineProvider>
-    </React.Fragment>
+    </Box>
   );
 };
 
