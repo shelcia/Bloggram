@@ -8,15 +8,11 @@
     "@mui/icons-material": "^5.13.7",
     "@mui/lab": "^5.0.0-alpha.135",
     "@mui/material": "^5.13.7",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^14.4.3",
     "aos": "^2.3.4",
-    "avataaars": "^2.0.0",
     "axios": "^1.4.0",
     "html-react-parser": "^4.0.0",
+    "lodash.merge": "^4.6.2",
     "react": "^18.2.0",
-    "react-awesome-shapes": "^0.1.12",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-lines-ellipsis": "^0.15.3",
@@ -51,6 +47,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.2",
-    "vite": "^4.4.1"
+    "vite": "^4.4.2"
   }
 }

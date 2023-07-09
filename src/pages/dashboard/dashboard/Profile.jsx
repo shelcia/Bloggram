@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Avatar from "avataaars";
+// import Avatar from "avataaars";
 import {
   Button,
   FormControl,
@@ -13,22 +13,22 @@ import { apiUsers } from "../../../services/models/UserModel";
 import { toast } from "react-hot-toast";
 
 const Profile = () => {
-  const [avatar, setAvatar] = useState({
-    topType: "LongHairMiaWallace",
-    accessoriesType: "Prescription02",
-    hairColor: "BrownDark",
-    facialHairType: "Blank",
-    clotheType: "Hoodie",
-    clotheColor: "PastelBlue",
-    eyeType: "Happy",
-    eyebrowType: "Default",
-    mouthType: "Smile",
-    skinColor: "Light",
-  });
+  // const [avatar, setAvatar] = useState({
+  //   topType: "LongHairMiaWallace",
+  //   accessoriesType: "Prescription02",
+  //   hairColor: "BrownDark",
+  //   facialHairType: "Blank",
+  //   clotheType: "Hoodie",
+  //   clotheColor: "PastelBlue",
+  //   eyeType: "Happy",
+  //   eyebrowType: "Default",
+  //   mouthType: "Smile",
+  //   skinColor: "Light",
+  // });
 
-  const handleAvatar = (e) => {
-    setAvatar({ ...avatar, [e.target.name]: e.target.value });
-  };
+  // const handleAvatar = (e) => {
+  //   setAvatar({ ...avatar, [e.target.name]: e.target.value });
+  // };
 
   const headStyles = [
     "No Hair",
@@ -227,7 +227,7 @@ const Profile = () => {
 
     const body = {
       name: user.name,
-      avatar: avatar,
+      // avatar: avatar,
     };
     apiUsers.put(body, `edit/${userId}`).then((res) => {
       //   console.log(res);
@@ -243,8 +243,8 @@ const Profile = () => {
   return (
     <section className="container p-5">
       <div className="row">
-        <div className="col-sm-6 d-flex flex-column align-items-center">
-          <Avatar
+        {/* <div className="col-sm-6 d-flex flex-column align-items-center"> */}
+        {/* <Avatar
             style={{ width: "200px", height: "200px", marginBottom: 8 }}
             avatarStyle="Circle"
             topType={avatar.topType}
@@ -257,8 +257,8 @@ const Profile = () => {
             eyebrowType={avatar.eyebrowType}
             mouthType={avatar.mouthType}
             skinColor={avatar.skinColor}
-          />
-          <div className="row">
+          /> */}
+        {/* <div className="row">
             <div className="col-md-6">
               <Stack spacing={2}>
                 {selectMenu1.map((menu, index) => (
@@ -310,7 +310,7 @@ const Profile = () => {
               </Stack>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="col-sm-6">
           <h3 className="text mb-4">Edit Profile</h3>
           <TextField

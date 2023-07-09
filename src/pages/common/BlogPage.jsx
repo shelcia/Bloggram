@@ -17,7 +17,7 @@ import BackToTop from "../../components/ScrollToTop";
 import EditIcon from "@mui/icons-material/Edit";
 import toast from "react-hot-toast";
 import { apiUsers } from "../../services/models/UserModel";
-import Avatar from "avataaars";
+// import Avatar from "avataaars";
 import { convertSimpleDate } from "../../helpers/convertDate";
 import { CYCLIC_BASE_URL } from "../../services/api";
 import parse from "html-react-parser";
@@ -352,20 +352,21 @@ const Comment = ({ comment }) => {
         ) : user.avatar ? (
           <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
         ) : (
-          <Avatar
-            style={{ width: 30, height: 30 }}
-            avatarStyle="Circle"
-            topType={user?.avatar?.topType}
-            accessoriesType={user?.avatar?.accessoriesType}
-            hairColor={user?.avatar?.hairColor}
-            facialHairType={user?.avatar?.facialHairType}
-            clotheType={user?.avatar?.clotheType}
-            clotheColor={user?.avatar?.clotheColor}
-            eyeType={user?.avatar?.eyeType}
-            eyebrowType={user?.avatar?.eyebrowType}
-            mouthType={user?.avatar?.mouthType}
-            skinColor={user?.avatar?.skinColor}
-          />
+          <></>
+          // <Avatar
+          //   style={{ width: 30, height: 30 }}
+          //   avatarStyle="Circle"
+          //   topType={user?.avatar?.topType}
+          //   accessoriesType={user?.avatar?.accessoriesType}
+          //   hairColor={user?.avatar?.hairColor}
+          //   facialHairType={user?.avatar?.facialHairType}
+          //   clotheType={user?.avatar?.clotheType}
+          //   clotheColor={user?.avatar?.clotheColor}
+          //   eyeType={user?.avatar?.eyeType}
+          //   eyebrowType={user?.avatar?.eyebrowType}
+          //   mouthType={user?.avatar?.mouthType}
+          //   skinColor={user?.avatar?.skinColor}
+          // />
         )}
         {/* </Tooltip> */}
 
