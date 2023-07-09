@@ -1,0 +1,46 @@
+.sun-editor {
+  .se-btn-module-border {
+    border: none !important;
+  }
+  .se-list-layer {
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1) !important;
+    border: none !important;
+  }
+  .se-wrapper-wysiwyg,
+  .sun-editor-editable {
+    font-family: $primaryFont !important;
+  }
+}
+
+.sun-editor-editable {
+  font-family: $primaryFont !important;
+}
+.sun-editor-light {
+  .sun-editor {
+    .se-toolbar {
+      background: linear-gradient(145deg, #ffffff, #e6e6e6) !important;
+      box-shadow: 28px 28px 56px #d9d9d9, -28px -28px 56px #ffffff !important;
+      outline: none !important;
+    }
+    button {
+      color: $darkThemeBg;
+    }
+  }
+}
+.sun-editor-dark {
+  .sun-editor {
+    border: 1px solid hsla(0, 0%, 100%, 0.2) !important;
+    outline: none !important;
+
+    .se-toolbar {
+      background: linear-gradient(145deg, #ffffff, #e6e6e6) !important;
+      box-shadow: 1px 1px 1px #d9d9d9, -1px -1px 1px #ffffff !important;
+    }
+
+    .se-container,
+    .se-toolbar {
+      border: 1px solid hsla(0, 0%, 100%, 0.2) !important;
+      outline: none !important;
+    }
+  }
+}

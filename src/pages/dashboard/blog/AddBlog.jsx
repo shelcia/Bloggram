@@ -1,32 +1,23 @@
 import React, { useState } from "react";
-import SunEditor from "suneditor-react";
-import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import { TextField, Chip, Button, IconButton, Input } from "@mui/material";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { toast } from "react-hot-toast";
-import { BlogShapes } from "../../../components/Shapes";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import CustomEditor from "../../../components/CustomEditor";
 
 const AddBlog = () => {
-  const BUTTONLIST = [
-    ["undo", "redo"],
-    ["font", "fontSize", "formatBlock"],
-    ["bold", "underline", "italic", "strike", "subscript", "superscript"],
-    ["removeFormat"],
-    // "/",
-    ["fontColor", "hiliteColor"],
-    ["outdent", "indent"],
-    ["align", "horizontalRule", "list", "table"],
-    ["link", "image", "video"],
-    ["fullScreen", "showBlocks" /*, 'codeView'*/],
-    ["preview", "print"],
-    // ["save", "template"],
-  ];
-
   const [file, setFile] = useState(null);
+  const [tag, setTag] = useState([]);
+  const [page, setPage] = useState(1);
+  const [blog, setBlog] = useState({
+    title: "",
+    desc: "",
+    tags: [],
+    content: [],
+  });
 
   // console.log({ file });
 
@@ -37,13 +28,6 @@ const AddBlog = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const [blog, setBlog] = useState({
-    title: "",
-    desc: "",
-    tags: [],
-    content: [],
-  });
-
   const handleInputs = (e) => {
     setBlog({ ...blog, [e.target.name]: e.target.value });
   };
@@ -51,21 +35,23 @@ const AddBlog = () => {
   const navigate = useNavigate();
 
   const createBlog = (type) => {
-    if (blog.title === "") {
-      toast.error("Fill in the title");
-      return;
-    }
-    if (blog.desc === "") {
-      toast.error("Fill in the Description");
-      return;
-    }
-    if (blog.content === "") {
-      toast.error("Fill in the Content");
-      return;
-    }
-    if (blog.tags === []) {
-      toast.error("Fill in the tags");
-      return;
+    if (blog.type === "PUBLISHED") {
+      if (blog.title === "") {
+        toast.error("Fill in the title");
+        return;
+      }
+      if (blog.desc === "") {
+        toast.error("Fill in the Description");
+        return;
+      }
+      if (blog.content === "") {
+        toast.error("Fill in the Content");
+        return;
+      }
+      if (blog?.tags?.length === 0) {
+        toast.error("Fill in the tags");
+        return;
+      }
     }
 
     setLoading(true);
@@ -96,11 +82,8 @@ const AddBlog = () => {
     navigate("/dashboard/home");
   };
 
-  const [tag, setTag] = useState("");
-
   return (
     <>
-      <BlogShapes />
       <section className="p-5">
         <div className="d-flex justify-content-between">
           <div>
@@ -122,14 +105,26 @@ const AddBlog = () => {
               >
                 Save as Draft
               </Button>
-              <Button
-                onClick={() => createBlog("PUBLISHED")}
-                variant="contained"
-                color="secondary"
-                size="small"
-              >
-                Publish
-              </Button>
+
+              {page === 1 ? (
+                <Button
+                  onClick={() => setPage(2)}
+                  variant="contained"
+                  color="secondary"
+                  size="small"
+                >
+                  Go to Publish
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => createBlog("PUBLISHED")}
+                  variant="contained"
+                  color="secondary"
+                  size="small"
+                >
+                  Publish
+                </Button>
+              )}
             </div>
           ) : (
             <>
@@ -143,97 +138,102 @@ const AddBlog = () => {
             </>
           )}
         </div>
-        <div className="text-center">
-          {file ? (
-            <>
-              <img
-                src={URL.createObjectURL(file)}
-                alt=""
-                className="img-fluid"
-              />
-              <br />
-              <Button
-                variant="outlined"
-                component="span"
-                onClick={() => setFile(null)}
-              >
-                Clear Image
-              </Button>
-            </>
-          ) : (
-            <>
-              <label htmlFor="contained-button-file">
-                <Input
-                  accept="image/png, image/jpeg"
-                  id="contained-button-file"
-                  type="file"
-                  sx={{ display: "none" }}
-                  onChange={(e) => setFile(e.target.files[0])}
-                />
-                <Button variant="outlined" component="span">
-                  <ImageOutlinedIcon
-                    className="me-2"
-                    sx={{ fontSize: "1rem" }}
-                  />
-                  Upload Image
-                </Button>
-              </label>
-            </>
-          )}
-        </div>
-        <TextField
-          name="title"
-          value={blog.title}
-          onChange={handleInputs}
-          label="Title*"
-          variant="standard"
-          className="w-100"
-        />
-        <TextField
-          name="desc"
-          value={blog.desc}
-          onChange={handleInputs}
-          label="Description*"
-          variant="standard"
-          className="w-100 my-3"
-          multiline
-          rows={4}
-        />
-        {blog.tags?.map((tag, index) => (
-          <Chip
-            label={tag}
-            key={index}
-            // onClick={handleClick}
-            onDelete={() =>
-              setBlog({
-                ...blog,
-                tags: blog.tags.filter((item) => item !== tag),
-              })
-            }
-          />
-        ))}
 
-        <TextField
-          name="tags"
-          value={tag}
-          onChange={(e) => setTag(e.target.value)}
-          label="Tags*"
-          variant="standard"
-          className="w-100 my-3"
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setBlog({ ...blog, tags: [...blog.tags, e.target.value] });
-              setTag("");
-            }
-          }}
-        />
-        <SunEditor
-          onChange={handleChange}
-          setOptions={{
-            height: "80vh",
-            buttonList: BUTTONLIST,
-          }}
-        />
+        {page === 1 ? (
+          <>
+            <TextField
+              name="title"
+              value={blog.title}
+              onChange={handleInputs}
+              label="Title*"
+              variant="standard"
+              className="w-100 mb-4"
+            />
+            <CustomEditor handleChange={handleChange} />
+          </>
+        ) : (
+          <>
+            <div className="text-center">
+              {file ? (
+                <>
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt=""
+                    className="img-fluid"
+                  />
+                  <br />
+                  <Button
+                    variant="outlined"
+                    component="span"
+                    onClick={() => setFile(null)}
+                  >
+                    Clear Image
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <TextField
+                    name="desc"
+                    value={blog.desc}
+                    onChange={handleInputs}
+                    label="Description*"
+                    variant="standard"
+                    className="w-100 my-3"
+                    multiline
+                    rows={4}
+                  />
+                  {blog.tags?.map((tag, index) => (
+                    <Chip
+                      label={tag}
+                      key={index}
+                      // onClick={handleClick}
+                      onDelete={() =>
+                        setBlog({
+                          ...blog,
+                          tags: blog.tags.filter((item) => item !== tag),
+                        })
+                      }
+                    />
+                  ))}
+
+                  <TextField
+                    name="tags"
+                    value={tag}
+                    onChange={(e) => setTag(e.target.value)}
+                    label="Tags*"
+                    variant="standard"
+                    className="w-100 my-3"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        setBlog({
+                          ...blog,
+                          tags: [...blog.tags, e.target.value],
+                        });
+                        setTag("");
+                      }
+                    }}
+                  />
+                  <label htmlFor="contained-button-file">
+                    <Input
+                      accept="image/png, image/jpeg"
+                      id="contained-button-file"
+                      type="file"
+                      sx={{ display: "none" }}
+                      onChange={(e) => setFile(e.target.files[0])}
+                    />
+                    <Button variant="outlined" component="span">
+                      <ImageOutlinedIcon
+                        className="me-2"
+                        sx={{ fontSize: "1rem" }}
+                      />
+                      Upload Image
+                    </Button>
+                  </label>
+                </>
+              )}
+            </div>
+          </>
+        )}
       </section>
     </>
   );

@@ -1,34 +1,16 @@
 import React, { useEffect, useState } from "react";
-import SunEditor from "suneditor-react";
-import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import { TextField, Chip, Button, IconButton, Input } from "@mui/material";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { toast } from "react-hot-toast";
-import { BlogShapes } from "../../../components/Shapes";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useNavigate, useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import Loading from "../../common/LoadingPage";
+import CustomEditor from "../../../components/CustomEditor";
 
 const EditBlog = () => {
-  const BUTTONLIST = [
-    ["undo", "redo"],
-    ["font", "fontSize", "formatBlock"],
-    ["bold", "underline", "italic", "strike", "subscript", "superscript"],
-    ["removeFormat"],
-    // "/",
-    ["fontColor", "hiliteColor"],
-    ["outdent", "indent"],
-    ["align", "horizontalRule", "list", "table"],
-    ["link", "image", "video"],
-    ["fullScreen", "showBlocks" /*, 'codeView'*/],
-    ["preview", "print"],
-    // ["save", "template"],
-  ];
-
   const [file, setFile] = useState(null);
-
   // console.log({ file });
 
   const handleChange = (content) => {
@@ -64,7 +46,7 @@ const EditBlog = () => {
       toast.error("Fill in the Content");
       return;
     }
-    if (blog.tags === []) {
+    if (blog.tags.length === 0) {
       toast.error("Fill in the tags");
       return;
     }
@@ -123,7 +105,6 @@ const EditBlog = () => {
     <Loading />
   ) : (
     <>
-      <BlogShapes />
       <section className="p-5">
         <div className="d-flex justify-content-between">
           <div>
@@ -247,14 +228,7 @@ const EditBlog = () => {
             }
           }}
         />
-        <SunEditor
-          onChange={handleChange}
-          setOptions={{
-            height: "80vh",
-            buttonList: BUTTONLIST,
-          }}
-          defaultValue={blog.content}
-        />
+        <CustomEditor defaultValue={blog.content} handleChange={handleChange} />
       </section>
     </>
   );
