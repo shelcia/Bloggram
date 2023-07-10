@@ -89,6 +89,7 @@ const BlogPage = () => {
           userId: userId,
         },
       ],
+      // eslint-disable-next-line no-unsafe-optional-chaining
       likedBlogs: [...user?.likedBlogs, blog._id],
     };
     // console.log(response);
@@ -124,7 +125,6 @@ const BlogPage = () => {
     return () => {
       ac.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return loading ? (
@@ -340,7 +340,6 @@ const Comment = ({ comment }) => {
     return () => {
       ac.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

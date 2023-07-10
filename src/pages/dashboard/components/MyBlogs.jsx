@@ -4,7 +4,7 @@ import { apiBlog } from "../../../services/models/BlogModel";
 import { TabContext, TabPanel } from "@mui/lab";
 import { useSelector, useDispatch } from "react-redux";
 import { LoadDrafts, LoadPublished } from "../../../redux/actions";
-import { BlogList } from "../../../components/BlogDisplay";
+import { BlogList } from "../../../components/CustomBlogDisplay";
 
 const MyBlogs = () => {
   const [value, setValue] = React.useState("1");
