@@ -34,7 +34,9 @@
   color: #f3f4f9;
 }
 
-.dark-theme .dashboard-topmenu .topmenu-items a.menu-item .toggle-icon:hover, .dark-theme .dashboard-topmenu .topmenu-items a.menu-item .toggle-icon.active {
+.dark-theme .dashboard-topmenu .topmenu-items a.menu-item:hover, .dark-theme .dashboard-topmenu .topmenu-items a.menu-item.active,
+.dark-theme .dashboard-topmenu .topmenu-items .toggle-icon:hover,
+.dark-theme .dashboard-topmenu .topmenu-items .toggle-icon.active {
   background-color: #f3f4f9;
   color: #091922;
 }
@@ -208,6 +210,9 @@
     transform: rotateY(0deg);
   }
 }
+.sun-editor {
+  font-size: 16px;
+}
 .sun-editor .se-btn-module-border {
   border: none !important;
 }
@@ -219,32 +224,51 @@
 .sun-editor .sun-editor-editable {
   font-family: "Satoshi", Verdana, Geneva, Tahoma, sans-serif !important;
 }
+.sun-editor .se-toolbar {
+  background: linear-gradient(145deg, #ffffff, #e6e6e6) !important;
+  box-shadow: 2px 2px 2px #d9d9d9, -2px -2px 2px #ffffff !important;
+  outline: none !important;
+}
 
 .sun-editor-editable {
   font-family: "Satoshi", Verdana, Geneva, Tahoma, sans-serif !important;
 }
 
-.sun-editor-light .sun-editor .se-toolbar {
-  background: linear-gradient(145deg, #ffffff, #e6e6e6) !important;
-  box-shadow: 28px 28px 56px #d9d9d9, -28px -28px 56px #ffffff !important;
-  outline: none !important;
+.sun-editor-light .sun-editor {
+  border: none !important;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 16px 16px 32px #ededed, -16px -16px 32px #ffffff;
+  border-radius: 8px;
 }
 .sun-editor-light .sun-editor button {
   color: #091922;
 }
+.sun-editor-light .sun-editor .se-wrapper-inner {
+  border: none;
+  border-radius: 0;
+  background: #f3f4f9;
+}
 
 .sun-editor-dark .sun-editor {
-  border: 1px solid hsla(0, 0%, 100%, 0.2) !important;
   outline: none !important;
+  border: none !important;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background: #091922;
+  background-color: #091922;
+  border-radius: 8px;
+  box-shadow: 29px 29px 50px #08151d, -29px -29px 50px #0a1d27;
 }
-.sun-editor-dark .sun-editor .se-toolbar {
-  background: linear-gradient(145deg, #ffffff, #e6e6e6) !important;
-  box-shadow: 1px 1px 1px #d9d9d9, -1px -1px 1px #ffffff !important;
+.sun-editor-dark .sun-editor .se-container {
+  background: #091922;
 }
-.sun-editor-dark .sun-editor .se-container,
-.sun-editor-dark .sun-editor .se-toolbar {
-  border: 1px solid hsla(0, 0%, 100%, 0.2) !important;
-  outline: none !important;
+.sun-editor-dark .sun-editor .sun-editor-editable {
+  background: #091922;
+  color: #f3f4f9;
+}
+
+.blog-title :hover, .blog-title:before {
+  border: none;
+  border-bottom: none !important;
 }
 
 * {

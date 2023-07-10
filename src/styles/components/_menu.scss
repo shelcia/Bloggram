@@ -44,7 +44,8 @@
 
 .dark-theme {
   .dashboard-topmenu .topmenu-items {
-    a.menu-item .toggle-icon {
+    a.menu-item,
+    .toggle-icon {
       &:hover,
       &.active {
         background-color: $lightThemeBg;
