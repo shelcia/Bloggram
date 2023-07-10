@@ -3,6 +3,7 @@ import AuthGuard from "./common/AuthGuard";
 import DashboardLayout from "./layout/DashboardLayout";
 import LoadingPage from "./pages/common/LoadingPage";
 
+// eslint-disable-next-line react/display-name
 const Loadable = (Component) => (props) =>
   (
     <Suspense fallback={<LoadingPage />}>

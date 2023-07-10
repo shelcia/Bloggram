@@ -9,9 +9,19 @@ const ThemeToggler = () => {
   return (
     <Box>
       {darkTheme ? (
-        <LightModeIcon onClick={() => setDarkTheme(!darkTheme)} />
+        <LightModeIcon
+          onClick={() => {
+            setDarkTheme(!darkTheme);
+            localStorage.setItem("bloggram-theme", false);
+          }}
+        />
       ) : (
-        <DarkModeIcon onClick={() => setDarkTheme(!darkTheme)} />
+        <DarkModeIcon
+          onClick={() => {
+            setDarkTheme(!darkTheme);
+            localStorage.setItem("bloggram-theme", true);
+          }}
+        />
       )}
     </Box>
   );

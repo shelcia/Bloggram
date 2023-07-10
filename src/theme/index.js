@@ -9,7 +9,7 @@ import {
   success,
   warning,
 } from "./themeColors";
-const fontSize = 14;
+const fontSize = 16;
 const baseOptions = {
   direction: "ltr",
   breakpoints: {
@@ -38,6 +38,8 @@ const baseOptions = {
           color: "inherit",
           boxShadow: "none",
           padding: "0.6rem 1.5rem",
+          fontSize: 14,
+          fontWeight: 700,
         },
         outlinedPrimary: {
           borderColor: primary.main,
@@ -90,6 +92,15 @@ const baseOptions = {
       defaultProps: {
         titleTypographyProps: {
           variant: "h6",
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          textTransform: "capitalize",
+          height: 42,
+          boxShadow: "none",
         },
       },
     },
@@ -173,7 +184,7 @@ const baseOptions = {
         root: {
           color: "#94A4C4",
           textTransform: "none",
-          fontSize: 12,
+          fontSize: 14,
           fontWeight: 600,
           padding: 0,
           minWidth: "auto",
@@ -247,6 +258,7 @@ const baseOptions = {
   typography: {
     button: {
       fontWeight: 600,
+      fontSize: 16,
     },
     fontFamily: "'Satoshi', sans-serif",
     h1: {
@@ -337,6 +349,18 @@ const themesOptions = {
       mode: "dark",
     },
     components: {
+      MuiButton: {
+        styleOverrides: {
+          containedSecondary: {
+            color: "black",
+            backgroundColor: secondary.main,
+            "&:hover": {
+              backgroundColor: `#b2b2b2`,
+              boxShadow: "none",
+            },
+          },
+        },
+      },
       MuiTableCell: {
         styleOverrides: {
           root: {
