@@ -26,8 +26,9 @@ const Dashboard = () => {
             aria-label="add"
             onClick={() => navigate("/dashboard/add-blog")}
             variant="extended"
+            className="text-capitalize"
           >
-            <EditIcon sx={{ mr: 1 }} /> Write
+            <EditIcon sx={{ mr: 1, fontSize: "1rem" }} /> Write
           </Fab>
         </Tooltip>
       </div>

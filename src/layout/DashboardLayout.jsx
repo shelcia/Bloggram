@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import CustomMenuList from "../components/CustomMenuList";
 import MenuIcon from "@mui/icons-material/Menu";
-import CustomPopover from "../components/Popover";
+import CustomPopover from "../components/CustomPopover";
 import { ThemeContext } from "../context/ThemeContext";
 import ThemeToggler from "../components/ThemeToggler";
 import {
@@ -95,7 +95,7 @@ const DashboardLayout = () => {
             </Box>
             <CustomPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
               <>
-                <CustomMenuList onclick={() => setAnchorEl(null)}>
+                <CustomMenuList onClick={() => setAnchorEl(null)}>
                   <ThemeToggler />
                 </CustomMenuList>
 
