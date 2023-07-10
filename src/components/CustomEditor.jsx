@@ -77,7 +77,7 @@ const CustomEditor = ({ handleChange, defaultValue = "" }) => {
                 "superscript",
                 // "fontColor",
                 // "hiliteColor",
-                "textStyle",
+                // "textStyle",
                 "removeFormat",
                 "outdent",
                 "indent",

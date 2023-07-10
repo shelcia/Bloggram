@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Img from "../assets/Bloggram_placeholder.png";
 import {
   Avatar as MuiAvatar,
   Button,
@@ -12,22 +11,31 @@ import {
   Avatar,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import LinesEllipsis from "react-lines-ellipsis";
-import { apiUsers } from "../services/models/UserModel";
-import IosShareIcon from "@mui/icons-material/IosShareRounded";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { ShareSocial } from "react-share-social";
-import { convertSimpleDate } from "../helpers/convertDate";
-import CustomPopover from "./Popover";
-import CustomMenuList from "./CustomMenuList";
-import { apiBlog } from "../services/models/BlogModel";
-import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { LoadDrafts, LoadPublished } from "../redux/actions";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+
+import { apiUsers } from "../services/models/UserModel";
+import { apiBlog } from "../services/models/BlogModel";
 import { CYCLIC_BASE_URL } from "../services/api";
+
+import {
+  MoreHoriz as MoreHorizIcon,
+  FavoriteBorder as FavoriteBorderIcon,
+  Favorite as FavoriteIcon,
+  BookmarkBorder as BookmarkBorderIcon,
+  Share as ShareIcon,
+} from "@mui/icons-material";
+
+import LinesEllipsis from "react-lines-ellipsis";
+
+import { ShareSocial } from "react-share-social";
+import { convertSimpleDate } from "../helpers/convertDate";
+import { toast } from "react-hot-toast";
+
+import CustomPopover from "./CustomPopover";
+import CustomMenuList from "./CustomMenuList";
+
+import Img from "../assets/Bloggram_placeholder.png";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
@@ -54,6 +62,7 @@ const BlogCard = ({ blog }) => {
           userId: userId,
         },
       ],
+      // eslint-disable-next-line no-unsafe-optional-chaining
       likedBlogs: [...user?.likedBlogs, blog._id],
     };
     // console.log(response);
@@ -85,13 +94,7 @@ const BlogCard = ({ blog }) => {
     return () => {
       ac.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // console.log(blog._id);
-  // console.log(user?.likedBlogs);
-
-  // console.log(user?.likedBlogs?.includes(blog._id));
 
   return (
     <React.Fragment>
@@ -106,14 +109,14 @@ const BlogCard = ({ blog }) => {
           style={{ width: "100%", height: "200px", objectFit: "cover" }}
         />
         <CardContent className="mt-3">
-          <div className="d-flex align-items-center justify-content-between">
-            <div className="d-flex align-items-center">
+          <Box className="d-flex align-items-center justify-content-between">
+            <Box className="d-flex align-items-center">
               <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
               <small className="mb-0 fst-italic text-muted ms-2">
                 {user?.name}
               </small>{" "}
-            </div>
-            <div>
+            </Box>
+            <Box>
               {/* {blog.type === "PUBLISHED" && (
                   <IconButton aria-label="share" >
                     <IosShareIcon />
@@ -136,8 +139,8 @@ const BlogCard = ({ blog }) => {
               <IconButton aria-label="save">
                 <BookmarkBorderIcon />
               </IconButton>
-            </div>
-          </div>
+            </Box>
+          </Box>
           <Typography variant="h5" className="my-3">
             <LinesEllipsis
               text={blog?.title}
@@ -227,6 +230,29 @@ const BlogList = ({ blog }) => {
   };
 
   const handlePublish = (type) => {
+    if (type === "PUBLISHED") {
+      if (blog.title === "") {
+        navigate(`/dashboard/edit-blog/${blog._id}`);
+        toast.error("Fill in the title");
+        return;
+      }
+      if (blog.desc === "") {
+        navigate(`/dashboard/edit-blog/${blog._id}`);
+        toast.error("Fill in the Description");
+        return;
+      }
+      if (blog.content === "") {
+        navigate(`/dashboard/edit-blog/${blog._id}`);
+        toast.error("Fill in the Content");
+        return;
+      }
+      if (blog?.tags?.length === 0) {
+        navigate(`/dashboard/edit-blog/${blog._id}`);
+        toast.error("Fill in the tags");
+        return;
+      }
+    }
+
     apiBlog.put({ type: type }, `type/${blog._id}`).then((res) => {
       // console.log(res);
       if (res.status === "200") {
@@ -258,6 +284,7 @@ const BlogList = ({ blog }) => {
           width: "100%",
           cursor: "pointer",
         }}
+        className="my-5"
       >
         <CardContent className="mt-3 d-flex align-items-center">
           <img
@@ -267,12 +294,12 @@ const BlogList = ({ blog }) => {
             className="me-4"
             onClick={gotoBlog}
           />
-          <div className="w-100">
+          <Box className="w-100">
             <Typography variant="h5" className="mt-3 mb-1" onClick={gotoBlog}>
               {blog?.title}
             </Typography>
-            <div className="d-flex justify-content-between w-100">
-              <div className="d-flex align-items-center">
+            <Box className="d-flex justify-content-between w-100">
+              <Box className="d-flex align-items-center">
                 <Avatar src="/broken-image.jpg" />
                 <small className="mb-0 fst-italic text-muted ms-2">
                   {user?.name}
@@ -286,11 +313,11 @@ const BlogList = ({ blog }) => {
                     Last Saved on {convertSimpleDate(user?.date)}
                   </small>
                 )}
-              </div>
+              </Box>
               <div>
                 {blog.type === "PUBLISHED" && (
                   <IconButton aria-label="share" onClick={() => setOpen(true)}>
-                    <IosShareIcon />
+                    <ShareIcon />
                   </IconButton>
                 )}
 
@@ -323,8 +350,8 @@ const BlogList = ({ blog }) => {
                   </>
                 </CustomPopover>
               </div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </CardContent>
       </Card>
       <SocialModal
