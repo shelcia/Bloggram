@@ -26,10 +26,6 @@ const AuthTopbar = () => {
       onclick: () => navigate("/login"),
       link: "/login",
     },
-    // {
-    //   name: "Logout",
-    //   onclick: () => logout(),
-    // },
   ];
 
   return (
@@ -48,22 +44,6 @@ const AuthTopbar = () => {
         >
           <Toolbar className="d-flex flex-row justify-content-between pe-0">
             <CustomMenuLogoLink />
-            {/* <Box
-              sx={{
-                borderRight: darkTheme
-                  ? "1px solid hsla(0,0%,100%,.2)"
-                  : "1px solid rgba(0,0,0,.6)",
-                height: 64,
-              }}
-              className="d-flex align-items-center blog-menu"
-              component={NavLink}
-              to={"/"}
-            >
-              <Typography variant="h6" component="h1">
-                Bloggram
-              </Typography>
-            </Box> */}
-
             <Box className="d-flex flex-row topmenu-items">
               <Box
                 sx={{

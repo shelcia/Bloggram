@@ -21,6 +21,9 @@ const Dashboard = Loadable(
 const Profile = Loadable(
   lazy(() => import("./pages/dashboard/dashboard/Profile"))
 );
+const EditProfile = Loadable(
+  lazy(() => import("./pages/dashboard/dashboard/EditProfile"))
+);
 const AddBlog = Loadable(lazy(() => import("./pages/dashboard/blog/AddBlog")));
 const EditBlog = Loadable(
   lazy(() => import("./pages/dashboard/blog/EditBlog"))
@@ -44,7 +47,7 @@ const routes = [
     element: <BlogPage />,
   },
   {
-    path: "dashboard",
+    path: "",
     element: (
       <AuthGuard>
         <DashboardLayout />
@@ -52,12 +55,12 @@ const routes = [
     ),
     children: [
       {
-        path: "home",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {
-        path: "profile",
-        element: <Profile />,
+        path: "profile/:name/edit",
+        element: <EditProfile />,
       },
       {
         path: "add-blog",
@@ -66,6 +69,17 @@ const routes = [
       {
         path: "edit-blog/:id",
         element: <EditBlog />,
+      },
+    ],
+  },
+  {
+    path: "",
+    element: <DashboardLayout></DashboardLayout>,
+
+    children: [
+      {
+        path: "profile/:name",
+        element: <Profile />,
       },
     ],
   },

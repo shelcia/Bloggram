@@ -1,7 +1,7 @@
 import React from "react";
-import { Fab, Tooltip } from "@mui/material";
-import MyBlogs from "../components/MyBlogs";
+import { Box, Divider, Fab, Tooltip, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import MyBlogs from "../components/MyBlogs";
 import EditIcon from "@mui/icons-material/Edit";
 
 const Dashboard = () => {
@@ -10,15 +10,16 @@ const Dashboard = () => {
   return (
     <>
       <section className="container pt-4">
-        <div className="row">
-          <div className="col-md-12">
-            <h2 className="display-3" style={{ fontWeight: 600 }}>
+        <Box className="row">
+          <Box className="col-md-12">
+            <Typography component="h1" variant="h2">
               Write Something Today !
-            </h2>
+            </Typography>
             <MyBlogs />
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
+      <Divider />
       <div style={editstyle}>
         <Tooltip title="Start Writing Blog Now">
           <Fab

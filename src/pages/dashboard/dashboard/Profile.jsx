@@ -1,17 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
+  Avatar,
   Box,
   Button,
   Card,
   CardContent,
-  TextField,
   Typography,
 } from "@mui/material";
 import { apiUsers } from "../../../services/models/UserModel";
-import { toast } from "react-hot-toast";
 import { convertSimpleDate } from "../../../helpers/convertDate";
+import { PREFIX } from "../../../constants";
+import UserLight from "../../../assets/placeholders/user-dummy-light.png";
+import UserDark from "../../../assets/placeholders/user-dummy-dark.png";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { useDispatch, useSelector } from "react-redux";
+import { apiBlog } from "../../../services/models/BlogModel";
+import { LoadPublished } from "../../../redux/actions";
+import { BlogList } from "../../../components/CustomBlogDisplay";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Profile = () => {
+  const [darkTheme] = useContext(ThemeContext);
+
+  const navigate = useNavigate();
+  const { name } = useParams();
+
   const [user, setUser] = useState({
     name: "",
     date: "",
@@ -19,7 +32,7 @@ const Profile = () => {
   });
 
   const _getProfile = (id, signal) => {
-    apiUsers.getSingle(id, signal).then((res) => {
+    apiUsers.getSingle(id, signal, "by-uname").then((res) => {
       if (res.status === "200") {
         setUser(res.message);
       }
@@ -28,78 +41,77 @@ const Profile = () => {
 
   useEffect(() => {
     const ac = new AbortController();
-
-    const userId = localStorage.getItem("BlogGram-UserId");
-
-    _getProfile(userId, ac.signal);
+    // const userId = localStorage.getItem(`${PREFIX}UserId`);
+    _getProfile(name, ac.signal);
     return () => {
       ac.abort();
     };
   }, []);
 
-  const editProfile = () => {
-    const userId = localStorage.getItem("BlogGram-UserId");
+  const published = useSelector((state) => state.published);
 
-    const body = {
-      name: user.name,
-      // avatar: avatar,
-    };
-    apiUsers.put(body, `edit/${userId}`).then((res) => {
-      //   console.log(res);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const ac = new AbortController();
+    // const userId = localStorage.getItem(`${PREFIX}UserId`);
+    apiBlog.getSingle(name, ac.signal, "by-uname").then((res) => {
       if (res.status === "200") {
-        toast.success(res.message);
-        _getProfile(userId);
-      } else {
-        toast.error("Edit failed");
+        console.log(res);
+        dispatch(
+          LoadPublished(res?.message?.filter((blog) => blog.type !== "DRAFT"))
+        );
       }
     });
-  };
+
+    return () => ac.abort();
+  }, [dispatch]);
 
   return (
     <section className="container pt-5">
-      <Typography className="mb-4" component="h1" variant="h2">
-        Edit Profile
-      </Typography>
       <Box className="row">
-        <Box className="col-md-6">
+        <Box className="col-md-4">
           <Card>
             <CardContent>
-              <TextField
-                label="Name*"
-                variant="standard"
-                value={user.name}
-                onChange={(e) => setUser({ ...user, name: e.target.value })}
-                fullWidth
-                className="mb-4"
-              />
-              {/* <TextField
-            label="Email"
-            variant="standard"
-            value={user.email}
-            fullWidth
-            disabled
-            className="mb-4"
-          /> */}
-              {/* Joined {convertSimpleDate(user.date)} */}
-              <Box className="mt-4">
-                <Button variant="outlined" onClick={editProfile}>
-                  Save
-                </Button>
+              <Box className="w-100 d-flex justify-content-center">
+                {user?.avatar ? (
+                  <Avatar src={user.avatar} sx={{ width: 60, height: 60 }} />
+                ) : darkTheme ? (
+                  <Avatar src={UserLight} sx={{ width: 60, height: 60 }} />
+                ) : (
+                  <Avatar src={UserDark} sx={{ width: 60, height: 60 }} />
+                )}
               </Box>
+              <Box className="d-flex flex-column" sx={{ gap: "0.5rem" }}>
+                <Typography variant="h6">{user.name}</Typography>
+                <Typography variant="subtitle2">{user.email}</Typography>
+                <Typography variant="body2">
+                  Joined {convertSimpleDate(user.date)}
+                </Typography>
+              </Box>
+              {localStorage.getItem(`${PREFIX}Token`) && (
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  sx={{ mt: 2 }}
+                  onClick={() => navigate(`/profile/${name}/edit`)}
+                >
+                  Edit Profile
+                </Button>
+              )}
             </CardContent>
           </Card>
         </Box>
-        <Box className="col-md-6">
-          <Card>
-            <CardContent>
-              <Typography className="mb-4" component="h2" variant="body1">
-                <b>Email:</b> {user.email}
-              </Typography>
-              <Typography className="mb-4" component="h2" variant="body1">
-                <b>Joined:</b> {convertSimpleDate(user.date)}
-              </Typography>
-            </CardContent>
-          </Card>
+        <Box className="col-md-8">
+          {published.length !== 0 ? (
+            published.map((blog, index) => <BlogList blog={blog} key={index} />)
+          ) : (
+            <Card>
+              <CardContent>
+                <Typography>No blogs published yet !</Typography>
+              </CardContent>
+            </Card>
+          )}
         </Box>
       </Box>
     </section>

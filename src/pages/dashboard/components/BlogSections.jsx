@@ -97,14 +97,6 @@ const BlogSections = ({
             value={blog.title}
             onChange={handleInputs}
           />
-          {/* <TextField
-            name="title"
-            value={blog.title}
-            onChange={handleInputs}
-            label="Title*"
-            variant="standard"
-            className="w-100 mb-4 mt-2 blog-title"
-          /> */}
           <CustomEditor
             handleChange={handleChange}
             defaultValue={defaultValue}
@@ -131,42 +123,60 @@ const BlogSections = ({
               val={blog}
               setVal={setBlog}
             />
-            {file ? (
-              <>
-                <img
-                  src={URL.createObjectURL(file)}
-                  alt=""
-                  className="img-fluid"
-                />
-                <br />
-                <Button
-                  variant="outlined"
-                  component="span"
-                  onClick={() => setFile(null)}
-                >
-                  Clear Image
-                </Button>
-              </>
-            ) : (
-              <>
-                <label htmlFor="contained-button-file">
-                  <Input
-                    accept="image/png, image/jpeg"
-                    id="contained-button-file"
-                    type="file"
-                    sx={{ display: "none" }}
-                    onChange={(e) => setFile(e.target.files[0])}
-                  />
-                  <Button variant="outlined" component="span">
-                    <ImageOutlinedIcon
-                      className="me-2"
-                      sx={{ fontSize: "1rem" }}
-                    />
-                    Upload Image
-                  </Button>
-                </label>
-              </>
-            )}
+            <Box className="row">
+              <Box className="col-md-6">
+                {file ? (
+                  <>
+                    {typeof file === "string" ? (
+                      <img src={file} alt="" className="img-fluid" />
+                    ) : (
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt=""
+                        className="img-fluid"
+                      />
+                    )}
+                    <br />
+                  </>
+                ) : (
+                  <>
+                    <p> No Background image added !</p>
+                  </>
+                )}
+              </Box>
+              <Box className="col-md-6 d-flex justify-content-center align-items-center flex-row">
+                {file ? (
+                  <>
+                    <Button
+                      variant="outlined"
+                      component="span"
+                      onClick={() => setFile(null)}
+                    >
+                      Clear Image
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <label htmlFor="contained-button-file">
+                      <Input
+                        accept="image/png, image/jpeg"
+                        id="contained-button-file"
+                        type="file"
+                        sx={{ display: "none" }}
+                        onChange={(e) => setFile(e.target.files[0])}
+                      />
+                      <Button variant="outlined" component="span">
+                        <ImageOutlinedIcon
+                          className="me-2"
+                          sx={{ fontSize: "1rem" }}
+                        />
+                        Upload Image*
+                      </Button>
+                    </label>
+                  </>
+                )}
+              </Box>
+            </Box>
           </Box>
         </>
       )}

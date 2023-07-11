@@ -14,6 +14,7 @@
     "lodash.merge": "^4.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.4.1",
     "react-lines-ellipsis": "^0.15.3",
     "react-redux": "^8.1.1",

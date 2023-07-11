@@ -3,6 +3,7 @@ import { apiBlog } from "../../../services/models/BlogModel";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import BlogSections from "../components/BlogSections";
+import { PREFIX } from "../../../constants";
 
 const AddBlog = () => {
   const [file, setFile] = useState(null);
@@ -49,7 +50,8 @@ const AddBlog = () => {
     }
 
     setLoading(true);
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
+    const uname = localStorage.getItem(`${PREFIX}uname`);
 
     let formData = new FormData();
 
@@ -58,6 +60,7 @@ const AddBlog = () => {
     }
 
     formData.append("userId", userId);
+    formData.append("uname", uname);
     formData.append("title", blog.title);
     formData.append("desc", blog.desc);
     formData.append("content", blog.content);
@@ -73,7 +76,7 @@ const AddBlog = () => {
     });
     setLoading(false);
 
-    navigate("/dashboard/home");
+    navigate("/dashboard");
   };
 
   return (
