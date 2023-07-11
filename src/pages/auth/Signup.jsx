@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Button, TextField, useMediaQuery } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AuthLayout from "../../layout/AuthLayout";
+import { PREFIX } from "../../constants";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -12,11 +13,10 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  const PREFIX = "BlogGram-";
 
   const navigate = useNavigate();
 
-  const onSubmit = (event) => {
+  const onSubmit = () => {
     setIsLoading(true);
     localStorage.setItem(`${PREFIX}Email`, email);
     // event.preventDefault();
@@ -37,9 +37,10 @@ const Signup = () => {
         localStorage.setItem(`${PREFIX}Token`, res.token);
         localStorage.setItem(`${PREFIX}UserId`, res.userId);
         localStorage.setItem(`${PREFIX}name`, res.name);
+        localStorage.setItem(`${PREFIX}uname`, res.uname);
         // sucessNotify("Login succesfulll");
         toast.success("Signup succesfull");
-        navigate("/dashboard/home");
+        navigate("/dashboard");
       } else {
         toast.error(res.message);
         localStorage.removeItem(`${PREFIX}Email`);

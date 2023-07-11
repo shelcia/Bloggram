@@ -5,6 +5,7 @@ import { TabContext, TabPanel } from "@mui/lab";
 import { useSelector, useDispatch } from "react-redux";
 import { LoadDrafts, LoadPublished } from "../../../redux/actions";
 import { BlogList } from "../../../components/CustomBlogDisplay";
+import { PREFIX } from "../../../constants";
 
 const MyBlogs = () => {
   const [value, setValue] = React.useState("1");
@@ -23,7 +24,7 @@ const MyBlogs = () => {
 
   useEffect(() => {
     const ac = new AbortController();
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
     apiBlog.getSingle(userId, ac.signal, "myBlogs").then((res) => {
       // console.log(res);
       if (res.status === "200") {

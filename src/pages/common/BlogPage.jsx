@@ -17,10 +17,11 @@ import BackToTop from "../../components/ScrollToTop";
 import EditIcon from "@mui/icons-material/Edit";
 import toast from "react-hot-toast";
 import { apiUsers } from "../../services/models/UserModel";
-// import Avatar from "avataaars";
 import { convertSimpleDate } from "../../helpers/convertDate";
-import { CYCLIC_BASE_URL } from "../../services/api";
+import { /*CYCLIC_BASE_URL,*/ LOCALHOST_URL } from "../../services/api";
 import parse from "html-react-parser";
+import { Helmet } from "react-helmet";
+import { PREFIX } from "../../constants";
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -64,7 +65,7 @@ const BlogPage = () => {
 
   const navigate = useNavigate();
 
-  const userId = localStorage.getItem("BlogGram-UserId");
+  const userId = localStorage.getItem(`${PREFIX}UserId`);
 
   const [user, setUser] = useState({
     name: "",
@@ -74,7 +75,7 @@ const BlogPage = () => {
   });
 
   const handleLike = () => {
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
     if (!userId) {
       toast.error("Only logged in users can like");
       return;
@@ -132,22 +133,26 @@ const BlogPage = () => {
   ) : (
     <>
       <section className="container p-5">
-        <div className="text-center mb-4">
+        <Helmet>
+          <title>{blog.title}</title>
+          <meta name="description" content={blog.desc} />
+        </Helmet>
+        <Box className="text-center mb-4">
           {blog.image && (
             <img
-              src={`${CYCLIC_BASE_URL}/blog/image/${blog._id}`}
+              src={`${LOCALHOST_URL}/blog/image/${blog._id}`}
               alt=""
               className="me-4 img-fluid"
             />
           )}
-        </div>
+        </Box>
 
         <h1 className="display-3" id="blog-top">
           {blog.title}
         </h1>
-        <p className="lead text-grey mb-4" style={{ fontStyle: "italic" }}>
+        {/* <p className="lead text-grey mb-4" style={{ fontStyle: "italic" }}>
           {blog.desc}
-        </p>
+        </p> */}
         {parse(blog.content)}
         <div style={style}>
           <Fab
@@ -224,7 +229,7 @@ const CommentSection = ({ drawer, setDrawer, comments, setBlog }) => {
 
   const { id } = useParams();
 
-  const userId = localStorage.getItem("BlogGram-UserId");
+  const userId = localStorage.getItem(`${PREFIX}UserId`);
 
   const addComment = () => {
     //   console.log("executed");
@@ -299,9 +304,9 @@ const CommentSection = ({ drawer, setDrawer, comments, setBlog }) => {
           label="Comment"
           fullWidth
           className="mb-4"
-          disabled={!localStorage.getItem("BlogGram-UserId")}
+          disabled={!localStorage.getItem(`${PREFIX}UserId`)}
         />
-        {!localStorage.getItem("BlogGram-UserId") && (
+        {!localStorage.getItem(`${PREFIX}UserId`) && (
           <i className="text-muted mb-4">
             You have to login to make any comment and like any blog
           </i>

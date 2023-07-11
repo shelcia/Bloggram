@@ -5,17 +5,17 @@ import toast from "react-hot-toast";
 import { Button, TextField, useMediaQuery } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AuthLayout from "../../layout/AuthLayout";
+import { PREFIX } from "../../constants";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  const PREFIX = "BlogGram-";
 
   const navigate = useNavigate();
 
-  const onSubmit = (event) => {
+  const onSubmit = () => {
     setIsLoading(true);
     localStorage.setItem(`${PREFIX}Email`, email);
     // event.preventDefault();
@@ -35,9 +35,10 @@ const Login = () => {
         localStorage.setItem(`${PREFIX}Token`, res.token);
         localStorage.setItem(`${PREFIX}UserId`, res.userId);
         localStorage.setItem(`${PREFIX}name`, res.name);
+        localStorage.setItem(`${PREFIX}uname`, res.uname);
         // sucessNotify("Login succesfulll");
         toast.success("Login successfuly");
-        navigate("/dashboard/home");
+        navigate("/dashboard");
       } else {
         toast.error(res.message);
       }
@@ -83,6 +84,7 @@ const Login = () => {
           )}
         </div>
         <div className="text-center mt-5">
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
           Don't have an account? then <Link to="/signup">Signup</Link>
         </div>
       </AuthLayout>

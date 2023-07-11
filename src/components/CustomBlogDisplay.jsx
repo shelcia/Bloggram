@@ -35,7 +35,8 @@ import { toast } from "react-hot-toast";
 import CustomPopover from "./CustomPopover";
 import CustomMenuList from "./CustomMenuList";
 
-import Img from "../assets/Bloggram_placeholder.png";
+import Img from "../assets/placeholders/bloggram-placeholder.png";
+import { PREFIX } from "../constants";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ const BlogCard = ({ blog }) => {
   });
 
   const handleLike = () => {
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
     if (!userId) {
       toast.error("Only logged in users can like");
       return;
@@ -184,7 +185,7 @@ const BlogList = ({ blog }) => {
   const dispatch = useDispatch();
 
   const fetchBlog = () => {
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
     apiBlog.getSingle(userId, undefined, "myBlogs").then((res) => {
       if (res.status === "200") {
         dispatch(
@@ -232,22 +233,22 @@ const BlogList = ({ blog }) => {
   const handlePublish = (type) => {
     if (type === "PUBLISHED") {
       if (blog.title === "") {
-        navigate(`/dashboard/edit-blog/${blog._id}`);
+        navigate(`/edit-blog/${blog._id}`);
         toast.error("Fill in the title");
         return;
       }
       if (blog.desc === "") {
-        navigate(`/dashboard/edit-blog/${blog._id}`);
+        navigate(`/edit-blog/${blog._id}`);
         toast.error("Fill in the Description");
         return;
       }
       if (blog.content === "") {
-        navigate(`/dashboard/edit-blog/${blog._id}`);
+        navigate(`/edit-blog/${blog._id}`);
         toast.error("Fill in the Content");
         return;
       }
       if (blog?.tags?.length === 0) {
-        navigate(`/dashboard/edit-blog/${blog._id}`);
+        navigate(`/edit-blog/${blog._id}`);
         toast.error("Fill in the tags");
         return;
       }
@@ -314,7 +315,7 @@ const BlogList = ({ blog }) => {
                   </small>
                 )}
               </Box>
-              <div>
+              <Box>
                 {blog.type === "PUBLISHED" && (
                   <IconButton aria-label="share" onClick={() => setOpen(true)}>
                     <ShareIcon />
@@ -324,32 +325,32 @@ const BlogList = ({ blog }) => {
                 <IconButton aria-label="menu" onClick={handleClick}>
                   <MoreHorizIcon />
                 </IconButton>
-                <CustomPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
-                  <>
-                    {blog.type === "PUBLISHED" ? (
-                      <CustomMenuList onClick={() => handlePublish("DRAFT")}>
-                        Unpublish
-                      </CustomMenuList>
-                    ) : (
+                {localStorage.getItem(`${PREFIX}Token`) && (
+                  <CustomPopover anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
+                    <>
+                      {blog.type === "PUBLISHED" ? (
+                        <CustomMenuList onClick={() => handlePublish("DRAFT")}>
+                          Unpublish
+                        </CustomMenuList>
+                      ) : (
+                        <CustomMenuList
+                          onClick={() => handlePublish("PUBLISHED")}
+                        >
+                          Publish
+                        </CustomMenuList>
+                      )}
                       <CustomMenuList
-                        onClick={() => handlePublish("PUBLISHED")}
+                        onClick={() => navigate(`/edit-blog/${blog._id}`)}
                       >
-                        Publish
+                        Edit
                       </CustomMenuList>
-                    )}
-                    <CustomMenuList
-                      onClick={() =>
-                        navigate(`/dashboard/edit-blog/${blog._id}`)
-                      }
-                    >
-                      Edit
-                    </CustomMenuList>
-                    <CustomMenuList onClick={() => _deleteUser(blog._id)}>
-                      Remove
-                    </CustomMenuList>
-                  </>
-                </CustomPopover>
-              </div>
+                      <CustomMenuList onClick={() => _deleteUser(blog._id)}>
+                        Remove
+                      </CustomMenuList>
+                    </>
+                  </CustomPopover>
+                )}
+              </Box>
             </Box>
           </Box>
         </CardContent>

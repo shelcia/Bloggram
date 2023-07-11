@@ -4,6 +4,8 @@ import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../common/LoadingPage";
 import BlogSections from "../components/BlogSections";
+import { LOCALHOST_URL } from "../../../services/api";
+import { PREFIX } from "../../../constants";
 
 const EditBlog = () => {
   const [pageLoading, setPageLoading] = useState(true);
@@ -51,7 +53,7 @@ const EditBlog = () => {
     }
 
     setLoading(true);
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
 
     let formData = new FormData();
 
@@ -78,7 +80,7 @@ const EditBlog = () => {
     });
     setLoading(false);
 
-    navigate("/dashboard/home");
+    navigate("/dashboard");
   };
 
   useEffect(() => {
@@ -87,6 +89,8 @@ const EditBlog = () => {
       // console.log(res);
       if (res.status === "200") {
         setBlog(res.message);
+        // console.log(res.message);
+        setFile(`${LOCALHOST_URL}/blog/image/${res.message._id}`);
         setPageLoading(false);
       } else {
         setPageLoading(false);

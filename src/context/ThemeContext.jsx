@@ -1,11 +1,12 @@
 import React, { useState, createContext, useEffect } from "react";
+import { PREFIX } from "../constants";
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [darkTheme, setDarkTheme] = useState(false);
 
-  const darkThemeLocal = localStorage.getItem("bloggram-theme");
+  const darkThemeLocal = localStorage.getItem(`${PREFIX}theme`);
 
   useEffect(() => {
     // console.log(JSON.stringify(darkThemeLocal), "true");

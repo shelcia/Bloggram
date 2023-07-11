@@ -11,9 +11,12 @@ import {
   CustomMenuLink,
   CustomMenuLogoLink,
 } from "../components/CustomComponents";
+import { PREFIX } from "../constants";
 
 const DashboardLayout = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const uname = localStorage.getItem(`${PREFIX}uname`);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -30,15 +33,15 @@ const DashboardLayout = () => {
   const menuItems = [
     {
       name: "Write",
-      link: "/dashboard/add-blog",
+      link: "/add-blog",
     },
     {
       name: "Dashboard",
-      link: "/dashboard/home",
+      link: "/dashboard",
     },
     {
       name: "Profile",
-      link: "/dashboard/profile",
+      link: `/profile/${uname}`,
     },
   ];
 

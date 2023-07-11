@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom"; // component props interface
 import Login from "../pages/auth/Login";
+import { PREFIX } from "../constants";
 
 const AuthGuard = ({ children }) => {
   function isAuthenticate() {
-    return localStorage.getItem("BlogGram-Token") ? true : false;
+    return localStorage.getItem(`${PREFIX}Token`) ? true : false;
   }
 
   function useAuth() {
