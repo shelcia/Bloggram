@@ -22,6 +22,7 @@ import { /*CYCLIC_BASE_URL,*/ LOCALHOST_URL } from "../../services/api";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
 import { PREFIX } from "../../constants";
+import { editBlogStyle, fabStyle } from "../../components/CustomStylings";
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -154,7 +155,7 @@ const BlogPage = () => {
           {blog.desc}
         </p> */}
         {parse(blog.content)}
-        <div style={style}>
+        <div style={fabStyle}>
           <Fab
             color="primary"
             aria-label="comments"
@@ -179,12 +180,12 @@ const BlogPage = () => {
           </Fab>
         </div>
         {userId === blog.userId && (
-          <div style={editstyle}>
+          <div style={editBlogStyle}>
             <Tooltip title="Edit Blog">
               <Fab
                 color="secondary"
                 aria-label="edit"
-                onClick={() => navigate(`/dashboard/edit-blog/${blog._id}`)}
+                onClick={() => navigate(`/edit-blog/${blog._id}`)}
                 variant="extended"
               >
                 <EditIcon sx={{ mr: 1 }} /> Edit Blog
@@ -357,20 +358,6 @@ const Comment = ({ comment }) => {
           <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
         ) : (
           <></>
-          // <Avatar
-          //   style={{ width: 30, height: 30 }}
-          //   avatarStyle="Circle"
-          //   topType={user?.avatar?.topType}
-          //   accessoriesType={user?.avatar?.accessoriesType}
-          //   hairColor={user?.avatar?.hairColor}
-          //   facialHairType={user?.avatar?.facialHairType}
-          //   clotheType={user?.avatar?.clotheType}
-          //   clotheColor={user?.avatar?.clotheColor}
-          //   eyeType={user?.avatar?.eyeType}
-          //   eyebrowType={user?.avatar?.eyebrowType}
-          //   mouthType={user?.avatar?.mouthType}
-          //   skinColor={user?.avatar?.skinColor}
-          // />
         )}
         {/* </Tooltip> */}
 
@@ -389,24 +376,4 @@ const Comment = ({ comment }) => {
       />
     </div>
   );
-};
-
-const style = {
-  margin: 0,
-  top: "auto",
-  right: "50%",
-  transform: "translateX(50%)",
-  bottom: 20,
-  left: "auto",
-  position: "fixed",
-};
-
-const editstyle = {
-  margin: 0,
-  bottom: "auto",
-  transform: "translateX(50%)",
-  top: 20,
-  right: 100,
-  left: "auto",
-  position: "fixed",
 };
