@@ -1,14 +1,14 @@
 .dashboard-topmenu .blog-menu {
-  padding-right: 24px;
+  padding-right: 1.5rem;
   cursor: pointer;
   color: #2499ef;
 }
 .dashboard-topmenu .topmenu-items a.menu-item,
 .dashboard-topmenu .topmenu-items div.menu-item {
   transition: all 0.1s ease-in;
-  padding-left: 24px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   cursor: pointer;
-  padding-right: 24px;
 }
 @media only screen and (max-width: 767px) {
   .dashboard-topmenu .topmenu-items a.menu-item,
@@ -17,9 +17,9 @@
   }
 }
 .dashboard-topmenu .topmenu-items .toggle-icon {
-  padding-left: 24px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   cursor: pointer;
-  padding-right: 24px;
 }
 @media only screen and (min-width: 767px) {
   .dashboard-topmenu .topmenu-items .toggle-icon {
@@ -211,7 +211,7 @@
   }
 }
 .sun-editor {
-  font-size: 16px;
+  font-size: 1rem;
 }
 .sun-editor .se-btn-module-border {
   border: none !important;
@@ -238,7 +238,7 @@
   border: none !important;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   box-shadow: 16px 16px 32px #ededed, -16px -16px 32px #ffffff;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 .sun-editor-light .sun-editor button {
   color: #091922;
@@ -255,7 +255,7 @@
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   background: #091922;
   background-color: #091922;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 29px 29px 50px #08151d, -29px -29px 50px #0a1d27;
 }
 .sun-editor-dark .sun-editor .se-container {

@@ -1,5 +1,5 @@
 .sun-editor {
-  font-size: 16px;
+  font-size: size(2);
 
   .se-btn-module-border {
     border: none !important;
@@ -28,7 +28,7 @@
     border: none !important;
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     box-shadow: 16px 16px 32px #ededed, -16px -16px 32px #ffffff;
-    border-radius: 8px;
+    border-radius: size(1);
 
     button {
       color: $darkThemeBg;
@@ -48,7 +48,7 @@
     transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     background: $darkThemeBg;
     background-color: $darkThemeBg;
-    border-radius: 8px;
+    border-radius: size(1);
     box-shadow: 29px 29px 50px #08151d, -29px -29px 50px #0a1d27;
 
     .se-container {

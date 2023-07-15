@@ -1,6 +1,6 @@
 .dashboard-topmenu {
   .blog-menu {
-    padding-right: 24px;
+    padding-right: size(3);
     cursor: pointer;
     color: $primaryBlue;
   }
@@ -9,19 +9,18 @@
     a.menu-item,
     div.menu-item {
       transition: all 0.1s ease-in;
-      padding-left: 24px;
+      padding-left: size(3);
+      padding-right: size(3);
       cursor: pointer;
-      padding-right: 24px;
-
       @media only screen and (max-width: $breakpoint-md) {
         display: none !important;
       }
     }
 
     .toggle-icon {
-      padding-left: 24px;
+      padding-left: size(3);
+      padding-right: size(3);
       cursor: pointer;
-      padding-right: 24px;
       @media only screen and (min-width: $breakpoint-md) {
         display: none !important;
       }

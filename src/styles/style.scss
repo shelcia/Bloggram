@@ -10,6 +10,7 @@ $primaryBlue: #2499ef;
 $darkThemeprimaryBlue: #2499ef;
 $lightThemeprimaryBlue: #2499ef;
 
+@import "./components/mixins";
 @import "./components/menu";
 @import "./components/loader";
 @import "./components/editor";
