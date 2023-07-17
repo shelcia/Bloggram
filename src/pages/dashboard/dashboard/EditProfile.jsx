@@ -18,6 +18,7 @@ const EditProfile = () => {
 
   const [user, setUser] = useState({
     name: "",
+    desc: "",
     date: "",
     email: "",
   });
@@ -46,6 +47,7 @@ const EditProfile = () => {
 
     const body = {
       name: user.name,
+      desc: user.desc,
       // avatar: avatar,
     };
     apiUsers.put(body, `edit/${userId}`).then((res) => {
@@ -79,8 +81,8 @@ const EditProfile = () => {
               <TextField
                 label="Description*"
                 variant="standard"
-                value={user.name}
-                onChange={(e) => setUser({ ...user, name: e.target.value })}
+                value={user.desc}
+                onChange={(e) => setUser({ ...user, desc: e.target.value })}
                 fullWidth
                 className="mb-4"
               />

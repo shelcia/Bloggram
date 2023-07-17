@@ -99,7 +99,7 @@ const baseOptions = {
       styleOverrides: {
         root: {
           textTransform: "capitalize",
-          height: 42,
+          // height: 42,
           boxShadow: "none",
         },
       },
@@ -235,7 +235,7 @@ const baseOptions = {
     MuiButtonBase: {
       styleOverrides: {
         root: {
-          fontFamily: "'Satoshi', sans-serif",
+          fontFamily: "'Figtree', sans-serif",
         },
       },
     },
@@ -260,7 +260,7 @@ const baseOptions = {
       fontWeight: 600,
       fontSize: 16,
     },
-    fontFamily: "'Satoshi', sans-serif",
+    fontFamily: "'Figtree', sans-serif",
     h1: {
       fontWeight: 800,
       fontSize: "4.25rem",

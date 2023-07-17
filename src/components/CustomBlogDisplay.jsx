@@ -9,6 +9,7 @@ import {
   Typography,
   Box,
   Avatar,
+  Chip,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -36,7 +37,7 @@ import CustomPopover from "./CustomPopover";
 import CustomMenuList from "./CustomMenuList";
 
 import Img from "../assets/placeholders/bloggram-placeholder.png";
-import DummyAvatar from "../assets/placeholders/user-dummy-dark.png";
+import DummyAvatar from "../assets/placeholders/dummy-user.png";
 import { PREFIX } from "../constants";
 import { customModalStyle } from "./CustomStylings";
 
@@ -369,6 +370,11 @@ const BlogList = ({ blog }) => {
                   </>
                 )}
               </Box>
+            </Box>
+            <Box>
+              {blog.tags?.map((tag) => (
+                <Chip label={tag} key={tag} />
+              ))}
             </Box>
           </Box>
         </CardContent>

@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from "react"; // , { lazy, Suspense }
 import AuthGuard from "./common/AuthGuard";
 import DashboardLayout from "./layout/DashboardLayout";
+import HomeLayout from "./layout/HomeLayout";
 import LoadingPage from "./pages/common/LoadingPage";
+import { PREFIX } from "./constants";
 
 // eslint-disable-next-line react/display-name
 const Loadable = (Component) => (props) =>
@@ -32,19 +34,21 @@ const EditBlog = Loadable(
 const routes = [
   {
     path: "",
-    element: <LandingPage />,
-  },
-  {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "signup",
-    element: <Signup />,
-  },
-  {
-    path: "blog/:id",
-    element: <BlogPage />,
+    element: <HomeLayout />,
+    children: [
+      {
+        path: "",
+        element: <LandingPage />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+    ],
   },
   {
     path: "",
@@ -74,12 +78,19 @@ const routes = [
   },
   {
     path: "",
-    element: <DashboardLayout></DashboardLayout>,
-
+    element: localStorage.getItem(`${PREFIX}Token`) ? (
+      <DashboardLayout />
+    ) : (
+      <HomeLayout />
+    ),
     children: [
       {
         path: "profile/:name",
         element: <Profile />,
+      },
+      {
+        path: "blog/:id",
+        element: <BlogPage />,
       },
     ],
   },

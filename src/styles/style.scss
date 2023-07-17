@@ -1,6 +1,6 @@
 $primaryColor: #000000;
 $secondaryColor: #747474;
-$primaryFont: "Satoshi", Verdana, Geneva, Tahoma, sans-serif;
+$primaryFont: "Figtree", Verdana, Geneva, Tahoma, sans-serif;
 $breakpoint-md: 767px;
 
 $darkThemeBg: #091922;
@@ -17,7 +17,7 @@ $lightThemeprimaryBlue: #2499ef;
 @import "./components/overrides";
 
 * {
-  font-family: "Satoshi", Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Figtree", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 //overrides

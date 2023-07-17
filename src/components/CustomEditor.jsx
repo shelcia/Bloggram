@@ -5,20 +5,6 @@ import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 
 const CustomEditor = ({ handleChange, defaultValue = "" }) => {
   const [darkTheme] = useContext(ThemeContext);
-  // const BUTTONLIST = [
-  //     ["undo", "redo"],
-  //     [/*"font",*/ "fontSize", "formatBlock"],
-  //     ["bold", "underline", "italic", "strike", "subscript", "superscript"],
-  //     ["removeFormat"],
-  //     // "/",
-  //     ["fontColor", "hiliteColor"],
-  //     ["outdent", "indent"],
-  //     ["align", "horizontalRule", "list", "table"],
-  //     ["link", "image", "video"],
-  //     // ["fullScreen", "showBlocks" /*, 'codeView'*/],
-  //     // ["preview", "print"],
-  //     // ["save", "template"],
-  //   ];
   return (
     <React.Fragment>
       <div
@@ -30,10 +16,7 @@ const CustomEditor = ({ handleChange, defaultValue = "" }) => {
       >
         <SunEditor
           onChange={handleChange}
-          // setOptions={{
-          //   height: "80vh",
-          //   buttonList: BUTTONLIST,
-          // }}
+          setDefaultStyle="font-size: 14px; font-weight: 500;"
           defaultValue={defaultValue}
           setOptions={{
             minHeight: "80vh",
@@ -64,10 +47,7 @@ const CustomEditor = ({ handleChange, defaultValue = "" }) => {
               [
                 "undo",
                 "redo",
-                // "font",
-                // "fontSize",
                 "formatBlock",
-                // "paragraphStyle",
                 "blockquote",
                 "bold",
                 "underline",
@@ -75,33 +55,19 @@ const CustomEditor = ({ handleChange, defaultValue = "" }) => {
                 "strike",
                 "subscript",
                 "superscript",
-                // "fontColor",
-                // "hiliteColor",
-                // "textStyle",
                 "removeFormat",
                 "outdent",
                 "indent",
                 "align",
                 "horizontalRule",
                 "list",
-                // "lineHeight",
                 "table",
                 "link",
                 "image",
                 "video",
                 "audio",
-                // "math",
-                //   "imageGallery",
-                // "fullScreen",
-                // "showBlocks",
-                // "codeView",
-                // "preview",
-                // "print",
-                // "save",
-                // "template",
               ],
             ],
-            // "lang": SUNEDITOR_LANG.en,
             "lang(In nodejs)": "en",
           }}
         />

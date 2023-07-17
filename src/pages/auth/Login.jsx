@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiAuth } from "../../services/models/AuthModel";
+import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { Button, TextField, useMediaQuery } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -8,8 +9,21 @@ import AuthLayout from "../../layout/AuthLayout";
 import { PREFIX } from "../../constants";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInputs = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  let userSchema = Yup.object({
+    email: Yup.string()
+      .email("must be a valid email")
+      .required("email is required"),
+    password: Yup.string().required("password is required"),
+  });
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,32 +31,36 @@ const Login = () => {
 
   const onSubmit = () => {
     setIsLoading(true);
-    localStorage.setItem(`${PREFIX}Email`, email);
-    // event.preventDefault();
 
-    const body = {
-      email: email,
-      password: password,
-    };
+    userSchema
+      .validate(user)
+      .then(() => {
+        localStorage.setItem(`${PREFIX}Email`, user.email);
 
-    // console.log(body);
+        const body = user;
 
-    apiAuth.post(body, "signin").then((res) => {
-      // console.log(res);
-      setIsLoading(false);
+        apiAuth.post(body, "signin").then((res) => {
+          // console.log(res);
+          setIsLoading(false);
 
-      if (res.status === "200") {
-        localStorage.setItem(`${PREFIX}Token`, res.token);
-        localStorage.setItem(`${PREFIX}UserId`, res.userId);
-        localStorage.setItem(`${PREFIX}name`, res.name);
-        localStorage.setItem(`${PREFIX}uname`, res.uname);
-        // sucessNotify("Login succesfulll");
-        toast.success("Login successfuly");
-        navigate("/dashboard");
-      } else {
-        toast.error(res.message);
-      }
-    });
+          if (res.status === "200") {
+            localStorage.setItem(`${PREFIX}Token`, res.token);
+            localStorage.setItem(`${PREFIX}UserId`, res.userId);
+            localStorage.setItem(`${PREFIX}name`, res.name);
+            localStorage.setItem(`${PREFIX}uname`, res.uname);
+            // sucessNotify("Login succesfulll");
+            toast.success("Login successfuly");
+            navigate("/dashboard");
+          } else {
+            toast.error(res.message);
+          }
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoading(false);
+        toast.error(err.errors.toString());
+      });
   };
 
   const matches = useMediaQuery("(min-width:600px)");
@@ -54,8 +72,9 @@ const Login = () => {
           label="Email"
           variant="standard"
           sx={{ minWidth: matches ? 450 : 200 }}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={user.email}
+          onChange={(e) => handleInputs(e)}
         />
         <br />
         <TextField
@@ -63,8 +82,9 @@ const Login = () => {
           variant="standard"
           sx={{ minWidth: matches ? 450 : 200 }}
           className="mt-4"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          value={user.password}
+          onChange={(e) => handleInputs(e)}
           type="password"
         />
         <div className="text-center mt-4">

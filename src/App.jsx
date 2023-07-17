@@ -52,7 +52,7 @@ const App = () => {
   const toasterOptions = {
     style: {
       fontWeight: 500,
-      fontFamily: "'Satoshi', sans-serif",
+      fontFamily: "'Figtree', sans-serif",
     },
   };
 

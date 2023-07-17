@@ -222,7 +222,7 @@
 }
 .sun-editor .se-wrapper-wysiwyg,
 .sun-editor .sun-editor-editable {
-  font-family: "Satoshi", Verdana, Geneva, Tahoma, sans-serif !important;
+  font-family: "Figtree", Verdana, Geneva, Tahoma, sans-serif !important;
 }
 .sun-editor .se-toolbar {
   background: linear-gradient(145deg, #ffffff, #e6e6e6) !important;
@@ -231,7 +231,7 @@
 }
 
 .sun-editor-editable {
-  font-family: "Satoshi", Verdana, Geneva, Tahoma, sans-serif !important;
+  font-family: "Figtree", Verdana, Geneva, Tahoma, sans-serif !important;
 }
 
 .sun-editor-light .sun-editor {
@@ -272,7 +272,7 @@
 }
 
 * {
-  font-family: "Satoshi", Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Figtree", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .se-image-container.__se__float-center {
