@@ -12,6 +12,9 @@ import {
   CustomMenuLogoLink,
 } from "../components/CustomComponents";
 import { PREFIX } from "../constants";
+// import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import Footer from "../common/Footer";
+import Cookies from "js-cookie";
 
 const DashboardLayout = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -25,9 +28,13 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
 
   const logout = () => {
+    Cookies.remove(`${PREFIX}Token`);
     localStorage.clear();
-    navigate("/");
-    setAnchorEl(null);
+    Promise.resolve().then(() => {
+      navigate("/");
+      setAnchorEl(null);
+      location.reload();
+    });
   };
 
   const menuItems = [
@@ -75,6 +82,25 @@ const DashboardLayout = () => {
               >
                 <ThemeToggler />
               </Box>
+
+              {/* <Box className="d-flex flex-row topmenu-items">
+                <Box
+                  sx={{
+                    borderLeft: darkTheme
+                      ? "1px solid hsla(0,0%,100%,.2)"
+                      : "1px solid rgba(0,0,0,.6)",
+                    height: 64,
+                  }}
+                  className="d-flex flex-row align-items-center menu-item"
+                >
+                  <IconButton>
+                  <Badge badgeContent={4} color="primary">
+                    <NotificationsNoneIcon />
+                  </Badge>
+                  </IconButton>
+                </Box>
+              </Box> */}
+
               {menuItems.map((itm) => (
                 <CustomMenuLink
                   key={itm.name}
@@ -121,6 +147,7 @@ const DashboardLayout = () => {
         </AppBar>
       </Box>
       <Outlet />
+      <Footer />
     </React.Fragment>
   );
 };

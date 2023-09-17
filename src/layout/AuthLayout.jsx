@@ -1,12 +1,9 @@
 import { Box, Card, CardContent } from "@mui/material";
 import React from "react";
-// import AuthTopbar from "./AuthTopbar";
-import Footer from "../common/Footer";
 
 const AuthLayout = ({ children, title = "" }) => {
   return (
     <React.Fragment>
-      {/* <AuthTopbar /> */}
       <Box className="container h-100 p-5 d-flex justify-content-center align-items-center">
         <Card>
           <CardContent sx={{ padding: 4 }}>
@@ -15,7 +12,6 @@ const AuthLayout = ({ children, title = "" }) => {
           </CardContent>
         </Card>
       </Box>
-      <Footer />
     </React.Fragment>
   );
 };

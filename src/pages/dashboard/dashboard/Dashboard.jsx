@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, Fab, Tooltip, Typography } from "@mui/material";
+import { Box, Fab, Tooltip, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MyBlogs from "../components/MyBlogs";
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,7 +20,7 @@ const Dashboard = () => {
           </Box>
         </Box>
       </section>
-      <Divider />
+      {/* <Divider /> */}
       <div style={writeBlogStyle}>
         <Tooltip title="Start Writing Blog Now">
           <Fab

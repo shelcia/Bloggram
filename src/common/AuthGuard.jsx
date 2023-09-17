@@ -1,21 +1,13 @@
 import React, { Fragment, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom"; // component props interface
 import Login from "../pages/auth/Login";
+import HomeLayout from "../layout/HomeLayout";
+import Cookies from "js-cookie";
 import { PREFIX } from "../constants";
 
 const AuthGuard = ({ children }) => {
-  function isAuthenticate() {
-    return localStorage.getItem(`${PREFIX}Token`) ? true : false;
-  }
-
   function useAuth() {
-    // console.log(isAuthenticate(), isExpired);
-    if (!isAuthenticate()) {
-      return false;
-    } else {
-      return true;
-    }
-    // return isAuthenticate() && !isExpired;
+    return Cookies.get(`${PREFIX}Token`) !== undefined;
   }
 
   const navigate = useNavigate();
@@ -32,9 +24,11 @@ const AuthGuard = ({ children }) => {
     }
 
     navigate("/login");
-    return <Login />;
-
-    // return <Login />;
+    return (
+      <HomeLayout>
+        <Login />
+      </HomeLayout>
+    );
   }
 
   if (requestedLocation && pathname !== requestedLocation) {

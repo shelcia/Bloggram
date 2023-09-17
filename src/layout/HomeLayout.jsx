@@ -10,6 +10,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CustomPopover from "../components/CustomPopover";
 import CustomMenuList from "../components/CustomMenuList";
+import Footer from "../common/Footer";
 
 const HomeLayout = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -111,6 +112,7 @@ const HomeLayout = () => {
         </AppBar>
       </Box>
       <Outlet />
+      <Footer />
     </>
   );
 };

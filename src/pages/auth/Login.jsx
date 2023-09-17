@@ -7,6 +7,7 @@ import { Button, TextField, useMediaQuery } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AuthLayout from "../../layout/AuthLayout";
 import { PREFIX } from "../../constants";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -44,13 +45,15 @@ const Login = () => {
           setIsLoading(false);
 
           if (res.status === "200") {
-            localStorage.setItem(`${PREFIX}Token`, res.token);
+            // localStorage.setItem(`${PREFIX}Token`, res.token);
+            Cookies.set(`${PREFIX}Token`, res.token, { expires: 6 / 24 });
             localStorage.setItem(`${PREFIX}UserId`, res.userId);
             localStorage.setItem(`${PREFIX}name`, res.name);
             localStorage.setItem(`${PREFIX}uname`, res.uname);
             // sucessNotify("Login succesfulll");
             toast.success("Login successfuly");
             navigate("/dashboard");
+            location.reload();
           } else {
             toast.error(res.message);
           }

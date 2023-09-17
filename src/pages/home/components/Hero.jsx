@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import React from "react";
 // import SearchInput from "../../../components/SearchInput";
 
@@ -15,19 +16,20 @@ const Hero = () => {
 
   return (
     <React.Fragment>
-      <section className="container pt-5" style={{ height: "90vh" }}>
-        <h1
-          className="display-2 mt-5"
+      <Box className="container pt-5">
+        <Typography
+          component="h1"
+          className="display-3 mb-5 mt-4"
           style={{ fontWeight: 600 }}
-          data-aos="fade-up"
+          // data-aos="fade-up"
         >
-          Write Passionate Blogs about Tech
-          {/* , Design, Art, Cinema and much more */}
-        </h1>
+          Write Passionate Blogs about Everything
+          {/* Tech , Design, Art, Cinema and much more */}
+        </Typography>
         {/* <div className="text-center mt-3">
           <SearchInput />
         </div> */}
-      </section>
+      </Box>
     </React.Fragment>
   );
 };

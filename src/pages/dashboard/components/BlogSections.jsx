@@ -128,12 +128,18 @@ const BlogSections = ({
                 {file ? (
                   <>
                     {typeof file === "string" ? (
-                      <img src={file} alt="" className="img-fluid" />
+                      <img
+                        src={file}
+                        alt=""
+                        className="img-fluid"
+                        loading="lazy"
+                      />
                     ) : (
                       <img
                         src={URL.createObjectURL(file)}
                         alt=""
                         className="img-fluid"
+                        loading="lazy"
                       />
                     )}
                     <br />

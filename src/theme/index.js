@@ -95,6 +95,13 @@ const baseOptions = {
         },
       },
     },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          height: 28,
+        },
+      },
+    },
     MuiFab: {
       styleOverrides: {
         root: {
@@ -331,6 +338,23 @@ const themesOptions = {
           },
         },
       },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "rgba(36, 154, 239, 0.1)",
+            color: primary.main,
+          },
+        },
+      },
+      MuiDivider: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "rgba(0,0,0,.6)",
+            borderColor: "rgba(0,0,0,.6)",
+            opacity: 1,
+          },
+        },
+      },
     },
   },
   [THEMES.DARK]: {
@@ -354,10 +378,19 @@ const themesOptions = {
           containedSecondary: {
             color: "black",
             backgroundColor: secondary.main,
+            borderColor: secondary.main,
             "&:hover": {
               backgroundColor: `#b2b2b2`,
               boxShadow: "none",
             },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            backgroundColor: primary.dark,
+            color: secondary.main,
           },
         },
       },

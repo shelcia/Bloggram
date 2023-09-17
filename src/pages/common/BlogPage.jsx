@@ -7,6 +7,9 @@ import {
   TextField,
   Tooltip,
   Avatar as MuiAvatar,
+  Typography,
+  ButtonGroup,
+  Button,
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiBlog } from "../../services/models/BlogModel";
@@ -133,30 +136,67 @@ const BlogPage = () => {
     <LoadingPage />
   ) : (
     <>
+      <img
+        src={`${LOCALHOST_URL}/blog/image/${blog?._id}`}
+        alt=""
+        // className="me-4"
+        height={250}
+        width={"100%"}
+        style={{ objectFit: "cover" }}
+        loading="lazy"
+      />
       <section className="container p-5">
         <Helmet>
           <title>{blog.title}</title>
           <meta name="description" content={blog.desc} />
         </Helmet>
         <Box className="text-center mb-4">
-          {blog.image && (
-            <img
-              src={`${LOCALHOST_URL}/blog/image/${blog._id}`}
-              alt=""
-              className="me-4 img-fluid"
-            />
-          )}
+          {/* {blog.image && ( */}
+
+          {/* )} */}
         </Box>
 
-        <h1 className="display-3" id="blog-top">
+        <Typography
+          sx={{ fontSize: 28, fontWeight: 700 }}
+          component="h1"
+          id="blog-top"
+          className="mb-4"
+        >
           {blog.title}
-        </h1>
-        {/* <p className="lead text-grey mb-4" style={{ fontStyle: "italic" }}>
+        </Typography>
+        <Typography className="text-muted mb-4" component="h2">
           {blog.desc}
-        </p> */}
+        </Typography>
         {parse(blog.content)}
         <div style={fabStyle}>
-          <Fab
+          <ButtonGroup variant="contained" color="secondary">
+            <Button
+              onClick={() => setDrawer(true)}
+              aria-label="comments"
+              sx={{
+                borderTopLeftRadius: "50ex",
+                borderBottomLeftRadius: "50ex",
+              }}
+            >
+              {/* <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
+                {blog.comments.length}
+              </span> */}
+              <ModeCommentIcon className="d-block" />
+            </Button>
+            <Button
+              onClick={handleLike}
+              sx={{
+                borderTopRightRadius: "50ex",
+                borderBottomRightRadius: "50ex",
+              }}
+            >
+              {/* <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
+                {blog.likes?.length}
+              </span> */}
+              <FavoriteRoundedIcon />
+            </Button>
+          </ButtonGroup>
+          {/* <Fab
             color="primary"
             aria-label="comments"
             className="me-2 flex-column"
@@ -177,7 +217,7 @@ const BlogPage = () => {
             <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
               {blog.likes?.length}
             </span>
-          </Fab>
+          </Fab> */}
         </div>
         {userId === blog.userId && (
           <div style={editBlogStyle}>
@@ -371,7 +411,7 @@ const Comment = ({ comment }) => {
         </div>
       </div>
       <Divider
-        sx={{ marginLeft: 0, marginY: 2, borderColor: "#6c757d" }}
+        // sx={{ marginLeft: 0, marginY: 2, borderColor: "#6c757d" }}
         className="text-muted"
       />
     </div>

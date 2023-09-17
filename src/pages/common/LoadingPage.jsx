@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 const LoadingPage = ({ text = "" }) => {
   return (
     <Box
-      className="h-100 w-100 d-flex align-items-center justify-content-center"
+      className="w-100 d-flex align-items-center justify-content-center"
       style={{ height: "90vh" }}
     >
       <Box className="loader">

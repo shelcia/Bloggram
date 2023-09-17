@@ -14,14 +14,18 @@ import DummyUser from "../../../assets/placeholders/dummy-user.png";
 import { useDispatch, useSelector } from "react-redux";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { LoadPublished } from "../../../redux/actions";
-import { BlogList } from "../../../components/CustomBlogDisplay";
+// import { BlogList } from "../../../components/CustomBlogList";
 import { useNavigate, useParams } from "react-router-dom";
+import { LOCALHOST_URL } from "../../../services/api";
+import BlogList from "../../../components/CustomBlogList";
+// import { primary } from "../../../theme/themeColors";
 
 const Profile = () => {
   const navigate = useNavigate();
   const { name } = useParams();
 
   const [user, setUser] = useState({
+    _id: "",
     name: "",
     desc: "",
     date: "",
@@ -52,9 +56,9 @@ const Profile = () => {
   useEffect(() => {
     const ac = new AbortController();
     // const userId = localStorage.getItem(`${PREFIX}UserId`);
-    apiBlog.getSingle(name, ac.signal, "by-uname").then((res) => {
+    apiBlog.getSingle(name, ac.signal, "by-uname-published").then((res) => {
       if (res.status === "200") {
-        console.log(res);
+        // console.log(res);
         dispatch(
           LoadPublished(res?.message?.filter((blog) => blog.type !== "DRAFT"))
         );
@@ -71,21 +75,41 @@ const Profile = () => {
           <Card>
             <CardContent>
               <Box className="w-100 d-flex justify-content-center">
-                {user?.avatar ? (
-                  <Avatar src={user.avatar} sx={{ width: 60, height: 60 }} />
-                ) : (
-                  <Avatar src={DummyUser} sx={{ width: 60, height: 60 }} />
-                )}
+                <Avatar
+                  src={`${LOCALHOST_URL}/user/image/${user._id}`}
+                  sx={{ width: 80, height: 80 }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = DummyUser;
+                  }}
+                />
               </Box>
               <Box className="d-flex flex-column" sx={{ gap: "0.5rem" }}>
                 <Typography variant="h6">{user.name}</Typography>
                 {user.desc && (
                   <Typography variant="subtitle1">{user.desc}</Typography>
                 )}
-                <Typography variant="subtitle2">{user.email}</Typography>
-                <Typography variant="body2">
+                <Box className="d-flex justify-content-between">
+                  <Typography variant="subtitle2" className="text-muted">
+                    {user.email}
+                  </Typography>
+                  <Typography variant="subtitle2" className="text-muted">
+                    Joined {convertSimpleDate(user.date)}
+                  </Typography>
+                </Box>
+
+                {/* <Box className="d-flex justify-content-between">
+                  <Typography variant="body2" sx={{ color: primary.main }}>
+                    10 Followers
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: primary.main }}>
+                    10 Following
+                  </Typography>
+                </Box> */}
+
+                {/* <Typography variant="body2" className="text-muted">
                   Joined {convertSimpleDate(user.date)}
-                </Typography>
+                </Typography> */}
               </Box>
               {localStorage.getItem(`${PREFIX}Token`) && (
                 <Button

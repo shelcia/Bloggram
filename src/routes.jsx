@@ -3,7 +3,7 @@ import AuthGuard from "./common/AuthGuard";
 import DashboardLayout from "./layout/DashboardLayout";
 import HomeLayout from "./layout/HomeLayout";
 import LoadingPage from "./pages/common/LoadingPage";
-import { PREFIX } from "./constants";
+import { isCookieExist } from "./helpers/isValidToken";
 
 // eslint-disable-next-line react/display-name
 const Loadable = (Component) => (props) =>
@@ -34,7 +34,7 @@ const EditBlog = Loadable(
 const routes = [
   {
     path: "",
-    element: <HomeLayout />,
+    element: isCookieExist() ? <DashboardLayout /> : <HomeLayout />,
     children: [
       {
         path: "",
@@ -78,11 +78,7 @@ const routes = [
   },
   {
     path: "",
-    element: localStorage.getItem(`${PREFIX}Token`) ? (
-      <DashboardLayout />
-    ) : (
-      <HomeLayout />
-    ),
+    element: isCookieExist() ? <DashboardLayout /> : <HomeLayout />,
     children: [
       {
         path: "profile/:name",
