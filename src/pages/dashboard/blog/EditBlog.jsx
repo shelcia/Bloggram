@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../common/LoadingPage";
 import BlogSections from "../components/BlogSections";
-import { LOCALHOST_URL } from "../../../services/api";
+import { /*LOCALHOST_URL*/ CYCLIC_BASE_URL } from "../../../services/api";
 import { PREFIX } from "../../../constants";
 
 const EditBlog = () => {
@@ -90,7 +90,7 @@ const EditBlog = () => {
       if (res.status === "200") {
         setBlog(res.message);
         // console.log(res.message);
-        setFile(`${LOCALHOST_URL}/blog/image/${res.message._id}`);
+        setFile(`${CYCLIC_BASE_URL}/blog/image/${res.message._id}`);
         setPageLoading(false);
       } else {
         setPageLoading(false);

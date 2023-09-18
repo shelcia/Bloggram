@@ -14,11 +14,9 @@ import DummyUser from "../../../assets/placeholders/dummy-user.png";
 import { useDispatch, useSelector } from "react-redux";
 import { apiBlog } from "../../../services/models/BlogModel";
 import { LoadPublished } from "../../../redux/actions";
-// import { BlogList } from "../../../components/CustomBlogList";
 import { useNavigate, useParams } from "react-router-dom";
-import { LOCALHOST_URL } from "../../../services/api";
+import { /*LOCALHOST_URL*/ CYCLIC_BASE_URL } from "../../../services/api";
 import BlogList from "../../../components/CustomBlogList";
-// import { primary } from "../../../theme/themeColors";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -76,7 +74,7 @@ const Profile = () => {
             <CardContent>
               <Box className="w-100 d-flex justify-content-center">
                 <Avatar
-                  src={`${LOCALHOST_URL}/user/image/${user._id}`}
+                  src={`${CYCLIC_BASE_URL}/user/image/${user._id}`}
                   sx={{ width: 80, height: 80 }}
                   onError={(e) => {
                     e.target.onerror = null;

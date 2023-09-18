@@ -24,7 +24,7 @@ import CustomBackToTop from "../../components/CustomScrollToTop";
 import toast from "react-hot-toast";
 import { apiUsers } from "../../services/models/UserModel";
 import { convertSimpleDate } from "../../helpers/convertDate";
-import { /*CYCLIC_BASE_URL,*/ LOCALHOST_URL } from "../../services/api";
+import { CYCLIC_BASE_URL /* LOCALHOST_URL*/ } from "../../services/api";
 import parse from "html-react-parser";
 import { Helmet } from "react-helmet";
 import { PREFIX } from "../../constants";
@@ -140,7 +140,7 @@ const BlogPage = () => {
   ) : (
     <>
       <img
-        src={`${LOCALHOST_URL}/blog/image/${blog?._id}`}
+        src={`${CYCLIC_BASE_URL}/blog/image/${blog?._id}`}
         alt=""
         // className="me-4"
         height={250}

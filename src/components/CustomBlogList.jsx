@@ -14,7 +14,7 @@ import { LoadDrafts, LoadPublished } from "../redux/actions";
 
 import { apiUsers } from "../services/models/UserModel";
 import { apiBlog } from "../services/models/BlogModel";
-import { /*CYCLIC_BASE_URL,*/ LOCALHOST_URL } from "../services/api";
+import { CYCLIC_BASE_URL /*, LOCALHOST_URL*/ } from "../services/api";
 
 import {
   MoreHoriz as MoreHorizIcon,
@@ -150,7 +150,7 @@ const BlogList = ({ blog, likedBlogs = [], savedBlogs = [] }) => {
       >
         <CardContent className="mt-3 d-flex align-items-center">
           <img
-            src={`${LOCALHOST_URL}/blog/image/${blog?._id}`}
+            src={`${CYCLIC_BASE_URL}/blog/image/${blog?._id}`}
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = Img;
@@ -173,7 +173,7 @@ const BlogList = ({ blog, likedBlogs = [], savedBlogs = [] }) => {
             <Box className="d-flex justify-content-between w-100">
               <Box className="d-flex align-items-center">
                 <Avatar
-                  src={`${LOCALHOST_URL}/user/image/${blog?.userId}`}
+                  src={`${CYCLIC_BASE_URL}/user/image/${blog?.userId}`}
                   sx={{ width: 20, height: 20 }}
                   onError={(e) => {
                     e.target.onerror = null;

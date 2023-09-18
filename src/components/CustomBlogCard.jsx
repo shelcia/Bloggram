@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-// import { PREFIX } from "../constants";
-// import { isCookieExist } from "../helpers/isValidToken";
-// import toast from "react-hot-toast";
-// import { apiBlog } from "../services/models/BlogModel";
 import { Share as ShareIcon } from "@mui/icons-material";
 import { apiUsers } from "../services/models/UserModel";
-import { LOCALHOST_URL } from "../services/api";
+import { /* LOCALHOST_URL,*/ CYCLIC_BASE_URL } from "../services/api";
 import {
   Avatar as MuiAvatar,
   Box,
@@ -59,7 +55,7 @@ const BlogCard = ({
     <React.Fragment>
       <Card>
         <img
-          src={`${LOCALHOST_URL}/blog/image/${blog?._id}`}
+          src={`${CYCLIC_BASE_URL}/blog/image/${blog?._id}`}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = Img;
@@ -79,7 +75,7 @@ const BlogCard = ({
               onClick={() => navigate(`/blog/${blog._id}`)}
             >
               <MuiAvatar
-                src={`${LOCALHOST_URL}/user/image/${blog?.userId}`}
+                src={`${CYCLIC_BASE_URL}/user/image/${blog?.userId}`}
                 sx={{ width: 30, height: 30 }}
                 onError={(e) => {
                   e.target.onerror = null;
