@@ -6,6 +6,8 @@ import {
   Bookmark as BookmarkIcon,
 } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { isCookieExist } from "../helpers/isValidToken";
+import toast from "react-hot-toast";
 
 export const CustomLikeComponent = ({
   id,
@@ -18,8 +20,12 @@ export const CustomLikeComponent = ({
   );
 
   const handleLikeClick = () => {
-    setIsLiked(!isLiked);
-    handleLike(id, _getUser());
+    if (isCookieExist()) {
+      setIsLiked(!isLiked);
+      handleLike(id, _getUser());
+    } else {
+      toast.error("Only logged in users can like");
+    }
   };
 
   return (
@@ -44,8 +50,12 @@ export const CustomShareComponent = ({
   );
 
   const handleSaveClick = () => {
-    setIsSaved(!isSaved);
-    handleSave(id, _getUser());
+    if (isCookieExist()) {
+      setIsSaved(!isSaved);
+      handleSave(id, _getUser());
+    } else {
+      toast.error("Only logged in users can save");
+    }
   };
 
   return (
