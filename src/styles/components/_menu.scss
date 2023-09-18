@@ -1,0 +1,55 @@
+.dashboard-topmenu {
+  .blog-menu {
+    padding-right: size(3);
+    cursor: pointer;
+    color: $primaryBlue;
+  }
+
+  .topmenu-items {
+    a.menu-item,
+    div.menu-item {
+      transition: all 0.1s ease-in;
+      padding-left: size(3);
+      padding-right: size(3);
+      cursor: pointer;
+      @media only screen and (max-width: $breakpoint-md) {
+        display: none !important;
+      }
+    }
+
+    .toggle-icon {
+      padding-left: size(3);
+      padding-right: size(3);
+      cursor: pointer;
+      @media only screen and (min-width: $breakpoint-md) {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.light-theme {
+  .dashboard-topmenu .topmenu-items {
+    a.menu-item,
+    .toggle-icon {
+      &:hover,
+      &.active {
+        background-color: $darkThemeBg;
+        color: $lightThemeBg;
+      }
+    }
+  }
+}
+
+.dark-theme {
+  .dashboard-topmenu .topmenu-items {
+    a.menu-item,
+    .toggle-icon {
+      &:hover,
+      &.active {
+        background-color: $lightThemeBg;
+        color: $darkThemeBg;
+      }
+    }
+  }
+}

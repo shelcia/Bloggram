@@ -4,17 +4,16 @@ import { apiBlog } from "../../../services/models/BlogModel";
 import { TabContext, TabPanel } from "@mui/lab";
 import { useSelector, useDispatch } from "react-redux";
 import { LoadDrafts, LoadPublished } from "../../../redux/actions";
-import { BlogList } from "../../../components/BlogDisplay";
+// import { BlogList } from "../../../components/CustomBlogList";
+import { PREFIX } from "../../../constants";
+import BlogList from "../../../components/CustomBlogList";
 
 const MyBlogs = () => {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState("2");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  //   const [drafts, setDrafts] = useState([]);
-  //   const [published, setPublished] = useState([]);
 
   const drafts = useSelector((state) => state.drafts);
   const published = useSelector((state) => state.published);
@@ -23,7 +22,7 @@ const MyBlogs = () => {
 
   useEffect(() => {
     const ac = new AbortController();
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
     apiBlog.getSingle(userId, ac.signal, "myBlogs").then((res) => {
       // console.log(res);
       if (res.status === "200") {

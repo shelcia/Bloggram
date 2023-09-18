@@ -4,6 +4,7 @@ import axios from "axios";
 import { handleResponse, handleError } from "./response";
 import { CYCLIC_BASE_URL } from "../api";
 // import { LOCALHOST_URL } from "../api";
+import { PREFIX } from "../../constants";
 
 // Define your api url from any source.
 // Pulling from your .env file when on the server or from localhost when locally
@@ -13,7 +14,7 @@ const BASE_URL = CYCLIC_BASE_URL;
 
 /** @param {string} resource */
 const getAll = async (resource, signal, isAuthorized = false) => {
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
 
   const headers = isAuthorized ? { "auth-token": token } : {};
 
@@ -38,7 +39,7 @@ const getSingle = async (
   additionalParam = "",
   isAuthorized = false
 ) => {
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
 
   const headers = isAuthorized ? { "auth-token": token } : {};
 
@@ -74,7 +75,7 @@ const getByParams = async (
   additionalParam = "",
   isAuthorized = false
 ) => {
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
 
   const headers = isAuthorized ? { "auth-token": token } : {};
 
@@ -108,7 +109,7 @@ const post = async (
   isAuthorized = false
 ) => {
   // console.log({ model });
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
   const headers = isAuthorized ? { "auth-token": token } : {};
 
   try {
@@ -141,7 +142,7 @@ const postFormData = async (
   additionalParam = "",
   isAuthorized = false
 ) => {
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
   // console.log("invoked");
   const headers = isAuthorized
     ? {
@@ -175,7 +176,7 @@ const postFormData = async (
 /** @param {string} resource */
 /** @param {object} model */
 const put = async (resource, model, additionalParams, isAuthorized = false) => {
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
   const headers = isAuthorized ? { "auth-token": token } : {};
 
   try {
@@ -202,7 +203,7 @@ const put = async (resource, model, additionalParams, isAuthorized = false) => {
 
 /** @param {string} resource */
 /** @param {object} model */
-const putById = async (resource, id, model, signal, isAuthorized = false) => {
+const putById = async (resource, id, model, signal) => {
   try {
     const response = await axios.put(`${BASE_URL}/${resource}/${id}`, model, {
       signal: signal,
@@ -222,7 +223,7 @@ const putFormData = async (
   additionalParam = "",
   isAuthorized = false
 ) => {
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
   // console.log("invoked");
   const headers = isAuthorized
     ? {
@@ -255,8 +256,8 @@ const putFormData = async (
 
 /** @param {string} resource */
 /** @param {object} model */
-const patch = async (resource, model, signal, isAuthorized = false) => {
-  const token = localStorage.getItem("BlogGram-Token");
+const patch = async (resource, model, signal) => {
+  const token = localStorage.getItem(`${PREFIX}Token`);
   try {
     const response = await axios.patch(`${BASE_URL}/${resource}`, model, {
       signal: signal,
@@ -278,7 +279,7 @@ const patchByParams = async (
   queryParams,
   isAuthorized = false
 ) => {
-  const token = localStorage.getItem("BlogGram-Token");
+  const token = localStorage.getItem(`${PREFIX}Token`);
   const headers = isAuthorized ? { "auth-token": token } : {};
 
   try {
@@ -296,11 +297,17 @@ const patchByParams = async (
 
 /** @param {string} resource */
 /** @param {string} id */
-const remove = async (resource, id, additionalParams, isAuthorized = false) => {
-  const token = localStorage.getItem("BlogGram-Token");
+const remove = async (
+  resource,
+  id,
+  additionalParams = "",
+  isAuthorized = false
+) => {
+  const token = localStorage.getItem(`${PREFIX}Token`);
   const headers = isAuthorized ? { "auth-token": token } : {};
 
-  // console.log(`${BASE_URL}/${resource}/${id}`);
+  console.log(`${BASE_URL}/${resource}/${id}`);
+
   try {
     let response;
     if (additionalParams === "") {

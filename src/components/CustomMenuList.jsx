@@ -1,21 +1,22 @@
+import React from "react";
 import { Box, styled } from "@mui/material";
 
 const Small = ({
   children,
   className,
   ellipsis,
-  textTransform,
+  // textTransform,
   italic = false,
   ...props
 }) => {
   return (
     <StyledBox
-      textTransformStyle={textTransform}
+      // textTransformStyle={textTransform}
       ellipsis={ellipsis}
       className={className}
       style={{ fontStyle: italic ? "italic" : "normal" }}
       component="small"
-      fontSize="12px"
+      fontSize="14px"
       fontWeight="500"
       lineHeight="1.5"
       {...props}

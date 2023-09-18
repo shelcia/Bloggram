@@ -1,13 +1,14 @@
 import React from "react";
+import { Box } from "@mui/material";
 
-const LoadingPage = ({ text }) => {
+const LoadingPage = ({ text = "" }) => {
   return (
-    <div
-      className="w-100 h-100 d-flex"
-      style={{ alignItems: "center", justifyContent: "center" }}
+    <Box
+      className="w-100 d-flex align-items-center justify-content-center"
+      style={{ height: "90vh" }}
     >
-      <div className="loader">
-        <div>
+      <Box className="loader">
+        <Box>
           <ul>
             <li>
               <svg viewBox="0 0 90 120" fill="currentColor">
@@ -40,16 +41,10 @@ const LoadingPage = ({ text }) => {
               </svg>
             </li>
           </ul>
-        </div>
-        <span>Loading</span>
-      </div>
-      {/* <BookLoader
-        background={"linear-gradient(135deg, #6FB3FF, #2499EF)"}
-        desktopSize={"100px"}
-        mobileSize={"80px"}
-        textColor={"#2499EF"}
-      /> */}
-    </div>
+        </Box>
+        <span>Loading {text}</span>
+      </Box>
+    </Box>
   );
 };
 

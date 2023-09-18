@@ -1,210 +1,37 @@
 import React, { useEffect, useState } from "react";
-import Avatar from "avataaars";
 import {
+  Avatar,
+  Box,
   Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
+  Card,
+  CardContent,
+  Typography,
 } from "@mui/material";
 import { apiUsers } from "../../../services/models/UserModel";
-import { toast } from "react-hot-toast";
+import { convertSimpleDate } from "../../../helpers/convertDate";
+import { PREFIX } from "../../../constants";
+import DummyUser from "../../../assets/placeholders/dummy-user.png";
+import { useDispatch, useSelector } from "react-redux";
+import { apiBlog } from "../../../services/models/BlogModel";
+import { LoadPublished } from "../../../redux/actions";
+import { useNavigate, useParams } from "react-router-dom";
+import { /*LOCALHOST_URL*/ CYCLIC_BASE_URL } from "../../../services/api";
+import BlogList from "../../../components/CustomBlogList";
 
 const Profile = () => {
-  const [avatar, setAvatar] = useState({
-    topType: "LongHairMiaWallace",
-    accessoriesType: "Prescription02",
-    hairColor: "BrownDark",
-    facialHairType: "Blank",
-    clotheType: "Hoodie",
-    clotheColor: "PastelBlue",
-    eyeType: "Happy",
-    eyebrowType: "Default",
-    mouthType: "Smile",
-    skinColor: "Light",
-  });
-
-  const handleAvatar = (e) => {
-    setAvatar({ ...avatar, [e.target.name]: e.target.value });
-  };
-
-  const headStyles = [
-    "No Hair",
-    "Eyepatch",
-    "Hat",
-    "Hijab",
-    "Turban",
-    "WinterHat1",
-    "WinterHat2",
-    "WinterHat3",
-    "WinterHat4",
-    "LongHairBigHair",
-    "LongHairBob",
-    "LongHairBun",
-    "LongHairCurly",
-    "LongHairCurvy",
-    "LongHairDreads",
-    "LongHairFrida",
-    "LongHairFro",
-    "LongHairFroBand",
-    "LongHairNotTooLong",
-    "LongHairShavedSides",
-    "LongHairMiaWallace",
-    "LongHairStraight",
-    "LongHairStraight2",
-    "LongHairStraightStrand",
-    "ShortHairDreads01",
-    "ShortHairDreads02",
-    "ShortHairFrizzle",
-    "ShortHairShaggyMullet",
-    "ShortHairShortCurly",
-    "ShortHairShortFlat",
-    "ShortHairShaggyMullet",
-    "ShortHairShortCurly",
-    "ShortHairShortFlat",
-    "ShortHairShortRound",
-    "ShortHairShortWaved",
-    "ShortHairSides",
-    "ShortHairTheCaesar",
-    "ShortHairTheCaesar",
-    "SidePart",
-  ];
-
-  const accessories = [
-    "Blank",
-    "Kurt",
-    "Prescription01",
-    "Prescription02",
-    "Round",
-    "Sunglasses",
-    "Wayfarers",
-  ];
-
-  const hairColors = [
-    "Auburn",
-    "Black",
-    "Blonde",
-    "BlondeGolden",
-    "Brown",
-    "BrownDark",
-    "PastelPink",
-    "Blue",
-    "Platinum",
-    "Red",
-    "SilverGray",
-  ];
-
-  const facialHair = [
-    "Blank",
-    "BeardMedium",
-    "BeardLight",
-    "BeardMajestic",
-    "MoustacheFancy",
-    "MoustacheMagnum",
-  ];
-
-  //   const facialHairColor = [
-  //     "Auburn",
-  //     "Black",
-  //     "Blonde",
-  //     "BlondeGolden",
-  //     "Brown",
-  //     "BrownDark",
-  //     "Platinum",
-  //     "Red",
-  //   ];
-
-  const clothes = [
-    "BlazerShirt",
-    "BlazerSweater",
-    "CollarSweater",
-    "GraphicShirt",
-    "Hoodie",
-    "Overall",
-    "ShirtCrewNeck",
-    "ShirtScoopNeck",
-    "ShirtVNeck",
-  ];
-
-  const clotheColor = [
-    "Black",
-    "Blue01",
-    "Blue02",
-    "Blue03",
-    "Gray01",
-    "Gray02",
-    "Heather",
-    "PastelBlue",
-    "PastelGreen",
-    "PastelOrange",
-    "PastelRed",
-    "PastelYellow",
-    "Pink",
-    "Red",
-    "White",
-  ];
-
-  const skin = [
-    "Tanned",
-    "Yellow",
-    "Pale",
-    "Light",
-    "Brown",
-    "DarkBrown",
-    "Black",
-  ];
-
-  const selectMenu1 = [
-    {
-      name: "topType",
-      label: "Hair Style",
-      list: headStyles,
-    },
-    {
-      name: "accessoriesType",
-      label: "Accessories",
-      list: accessories,
-    },
-    {
-      name: "hairColor",
-      label: "Hair Color",
-      list: hairColors,
-    },
-    {
-      name: "facialHairType",
-      label: "Facial Hair",
-      list: facialHair,
-    },
-  ];
-
-  const selectMenu2 = [
-    {
-      name: "clotheType",
-      label: "Clothe Type",
-      list: clothes,
-    },
-    {
-      name: "clotheColor",
-      label: "Clothe Color",
-      list: clotheColor,
-    },
-    {
-      name: "skinColor",
-      label: "Skin Color",
-      list: skin,
-    },
-  ];
+  const navigate = useNavigate();
+  const { name } = useParams();
 
   const [user, setUser] = useState({
+    _id: "",
     name: "",
+    desc: "",
     date: "",
     email: "",
   });
 
   const _getProfile = (id, signal) => {
-    apiUsers.getSingle(id, signal).then((res) => {
+    apiUsers.getSingle(id, signal, "by-uname").then((res) => {
       if (res.status === "200") {
         setUser(res.message);
       }
@@ -213,130 +40,100 @@ const Profile = () => {
 
   useEffect(() => {
     const ac = new AbortController();
-
-    const userId = localStorage.getItem("BlogGram-UserId");
-
-    _getProfile(userId, ac.signal);
+    // const userId = localStorage.getItem(`${PREFIX}UserId`);
+    _getProfile(name, ac.signal);
     return () => {
       ac.abort();
     };
   }, []);
 
-  const editProfile = () => {
-    const userId = localStorage.getItem("BlogGram-UserId");
+  const published = useSelector((state) => state.published);
 
-    const body = {
-      name: user.name,
-      avatar: avatar,
-    };
-    apiUsers.put(body, `edit/${userId}`).then((res) => {
-      //   console.log(res);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const ac = new AbortController();
+    // const userId = localStorage.getItem(`${PREFIX}UserId`);
+    apiBlog.getSingle(name, ac.signal, "by-uname-published").then((res) => {
       if (res.status === "200") {
-        toast.success(res.message);
-        _getProfile(userId);
-      } else {
-        toast.error("Edit failed");
+        // console.log(res);
+        dispatch(
+          LoadPublished(res?.message?.filter((blog) => blog.type !== "DRAFT"))
+        );
       }
     });
-  };
+
+    return () => ac.abort();
+  }, [dispatch]);
 
   return (
-    <section className="container p-5">
-      <div className="row">
-        <div className="col-sm-6 d-flex flex-column align-items-center">
-          <Avatar
-            style={{ width: "200px", height: "200px", marginBottom: 8 }}
-            avatarStyle="Circle"
-            topType={avatar.topType}
-            accessoriesType={avatar.accessoriesType}
-            hairColor={avatar.hairColor}
-            facialHairType={avatar.facialHairType}
-            clotheType={avatar.clotheType}
-            clotheColor={avatar.clotheColor}
-            eyeType={avatar.eyeType}
-            eyebrowType={avatar.eyebrowType}
-            mouthType={avatar.mouthType}
-            skinColor={avatar.skinColor}
-          />
-          <div className="row">
-            <div className="col-md-6">
-              <Stack spacing={2}>
-                {selectMenu1.map((menu, index) => (
-                  <FormControl
-                    variant="standard"
-                    sx={{ width: 180 }}
-                    key={index}
-                  >
-                    <InputLabel>{menu.label}</InputLabel>
-                    <Select
-                      value={avatar[menu.name]}
-                      name={menu.name}
-                      onChange={handleAvatar}
-                      size="small"
-                    >
-                      {menu.list?.map((item, index) => (
-                        <MenuItem value={item} key={index}>
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                ))}
-              </Stack>
-            </div>
-            <div className="col-md-6">
-              <Stack spacing={2}>
-                {selectMenu2.map((menu, index) => (
-                  <FormControl
-                    variant="standard"
-                    sx={{ width: 180 }}
-                    key={index}
-                  >
-                    <InputLabel>{menu.label}</InputLabel>
-                    <Select
-                      value={avatar[menu.name]}
-                      name={menu.name}
-                      onChange={handleAvatar}
-                      size="small"
-                    >
-                      {menu.list?.map((item, index) => (
-                        <MenuItem value={item} key={index}>
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                ))}
-              </Stack>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-6">
-          <h3 className="text mb-4">Edit Profile</h3>
-          <TextField
-            label="Name"
-            variant="standard"
-            value={user.name}
-            onChange={(e) => setUser({ ...user, name: e.target.value })}
-            fullWidth
-            className="mb-4"
-          />
-          <TextField
-            label="Email"
-            variant="standard"
-            value={user.email}
-            fullWidth
-            disabled
-            className="mb-4"
-          />
-          Joined {user.date}
-          <div className="mt-4">
-            <Button variant="outlined" onClick={editProfile}>
-              Save
-            </Button>
-          </div>
-        </div>
-      </div>
+    <section className="container pt-5">
+      <Box className="row">
+        <Box className="col-md-4">
+          <Card>
+            <CardContent>
+              <Box className="w-100 d-flex justify-content-center">
+                <Avatar
+                  src={`${CYCLIC_BASE_URL}/user/image/${user._id}`}
+                  sx={{ width: 80, height: 80 }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = DummyUser;
+                  }}
+                />
+              </Box>
+              <Box className="d-flex flex-column" sx={{ gap: "0.5rem" }}>
+                <Typography variant="h6">{user.name}</Typography>
+                {user.desc && (
+                  <Typography variant="subtitle1">{user.desc}</Typography>
+                )}
+                <Box className="d-flex justify-content-between">
+                  <Typography variant="subtitle2" className="text-muted">
+                    {user.email}
+                  </Typography>
+                  <Typography variant="subtitle2" className="text-muted">
+                    Joined {convertSimpleDate(user.date)}
+                  </Typography>
+                </Box>
+
+                {/* <Box className="d-flex justify-content-between">
+                  <Typography variant="body2" sx={{ color: primary.main }}>
+                    10 Followers
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: primary.main }}>
+                    10 Following
+                  </Typography>
+                </Box> */}
+
+                {/* <Typography variant="body2" className="text-muted">
+                  Joined {convertSimpleDate(user.date)}
+                </Typography> */}
+              </Box>
+              {localStorage.getItem(`${PREFIX}Token`) && (
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  sx={{ mt: 2 }}
+                  onClick={() => navigate(`/profile/${name}/edit`)}
+                >
+                  Edit Profile
+                </Button>
+              )}
+            </CardContent>
+          </Card>
+        </Box>
+        <Box className="col-md-8">
+          {published.length !== 0 ? (
+            published.map((blog, index) => <BlogList blog={blog} key={index} />)
+          ) : (
+            <Card>
+              <CardContent>
+                <Typography>No blogs published yet !</Typography>
+              </CardContent>
+            </Card>
+          )}
+        </Box>
+      </Box>
     </section>
   );
 };

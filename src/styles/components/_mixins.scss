@@ -1,0 +1,4 @@
+@function size($number) {
+  $result: calc(0.5rem * $number);
+  @return $result;
+}

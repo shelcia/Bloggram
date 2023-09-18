@@ -1,0 +1,63 @@
+.sun-editor {
+  font-size: size(2);
+
+  .se-btn-module-border {
+    border: none !important;
+  }
+  .se-list-layer {
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.1) !important;
+    border: none !important;
+  }
+  .se-wrapper-wysiwyg,
+  .sun-editor-editable {
+    font-family: $primaryFont !important;
+  }
+  .se-toolbar {
+    background: linear-gradient(145deg, #ffffff, #e6e6e6) !important;
+    // box-shadow: 28px 28px 56px #d9d9d9, -28px -28px 56px #ffffff !important;
+    box-shadow: 2px 2px 2px #d9d9d9, -2px -2px 2px #ffffff !important;
+    outline: none !important;
+  }
+}
+
+.sun-editor-editable {
+  font-family: $primaryFont !important;
+}
+.sun-editor-light {
+  .sun-editor {
+    border: none !important;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    box-shadow: 16px 16px 32px #ededed, -16px -16px 32px #ffffff;
+    border-radius: size(1);
+
+    button {
+      color: $darkThemeBg;
+    }
+
+    .se-wrapper-inner {
+      border: none;
+      border-radius: 0;
+      background: $lightThemeBg;
+    }
+  }
+}
+.sun-editor-dark {
+  .sun-editor {
+    outline: none !important;
+    border: none !important;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background: $darkThemeBg;
+    background-color: $darkThemeBg;
+    border-radius: size(1);
+    box-shadow: 29px 29px 50px #08151d, -29px -29px 50px #0a1d27;
+
+    .se-container {
+      background: $darkThemeBg;
+    }
+
+    .sun-editor-editable {
+      background: $darkThemeBg;
+      color: $lightThemeBg;
+    }
+  }
+}

@@ -9,7 +9,7 @@ import {
   success,
   warning,
 } from "./themeColors";
-const fontSize = 14;
+const fontSize = 16;
 const baseOptions = {
   direction: "ltr",
   breakpoints: {
@@ -38,6 +38,8 @@ const baseOptions = {
           color: "inherit",
           boxShadow: "none",
           padding: "0.6rem 1.5rem",
+          fontSize: 14,
+          fontWeight: 700,
         },
         outlinedPrimary: {
           borderColor: primary.main,
@@ -90,6 +92,22 @@ const baseOptions = {
       defaultProps: {
         titleTypographyProps: {
           variant: "h6",
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          height: 28,
+        },
+      },
+    },
+    MuiFab: {
+      styleOverrides: {
+        root: {
+          textTransform: "capitalize",
+          // height: 42,
+          boxShadow: "none",
         },
       },
     },
@@ -173,7 +191,7 @@ const baseOptions = {
         root: {
           color: "#94A4C4",
           textTransform: "none",
-          fontSize: 12,
+          fontSize: 14,
           fontWeight: 600,
           padding: 0,
           minWidth: "auto",
@@ -224,7 +242,7 @@ const baseOptions = {
     MuiButtonBase: {
       styleOverrides: {
         root: {
-          fontFamily: "'Poppins', sans-serif",
+          fontFamily: "'Figtree', sans-serif",
         },
       },
     },
@@ -247,8 +265,9 @@ const baseOptions = {
   typography: {
     button: {
       fontWeight: 600,
+      fontSize: 16,
     },
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Figtree', sans-serif",
     h1: {
       fontWeight: 800,
       fontSize: "4.25rem",
@@ -271,7 +290,8 @@ const baseOptions = {
     },
     h6: {
       fontWeight: 600,
-      fontSize,
+      fontSize: "1.1rem",
+      // fontSize,
     },
     overline: {
       fontWeight: 600,
@@ -295,8 +315,9 @@ const themesOptions = {
       info,
       divider: secondary[300],
       background: {
-        // default: "#f3f4f9",
-        default: "#fff",
+        default: "#f3f4f9",
+        paper: "#f3f4f9",
+        // default: "#fff",
       },
       text: {
         primary: secondary[500],
@@ -317,6 +338,23 @@ const themesOptions = {
           },
         },
       },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "rgba(36, 154, 239, 0.1)",
+            color: primary.main,
+          },
+        },
+      },
+      MuiDivider: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "rgba(0,0,0,.6)",
+            borderColor: "rgba(0,0,0,.6)",
+            opacity: 1,
+          },
+        },
+      },
     },
   },
   [THEMES.DARK]: {
@@ -327,12 +365,35 @@ const themesOptions = {
       success,
       info,
       background: {
-        default: "#1e2732",
-        paper: "#222b36",
+        // default: "#1e2732",
+        default: "#091922",
+        paper: "#091922",
+        // paper: "#222b36",
       },
       mode: "dark",
     },
     components: {
+      MuiButton: {
+        styleOverrides: {
+          containedSecondary: {
+            color: "black",
+            backgroundColor: secondary.main,
+            borderColor: secondary.main,
+            "&:hover": {
+              backgroundColor: `#b2b2b2`,
+              boxShadow: "none",
+            },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            backgroundColor: primary.dark,
+            color: secondary.main,
+          },
+        },
+      },
       MuiTableCell: {
         styleOverrides: {
           root: {
@@ -346,6 +407,14 @@ const themesOptions = {
             "& .MuiPopover-paper": {
               border: "1px solid rgba(255, 255, 255, 0.12)",
             },
+          },
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            // border: "1px solid hsla(0,0%,100%,.2)",
+            boxShadow: "20px 20px 60px #08151d, -20px -20px 60px #0a1d27",
           },
         },
       },

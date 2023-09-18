@@ -1,8 +1,11 @@
 import React, { lazy, Suspense } from "react"; // , { lazy, Suspense }
-import AuthGuard from "./components/AuthGuard";
-import DashboardLayout from "./components/DashboardLayout";
+import AuthGuard from "./common/AuthGuard";
+import DashboardLayout from "./layout/DashboardLayout";
+import HomeLayout from "./layout/HomeLayout";
 import LoadingPage from "./pages/common/LoadingPage";
+import { isCookieExist } from "./helpers/isValidToken";
 
+// eslint-disable-next-line react/display-name
 const Loadable = (Component) => (props) =>
   (
     <Suspense fallback={<LoadingPage />}>
@@ -20,6 +23,9 @@ const Dashboard = Loadable(
 const Profile = Loadable(
   lazy(() => import("./pages/dashboard/dashboard/Profile"))
 );
+const EditProfile = Loadable(
+  lazy(() => import("./pages/dashboard/dashboard/EditProfile"))
+);
 const AddBlog = Loadable(lazy(() => import("./pages/dashboard/blog/AddBlog")));
 const EditBlog = Loadable(
   lazy(() => import("./pages/dashboard/blog/EditBlog"))
@@ -28,22 +34,24 @@ const EditBlog = Loadable(
 const routes = [
   {
     path: "",
-    element: <LandingPage />,
+    element: isCookieExist() ? <DashboardLayout /> : <HomeLayout />,
+    children: [
+      {
+        path: "",
+        element: <LandingPage />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+    ],
   },
   {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "signup",
-    element: <Signup />,
-  },
-  {
-    path: "blog/:id",
-    element: <BlogPage />,
-  },
-  {
-    path: "dashboard",
+    path: "",
     element: (
       <AuthGuard>
         <DashboardLayout />
@@ -51,12 +59,12 @@ const routes = [
     ),
     children: [
       {
-        path: "home",
+        path: "dashboard",
         element: <Dashboard />,
       },
       {
-        path: "profile",
-        element: <Profile />,
+        path: "profile/:name/edit",
+        element: <EditProfile />,
       },
       {
         path: "add-blog",
@@ -65,6 +73,20 @@ const routes = [
       {
         path: "edit-blog/:id",
         element: <EditBlog />,
+      },
+    ],
+  },
+  {
+    path: "",
+    element: isCookieExist() ? <DashboardLayout /> : <HomeLayout />,
+    children: [
+      {
+        path: "profile/:name",
+        element: <Profile />,
+      },
+      {
+        path: "blog/:id",
+        element: <BlogPage />,
       },
     ],
   },

@@ -1,18 +1,22 @@
 import React from "react";
-import { LandingPageShapes } from "../../components/Shapes";
 import Blogs from "./components/Blogs";
 import Hero from "./components/Hero";
-import Topbar from "./components/Topbar";
-import Footer from "../../components/Footer";
+// import Footer from "../../common/Footer";
+import { Box, Button, Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   return (
     <React.Fragment>
-      <LandingPageShapes />
-      <Topbar />
       <Hero />
+      <Divider />
       <Blogs />
-      <Footer />
+      <Box className="text-center" sx={{ mt: { xs: 3, md: 0 } }}>
+        <Button variant="contained" onClick={() => navigate("/signup")}>
+          Start Reading Now !
+        </Button>
+      </Box>
     </React.Fragment>
   );
 };

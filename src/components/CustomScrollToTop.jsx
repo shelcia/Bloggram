@@ -39,7 +39,7 @@ const ScrollTop = ({ id, ...props }) => {
   );
 };
 
-export default function BackToTop({ id, ...props }) {
+export default function CustomBackToTop({ id, ...props }) {
   return (
     <React.Fragment>
       <ScrollTop {...props} id={id}>

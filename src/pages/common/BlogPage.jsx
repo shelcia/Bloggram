@@ -7,21 +7,28 @@ import {
   TextField,
   Tooltip,
   Avatar as MuiAvatar,
+  Typography,
+  ButtonGroup,
+  Button,
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiBlog } from "../../services/models/BlogModel";
-import ModeCommentIcon from "@mui/icons-material/ModeComment";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import { ViewBlogShapes } from "../../components/Shapes";
+// import ModeCommentIcon from "@mui/icons-material/ModeComment";
+import {
+  ModeComment as ModeCommentIcon,
+  FavoriteRounded as FavoriteRoundedIcon,
+  Edit as EditIcon,
+} from "@mui/icons-material";
 import LoadingPage from "./LoadingPage";
-import BackToTop from "../../components/ScrollToTop";
-import EditIcon from "@mui/icons-material/Edit";
+import CustomBackToTop from "../../components/CustomScrollToTop";
 import toast from "react-hot-toast";
 import { apiUsers } from "../../services/models/UserModel";
-import Avatar from "avataaars";
 import { convertSimpleDate } from "../../helpers/convertDate";
-import { CYCLIC_BASE_URL } from "../../services/api";
-const parse = require("html-react-parser");
+import { CYCLIC_BASE_URL /* LOCALHOST_URL*/ } from "../../services/api";
+import parse from "html-react-parser";
+import { Helmet } from "react-helmet";
+import { PREFIX } from "../../constants";
+import { editBlogStyle, fabStyle } from "../../components/CustomStylings";
 
 const BlogPage = () => {
   const { id } = useParams();
@@ -65,7 +72,7 @@ const BlogPage = () => {
 
   const navigate = useNavigate();
 
-  const userId = localStorage.getItem("BlogGram-UserId");
+  const userId = localStorage.getItem(`${PREFIX}UserId`);
 
   const [user, setUser] = useState({
     name: "",
@@ -75,7 +82,7 @@ const BlogPage = () => {
   });
 
   const handleLike = () => {
-    const userId = localStorage.getItem("BlogGram-UserId");
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
     if (!userId) {
       toast.error("Only logged in users can like");
       return;
@@ -90,6 +97,7 @@ const BlogPage = () => {
           userId: userId,
         },
       ],
+      // eslint-disable-next-line no-unsafe-optional-chaining
       likedBlogs: [...user?.likedBlogs, blog._id],
     };
     // console.log(response);
@@ -125,34 +133,74 @@ const BlogPage = () => {
     return () => {
       ac.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return loading ? (
     <LoadingPage />
   ) : (
     <>
-      <ViewBlogShapes />
+      <img
+        src={`${CYCLIC_BASE_URL}/blog/image/${blog?._id}`}
+        alt=""
+        // className="me-4"
+        height={250}
+        width={"100%"}
+        style={{ objectFit: "cover" }}
+        loading="lazy"
+      />
       <section className="container p-5">
-        <div className="text-center mb-4">
-          {blog.image && (
-            <img
-              src={`${CYCLIC_BASE_URL}/blog/image/${blog._id}`}
-              alt=""
-              className="me-4 img-fluid"
-            />
-          )}
-        </div>
+        <Helmet>
+          <title>{blog.title}</title>
+          <meta name="description" content={blog.desc} />
+        </Helmet>
+        <Box className="text-center mb-4">
+          {/* {blog.image && ( */}
 
-        <h1 className="display-3 text" id="blog-top">
+          {/* )} */}
+        </Box>
+
+        <Typography
+          sx={{ fontSize: 28, fontWeight: 700 }}
+          component="h1"
+          id="blog-top"
+          className="mb-4"
+        >
           {blog.title}
-        </h1>
-        <p className="lead text-grey mb-4" style={{ fontStyle: "italic" }}>
+        </Typography>
+        <Typography className="text-muted mb-4" component="h2">
           {blog.desc}
-        </p>
+        </Typography>
         {parse(blog.content)}
-        <div style={style}>
-          <Fab
+        <div style={fabStyle}>
+          <ButtonGroup variant="contained" color="secondary">
+            <Button
+              // onClick={() => setDrawer(true)}
+              aria-label="comments"
+              sx={{
+                borderTopLeftRadius: "50ex",
+                borderBottomLeftRadius: "50ex",
+              }}
+              disabled
+            >
+              {/* <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
+                {blog.comments.length}
+              </span> */}
+              <ModeCommentIcon className="d-block" />
+            </Button>
+            <Button
+              onClick={handleLike}
+              sx={{
+                borderTopRightRadius: "50ex",
+                borderBottomRightRadius: "50ex",
+              }}
+            >
+              {/* <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
+                {blog.likes?.length}
+              </span> */}
+              <FavoriteRoundedIcon />
+            </Button>
+          </ButtonGroup>
+          {/* <Fab
             color="primary"
             aria-label="comments"
             className="me-2 flex-column"
@@ -173,15 +221,15 @@ const BlogPage = () => {
             <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
               {blog.likes?.length}
             </span>
-          </Fab>
+          </Fab> */}
         </div>
         {userId === blog.userId && (
-          <div style={editstyle}>
+          <div style={editBlogStyle}>
             <Tooltip title="Edit Blog">
               <Fab
                 color="secondary"
                 aria-label="edit"
-                onClick={() => navigate(`/dashboard/edit-blog/${blog._id}`)}
+                onClick={() => navigate(`/edit-blog/${blog._id}`)}
                 variant="extended"
               >
                 <EditIcon sx={{ mr: 1 }} /> Edit Blog
@@ -197,7 +245,7 @@ const BlogPage = () => {
           setBlog={setBlog}
         />
       </section>
-      <BackToTop id="blog-top" />
+      <CustomBackToTop id="blog-top" />
     </>
   );
 };
@@ -226,7 +274,7 @@ const CommentSection = ({ drawer, setDrawer, comments, setBlog }) => {
 
   const { id } = useParams();
 
-  const userId = localStorage.getItem("BlogGram-UserId");
+  const userId = localStorage.getItem(`${PREFIX}UserId`);
 
   const addComment = () => {
     //   console.log("executed");
@@ -301,9 +349,9 @@ const CommentSection = ({ drawer, setDrawer, comments, setBlog }) => {
           label="Comment"
           fullWidth
           className="mb-4"
-          disabled={!localStorage.getItem("BlogGram-UserId")}
+          disabled={!localStorage.getItem(`${PREFIX}UserId`)}
         />
-        {!localStorage.getItem("BlogGram-UserId") && (
+        {!localStorage.getItem(`${PREFIX}UserId`) && (
           <i className="text-muted mb-4">
             You have to login to make any comment and like any blog
           </i>
@@ -342,7 +390,6 @@ const Comment = ({ comment }) => {
     return () => {
       ac.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -351,23 +398,10 @@ const Comment = ({ comment }) => {
         {/* <Tooltip title={user?.name}> */}
         {loading ? (
           <></>
-        ) : user.avatar === undefined || user.avatar === {} ? (
+        ) : user.avatar ? (
           <MuiAvatar src="/broke.img" sx={{ width: 30, height: 30 }} />
         ) : (
-          <Avatar
-            style={{ width: 30, height: 30 }}
-            avatarStyle="Circle"
-            topType={user?.avatar?.topType}
-            accessoriesType={user?.avatar?.accessoriesType}
-            hairColor={user?.avatar?.hairColor}
-            facialHairType={user?.avatar?.facialHairType}
-            clotheType={user?.avatar?.clotheType}
-            clotheColor={user?.avatar?.clotheColor}
-            eyeType={user?.avatar?.eyeType}
-            eyebrowType={user?.avatar?.eyebrowType}
-            mouthType={user?.avatar?.mouthType}
-            skinColor={user?.avatar?.skinColor}
-          />
+          <></>
         )}
         {/* </Tooltip> */}
 
@@ -381,29 +415,9 @@ const Comment = ({ comment }) => {
         </div>
       </div>
       <Divider
-        sx={{ marginLeft: 0, marginY: 2, borderColor: "#6c757d" }}
+        // sx={{ marginLeft: 0, marginY: 2, borderColor: "#6c757d" }}
         className="text-muted"
       />
     </div>
   );
-};
-
-const style = {
-  margin: 0,
-  top: "auto",
-  right: "50%",
-  transform: "translateX(50%)",
-  bottom: 20,
-  left: "auto",
-  position: "fixed",
-};
-
-const editstyle = {
-  margin: 0,
-  bottom: "auto",
-  transform: "translateX(50%)",
-  top: 20,
-  right: 100,
-  left: "auto",
-  position: "fixed",
 };
