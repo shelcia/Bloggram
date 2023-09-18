@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Modal } from "@mui/material";
-import { customModalStyle } from "./CustomStylings";
+import { customModalContentStyle, customModalStyle } from "./CustomStylings";
 import { ShareSocial } from "react-share-social";
 
 const SocialModal = ({ open, setOpen, url, name }) => {
@@ -17,7 +17,14 @@ const SocialModal = ({ open, setOpen, url, name }) => {
         <ShareSocial
           title={`Hello folks I have published ${name}`}
           url={url}
-          socialTypes={["facebook", "twitter", "reddit", "linkedin"]}
+          socialTypes={[
+            "facebook",
+            "twitter",
+            "reddit",
+            "linkedin",
+            "whatsapp",
+          ]}
+          style={customModalContentStyle}
         />
       </Box>
     </Modal>

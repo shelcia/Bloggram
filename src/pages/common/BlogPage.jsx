@@ -16,7 +16,7 @@ import { apiBlog } from "../../services/models/BlogModel";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import LoadingPage from "./LoadingPage";
-import BackToTop from "../../components/ScrollToTop";
+import CustomBackToTop from "../../components/CustomScrollToTop";
 import EditIcon from "@mui/icons-material/Edit";
 import toast from "react-hot-toast";
 import { apiUsers } from "../../services/models/UserModel";
@@ -241,7 +241,7 @@ const BlogPage = () => {
           setBlog={setBlog}
         />
       </section>
-      <BackToTop id="blog-top" />
+      <CustomBackToTop id="blog-top" />
     </>
   );
 };

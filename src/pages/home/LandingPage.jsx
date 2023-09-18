@@ -12,12 +12,11 @@ const LandingPage = () => {
       <Hero />
       <Divider />
       <Blogs />
-      <Box className="text-center">
+      <Box className="text-center" sx={{ mt: { xs: 3, md: 0 } }}>
         <Button variant="contained" onClick={() => navigate("/signup")}>
           Start Reading Now !
         </Button>
       </Box>
-      {/* <Footer /> */}
     </React.Fragment>
   );
 };

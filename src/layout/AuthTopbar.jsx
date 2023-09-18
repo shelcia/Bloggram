@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import ThemeToggler from "../components/ThemeToggler";
+import ThemeToggler from "../components/CustomThemeToggler";
 import { ThemeContext } from "../context/ThemeContext";
 import { CustomMenuLogoLink } from "../components/CustomComponents";
 

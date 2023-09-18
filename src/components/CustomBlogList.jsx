@@ -18,9 +18,6 @@ import { /*CYCLIC_BASE_URL,*/ LOCALHOST_URL } from "../services/api";
 
 import {
   MoreHoriz as MoreHorizIcon,
-  FavoriteBorder as FavoriteBorderIcon,
-  // Favorite as FavoriteIcon,
-  BookmarkBorder as BookmarkBorderIcon,
   Share as ShareIcon,
 } from "@mui/icons-material";
 
@@ -33,10 +30,15 @@ import CustomMenuList from "./CustomMenuList";
 import Img from "../assets/placeholders/bloggram-placeholder.png";
 import DummyAvatar from "../assets/placeholders/dummy-user.png";
 import { PREFIX } from "../constants";
-// import { isCookieExist } from "../helpers/isValidToken";
 import SocialModal from "./CustomShareModal";
+import { handleLike } from "../helpers/blogMethods";
+import {
+  CustomLikeComponent,
+  CustomShareComponent,
+} from "./CustomBlogComponents";
+import { isCookieExist, isSameUser } from "../helpers/isValidToken";
 
-const BlogList = ({ blog }) => {
+const BlogList = ({ blog, likedBlogs = [], savedBlogs = [] }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -56,22 +58,26 @@ const BlogList = ({ blog }) => {
 
   const [user, setUser] = useState({
     name: "",
-    avatar: {},
     date: "",
   });
 
-  useEffect(() => {
-    const ac = new AbortController();
-    apiUsers.getSingle(blog.userId, ac.signal).then((res) => {
+  const _getUser = (id, signal) => {
+    apiUsers.getSingle(id, signal).then((res) => {
+      // console.log(res.message);
       if (res.status === "200") {
         setUser(res.message);
       }
     });
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+    _getUser(blog.userId, ac.signal);
 
     return () => {
       ac.abort();
     };
-  }, [blog?.userId]);
+  }, []);
 
   const [open, setOpen] = React.useState(false);
 
@@ -175,7 +181,10 @@ const BlogList = ({ blog }) => {
                   }}
                 />
                 <small className="mb-0 text-muted ms-2">{user?.name}</small>{" "}
-                {blog?.type === "PUBLISHED" ? (
+                <small className="mb-0 fw-light text-muted ms-2">
+                  {convertSimpleDate(user?.date)}
+                </small>
+                {/* {blog?.type === "PUBLISHED" ? (
                   <small className="mb-0 fw-light text-muted ms-2">
                     Published on {convertSimpleDate(user?.date)}
                   </small>
@@ -183,22 +192,28 @@ const BlogList = ({ blog }) => {
                   <small className="mb-0 fw-light text-muted ms-2">
                     Last Saved on {convertSimpleDate(user?.date)}
                   </small>
-                )}
+                )} */}
               </Box>
               <Box>
-                <IconButton aria-label="like">
-                  <FavoriteBorderIcon />
+                <CustomLikeComponent
+                  id={blog._id}
+                  likedBlogs={likedBlogs}
+                  handleLike={handleLike}
+                  _getUser={_getUser}
+                />
+                <CustomShareComponent
+                  id={blog._id}
+                  savedBlog={savedBlogs}
+                  handleLike={handleLike}
+                  _getUser={_getUser}
+                />
+                {/* {blog?.type === "PUBLISHED" && ( */}
+                <IconButton aria-label="share" onClick={() => setOpen(true)}>
+                  <ShareIcon />
                 </IconButton>
-                <IconButton aria-label="save">
-                  <BookmarkBorderIcon />
-                </IconButton>
-                {blog?.type === "PUBLISHED" && (
-                  <IconButton aria-label="share" onClick={() => setOpen(true)}>
-                    <ShareIcon />
-                  </IconButton>
-                )}
+                {/* )} */}
 
-                {localStorage.getItem(`${PREFIX}Token`) && (
+                {isCookieExist() && isSameUser(blog.userId) && (
                   <>
                     <IconButton aria-label="menu" onClick={handleClick}>
                       <MoreHorizIcon />

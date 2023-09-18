@@ -13,7 +13,11 @@ const Dashboard = () => {
       <section className="container pt-4">
         <Box className="row">
           <Box className="col-md-12">
-            <Typography component="h1" variant="h2">
+            <Typography
+              component="h1"
+              variant="h2"
+              sx={{ fontSize: { xs: "3rem" } }}
+            >
               Write Something Today !
             </Typography>
             <MyBlogs />

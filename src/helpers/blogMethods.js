@@ -3,7 +3,7 @@ import { PREFIX } from "../constants";
 import { isCookieExist } from "./isValidToken";
 import { apiBlog } from "../services/models/BlogModel";
 
-export const handleLike = (blogId) => {
+export const handleLike = (blogId, _getUser = () => {}) => {
   const userId = localStorage.getItem(`${PREFIX}UserId`);
   if (!(isCookieExist() && userId)) {
     toast.error("Only logged in users can like");
@@ -19,7 +19,7 @@ export const handleLike = (blogId) => {
     // console.log(res);
     if (res.status === "200") {
       toast.success(res.message);
-      // _getUser();
+      _getUser();
     } else {
       toast.error(res.message);
     }

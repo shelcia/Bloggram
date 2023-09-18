@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { apiBlog } from "../../../services/models/BlogModel";
-// import { BlogCard, BlogList } from "../../../components/CustomBlogList";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Typography, useMediaQuery } from "@mui/material";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import BlogCard from "../../../components/CustomBlogCard";
 import BlogList from "../../../components/CustomBlogList";
+import { apiUsers } from "../../../services/models/UserModel";
+import { PREFIX } from "../../../constants";
 
 const Blogs = () => {
+  const matches = useMediaQuery("(max-width:600px)");
+
   const [isLoading, setIsLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
 
@@ -22,6 +25,32 @@ const Blogs = () => {
       );
       setIsLoading(false);
     });
+
+    return () => {
+      ac.abort();
+    };
+  }, []);
+
+  const [user, setUser] = useState({
+    name: "",
+    date: "",
+    likedBlogs: [],
+    savedBlogs: [],
+  });
+
+  const _getUser = (id, signal) => {
+    apiUsers.getSingle(id, signal, `details`).then((res) => {
+      console.log(res.message);
+      if (res.status === "200") {
+        setUser(res.message);
+      }
+    });
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+    const userId = localStorage.getItem(`${PREFIX}UserId`);
+    _getUser(userId, ac.signal);
 
     return () => {
       ac.abort();
@@ -65,15 +94,48 @@ const Blogs = () => {
           blogs.length !== 0 &&
           blogs && (
             <Box className="row mt-3">
-              <Box className="col-md-6">
+              <Box className="col-lg-6" sx={{ mb: { xs: 5 } }}>
                 <Typography sx={{ mb: 2 }} variant="h6">
                   See what is trending <TrendingUpIcon /> !
                 </Typography>
-                <BlogCard blog={blogs?.[0]} />
+                <BlogCard
+                  blog={blogs?.[0]}
+                  likedBlogs={user.likedBlogs}
+                  savedBlogs={user.savedBlogs}
+                  getCurrUser={() => _getUser()}
+                />
               </Box>
-              <Box className="col-md-6 pt-2">
-                <BlogList blog={blogs?.[1]} />
-                <BlogList blog={blogs?.[2]} />
+              <Box className="col-lg-6 pt-2">
+                {matches ? (
+                  <BlogCard
+                    blog={blogs?.[1]}
+                    likedBlogs={user.likedBlogs}
+                    savedBlogs={user.savedBlogs}
+                    getCurrUser={() => _getUser()}
+                  />
+                ) : (
+                  <BlogList
+                    blog={blogs?.[1]}
+                    likedBlogs={user.likedBlogs}
+                    savedBlogs={user.savedBlogs}
+                    getCurrUser={() => _getUser()}
+                  />
+                )}
+                {matches ? (
+                  <BlogCard
+                    blog={blogs?.[2]}
+                    likedBlogs={user.likedBlogs}
+                    savedBlogs={user.savedBlogs}
+                    getCurrUser={() => _getUser()}
+                  />
+                ) : (
+                  <BlogList
+                    blog={blogs?.[2]}
+                    likedBlogs={user.likedBlogs}
+                    savedBlogs={user.savedBlogs}
+                    getCurrUser={() => _getUser()}
+                  />
+                )}
               </Box>
             </Box>
           )

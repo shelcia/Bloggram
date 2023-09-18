@@ -6,7 +6,22 @@ export const customModalStyle = {
   maxWidth: 400,
   minWidth: "30%",
   bgcolor: "background.paper",
-  boxShadow: 24,
+  boxShadow: "none",
+  borderRadius: 4,
+  fontFamily: "'Figtree', sans-serif",
+};
+
+export const customModalContentStyle = {
+  root: {
+    borderRadius: 5,
+    border: 0,
+  },
+  // copyContainer: {
+  //   border: "1px solid blue",
+  // },
+  title: {
+    fontFamily: "'Figtree', sans-serif",
+  },
 };
 
 export const drawerStyle = {

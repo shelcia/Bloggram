@@ -23,3 +23,8 @@ export const isValidToken = async () => {
 export const isCookieExist = () => {
   return Cookies.get(`${PREFIX}Token`) !== undefined;
 };
+
+export const isSameUser = (id) => {
+  const userId = localStorage.getItem(`${PREFIX}UserId`);
+  return id === userId;
+};

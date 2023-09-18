@@ -275,6 +275,11 @@ img { /* Safari 6.0 - 9.0 */
   filter: grayscale(100%);
 }
 
+.makeStyles-title-18 {
+  font-family: "Figtree", Verdana, Geneva, Tahoma, sans-serif !important;
+  font-weight: 700 !important;
+}
+
 * {
   font-family: "Figtree", Verdana, Geneva, Tahoma, sans-serif;
 }

@@ -3,12 +3,7 @@ import React, { useEffect, useState } from "react";
 // import { isCookieExist } from "../helpers/isValidToken";
 // import toast from "react-hot-toast";
 // import { apiBlog } from "../services/models/BlogModel";
-import {
-  FavoriteBorder as FavoriteBorderIcon,
-  Favorite as FavoriteIcon,
-  BookmarkBorder as BookmarkBorderIcon,
-  Share as ShareIcon,
-} from "@mui/icons-material";
+import { Share as ShareIcon } from "@mui/icons-material";
 import { apiUsers } from "../services/models/UserModel";
 import { LOCALHOST_URL } from "../services/api";
 import {
@@ -24,19 +19,27 @@ import LinesEllipsis from "react-lines-ellipsis";
 import Img from "../assets/placeholders/bloggram-placeholder.png";
 import { convertSimpleDate } from "../helpers/convertDate";
 import { handleLike } from "../helpers/blogMethods";
+import {
+  CustomLikeComponent,
+  CustomShareComponent,
+} from "./CustomBlogComponents";
+import { useNavigate } from "react-router-dom";
 
-const BlogCard = ({ blog }) => {
-  // const navigate = useNavigate();
+const BlogCard = ({
+  blog,
+  likedBlogs = [],
+  savedBlogs = [],
+  getCurrUser = () => {},
+}) => {
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: "",
-    avatar: {},
     date: "",
-    likedBlogs: [],
   });
 
   const _getUser = (id, signal) => {
-    apiUsers.getSingle(blog.userId, signal).then((res) => {
+    apiUsers.getSingle(id, signal).then((res) => {
       if (res.status === "200") {
         setUser(res.message);
       }
@@ -64,10 +67,17 @@ const BlogCard = ({ blog }) => {
           alt=""
           style={{ width: "100%", height: "200px", objectFit: "cover" }}
           loading="lazy"
+          onClick={() => navigate(`/blog/${blog._id}`)}
         />
         <CardContent className="mt-3">
-          <Box className="d-flex align-items-center justify-content-between">
-            <Box className="d-flex align-items-center">
+          <Box
+            className="d-flex align-items-center justify-content-between"
+            sx={{ flexDirection: { xs: "column", md: "row" } }}
+          >
+            <Box
+              className="d-flex align-items-center"
+              onClick={() => navigate(`/blog/${blog._id}`)}
+            >
               <MuiAvatar
                 src={`${LOCALHOST_URL}/user/image/${blog?.userId}`}
                 sx={{ width: 30, height: 30 }}
@@ -78,36 +88,33 @@ const BlogCard = ({ blog }) => {
               />
               <small className="mb-0 text-muted ms-2">{user?.name}</small>{" "}
               <small className="mb-0 fw-light text-muted ms-2">
-                Published on {convertSimpleDate(user?.date)}
+                {/* Published on  */}
+                {convertSimpleDate(user?.date)}
               </small>
             </Box>
             <Box>
-              {user?.likedBlogs?.includes(blog?._id) ? (
-                <IconButton
-                  aria-label="like"
-                  color="error"
-                  onClick={() => handleLike(blog?._id)}
-                >
-                  <FavoriteIcon />
-                </IconButton>
-              ) : (
-                <IconButton
-                  aria-label="like"
-                  onClick={() => handleLike(blog?._id)}
-                >
-                  <FavoriteBorderIcon />
-                </IconButton>
-              )}
-
-              <IconButton aria-label="save">
-                <BookmarkBorderIcon />
-              </IconButton>
+              <CustomLikeComponent
+                id={blog._id}
+                likedBlogs={likedBlogs}
+                handleLike={handleLike}
+                _getUser={() => getCurrUser()}
+              />
+              <CustomShareComponent
+                id={blog._id}
+                savedBlog={savedBlogs}
+                handleLike={handleLike}
+                _getUser={() => getCurrUser()}
+              />
               <IconButton aria-label="share">
                 <ShareIcon />
               </IconButton>
             </Box>
           </Box>
-          <Typography variant="h5" className="my-3">
+          <Typography
+            variant="h5"
+            className="my-3"
+            onClick={() => navigate(`/blog/${blog._id}`)}
+          >
             <LinesEllipsis
               text={blog?.title}
               maxLine="1"
@@ -116,7 +123,11 @@ const BlogCard = ({ blog }) => {
               basedOn="letters"
             />
           </Typography>
-          <Typography variant="h6" style={{ fontWeight: 400 }}>
+          <Typography
+            variant="h6"
+            style={{ fontWeight: 400 }}
+            onClick={() => navigate(`/blog/${blog._id}`)}
+          >
             <LinesEllipsis
               text={blog?.desc}
               maxLine="2"
@@ -125,26 +136,11 @@ const BlogCard = ({ blog }) => {
               basedOn="letters"
             />
           </Typography>
-          {/* <div className="text-end my-2">
-              {blog.type === "PUBLISHED" && (
-                <small className="mb-0 fw-light text-muted ms-2">
-                  Published on {convertSimpleDate(user?.date)}
-                </small>
-              )}
-            </div> */}
           <Box sx={{ mt: 1 }}>
             {blog?.tags?.map((tag) => (
               <Chip label={tag} key={tag} sx={{ mr: 1 }} />
             ))}
           </Box>
-          {/* <div
-              className="text-center"
-              onClick={() => navigate(`/blog/${blog._id}`)}
-            >
-              <Button variant="outlined" size="small">
-                Read More
-              </Button>
-            </div> */}
         </CardContent>
       </Card>
     </React.Fragment>

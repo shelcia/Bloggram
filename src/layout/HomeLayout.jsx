@@ -5,7 +5,7 @@ import {
   CustomMenuLogoLink,
 } from "../components/CustomComponents";
 import { ThemeContext } from "../context/ThemeContext";
-import ThemeToggler from "../components/ThemeToggler";
+import ThemeToggler from "../components/CustomThemeToggler";
 import { Outlet, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CustomPopover from "../components/CustomPopover";

@@ -5,7 +5,7 @@ import CustomMenuList from "../components/CustomMenuList";
 import MenuIcon from "@mui/icons-material/Menu";
 import CustomPopover from "../components/CustomPopover";
 import { ThemeContext } from "../context/ThemeContext";
-import ThemeToggler from "../components/ThemeToggler";
+import ThemeToggler from "../components/CustomThemeToggler";
 import {
   CustomMenuItm,
   CustomMenuLink,
