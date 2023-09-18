@@ -4,6 +4,7 @@ import { isCookieExist } from "./isValidToken";
 import { apiBlog } from "../services/models/BlogModel";
 
 export const handleLike = (blogId, _getUser = () => {}) => {
+  console.log(_getUser());
   const userId = localStorage.getItem(`${PREFIX}UserId`);
   if (!(isCookieExist() && userId)) {
     toast.error("Only logged in users can like");
@@ -16,6 +17,29 @@ export const handleLike = (blogId, _getUser = () => {}) => {
   };
 
   apiBlog.put(response, `likes/${blogId}`).then((res) => {
+    // console.log(res);
+    if (res.status === "200") {
+      toast.success(res.message);
+      _getUser();
+    } else {
+      toast.error(res.message);
+    }
+  });
+};
+
+export const handleSave = (blogId, _getUser = () => {}) => {
+  const userId = localStorage.getItem(`${PREFIX}UserId`);
+  if (!(isCookieExist() && userId)) {
+    toast.error("Only logged in users can like");
+    return;
+  }
+
+  const response = {
+    userId: userId,
+    blogId: blogId,
+  };
+
+  apiBlog.put(response, `savedposts/${blogId}`).then((res) => {
     // console.log(res);
     if (res.status === "200") {
       toast.success(res.message);

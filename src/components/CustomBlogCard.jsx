@@ -18,7 +18,7 @@ import {
 import LinesEllipsis from "react-lines-ellipsis";
 import Img from "../assets/placeholders/bloggram-placeholder.png";
 import { convertSimpleDate } from "../helpers/convertDate";
-import { handleLike } from "../helpers/blogMethods";
+import { handleLike, handleSave } from "../helpers/blogMethods";
 import {
   CustomLikeComponent,
   CustomShareComponent,
@@ -102,7 +102,7 @@ const BlogCard = ({
               <CustomShareComponent
                 id={blog._id}
                 savedBlog={savedBlogs}
-                handleLike={handleLike}
+                handleSave={handleSave}
                 _getUser={() => getCurrUser()}
               />
               <IconButton aria-label="share">

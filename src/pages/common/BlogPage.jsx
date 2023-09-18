@@ -13,11 +13,14 @@ import {
 } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import { apiBlog } from "../../services/models/BlogModel";
-import ModeCommentIcon from "@mui/icons-material/ModeComment";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+// import ModeCommentIcon from "@mui/icons-material/ModeComment";
+import {
+  ModeComment as ModeCommentIcon,
+  FavoriteRounded as FavoriteRoundedIcon,
+  Edit as EditIcon,
+} from "@mui/icons-material";
 import LoadingPage from "./LoadingPage";
 import CustomBackToTop from "../../components/CustomScrollToTop";
-import EditIcon from "@mui/icons-material/Edit";
 import toast from "react-hot-toast";
 import { apiUsers } from "../../services/models/UserModel";
 import { convertSimpleDate } from "../../helpers/convertDate";
@@ -171,12 +174,13 @@ const BlogPage = () => {
         <div style={fabStyle}>
           <ButtonGroup variant="contained" color="secondary">
             <Button
-              onClick={() => setDrawer(true)}
+              // onClick={() => setDrawer(true)}
               aria-label="comments"
               sx={{
                 borderTopLeftRadius: "50ex",
                 borderBottomLeftRadius: "50ex",
               }}
+              disabled
             >
               {/* <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
                 {blog.comments.length}

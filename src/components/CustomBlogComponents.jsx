@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FavoriteBorder as FavoriteBorderIcon,
   Favorite as FavoriteIcon,
@@ -13,18 +13,22 @@ export const CustomLikeComponent = ({
   handleLike,
   _getUser = () => {},
 }) => {
-  console.log(_getUser());
-  return likedBlogs?.map((blog) => blog.blogId).includes(id.toString()) ? (
+  const [isLiked, setIsLiked] = useState(
+    likedBlogs?.map((blog) => blog.blogId).includes(id.toString())
+  );
+
+  const handleLikeClick = () => {
+    setIsLiked(!isLiked);
+    handleLike(id, _getUser());
+  };
+
+  return (
     <IconButton
       aria-label="like"
-      color="error"
-      onClick={() => handleLike(id, _getUser())}
+      onClick={handleLikeClick}
+      color={isLiked ? "error" : "default"}
     >
-      <FavoriteIcon />
-    </IconButton>
-  ) : (
-    <IconButton aria-label="like" onClick={() => handleLike(id, _getUser())}>
-      <FavoriteBorderIcon />
+      {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
     </IconButton>
   );
 };
@@ -32,20 +36,25 @@ export const CustomLikeComponent = ({
 export const CustomShareComponent = ({
   id,
   savedBlog,
-  handleLike,
-  _getUser,
+  handleSave,
+  _getUser = () => {},
 }) => {
-  return savedBlog?.map((blog) => blog.blogId).includes(id.toString()) ? (
+  const [isSaved, setIsSaved] = useState(
+    savedBlog?.map((blog) => blog.blogId).includes(id.toString())
+  );
+
+  const handleSaveClick = () => {
+    setIsSaved(!isSaved);
+    handleSave(id, _getUser());
+  };
+
+  return (
     <IconButton
-      aria-label="like"
-      color="secondary"
-      onClick={() => handleLike(id, _getUser)}
+      aria-label="save"
+      onClick={handleSaveClick}
+      color={isSaved ? "primary" : "default"}
     >
-      <BookmarkIcon />
-    </IconButton>
-  ) : (
-    <IconButton aria-label="like" onClick={() => handleLike(id, _getUser)}>
-      <BookmarkBorderIcon />
+      {isSaved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
     </IconButton>
   );
 };

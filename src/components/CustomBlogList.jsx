@@ -31,7 +31,7 @@ import Img from "../assets/placeholders/bloggram-placeholder.png";
 import DummyAvatar from "../assets/placeholders/dummy-user.png";
 import { PREFIX } from "../constants";
 import SocialModal from "./CustomShareModal";
-import { handleLike } from "../helpers/blogMethods";
+import { handleLike, handleSave } from "../helpers/blogMethods";
 import {
   CustomLikeComponent,
   CustomShareComponent,
@@ -204,7 +204,7 @@ const BlogList = ({ blog, likedBlogs = [], savedBlogs = [] }) => {
                 <CustomShareComponent
                   id={blog._id}
                   savedBlog={savedBlogs}
-                  handleLike={handleLike}
+                  handleSave={handleSave}
                   _getUser={_getUser}
                 />
                 {/* {blog?.type === "PUBLISHED" && ( */}
