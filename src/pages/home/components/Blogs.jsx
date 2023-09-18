@@ -100,8 +100,8 @@ const Blogs = () => {
                 </Typography>
                 <BlogCard
                   blog={blogs?.[0]}
-                  likedBlogs={user.likedBlogs}
-                  savedBlogs={user.savedBlogs}
+                  likedBlogs={user?.likedBlogs}
+                  savedBlogs={user?.savedBlogs}
                   getCurrUser={() => _getUser()}
                 />
               </Box>
@@ -109,30 +109,30 @@ const Blogs = () => {
                 {matches ? (
                   <BlogCard
                     blog={blogs?.[1]}
-                    likedBlogs={user.likedBlogs}
-                    savedBlogs={user.savedBlogs}
+                    likedBlogs={user?.likedBlogs}
+                    savedBlogs={user?.savedBlogs}
                     getCurrUser={() => _getUser()}
                   />
                 ) : (
                   <BlogList
                     blog={blogs?.[1]}
-                    likedBlogs={user.likedBlogs}
-                    savedBlogs={user.savedBlogs}
+                    likedBlogs={user?.likedBlogs}
+                    savedBlogs={user?.savedBlogs}
                     getCurrUser={() => _getUser()}
                   />
                 )}
                 {matches ? (
                   <BlogCard
                     blog={blogs?.[2]}
-                    likedBlogs={user.likedBlogs}
-                    savedBlogs={user.savedBlogs}
+                    likedBlogs={user?.likedBlogs}
+                    savedBlogs={user?.savedBlogs}
                     getCurrUser={() => _getUser()}
                   />
                 ) : (
                   <BlogList
                     blog={blogs?.[2]}
-                    likedBlogs={user.likedBlogs}
-                    savedBlogs={user.savedBlogs}
+                    likedBlogs={user?.likedBlogs}
+                    savedBlogs={user?.savedBlogs}
                     getCurrUser={() => _getUser()}
                   />
                 )}
