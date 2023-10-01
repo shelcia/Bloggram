@@ -3,7 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiAuth } from "../../services/models/AuthModel";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import { Button, TextField, useMediaQuery } from "@mui/material";
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  TextField,
+  useMediaQuery,
+} from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AuthLayout from "../../layout/AuthLayout";
 import { PREFIX } from "../../constants";
@@ -71,6 +77,11 @@ const Login = () => {
   return (
     <React.Fragment>
       <AuthLayout title="Login">
+        <Alert severity="primary" variant="filled" sx={{ p: 0.25, mb: 2 }}>
+          <AlertTitle>Demo Account</AlertTitle>
+          <b>email:</b> anika.grant31@ethereal.email <br /> <b>password:</b>{" "}
+          password
+        </Alert>
         <TextField
           label="Email"
           variant="standard"
