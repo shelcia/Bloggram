@@ -12,17 +12,25 @@
 
 ## Demo Pages
 
-![Screen 1](./screens/1.png)
+![Screen 1](./screens/home-light.png)
 
-![Screen 2](./screens/2.png)
+![Screen 2](./screens/home-dark.png)
 
-![Screen 3](./screens/3.png)
+![Screen 3](./screens/login.png)
+
+![Screen 4](./screens/dashboard.png)
+
+![Screen 5](./screens/write.png)
+
+![Screen 6](./screens/profile-dark.png)
+
+![Screen 6](./screens/blog.png)
 
 ## Demo Account
 
-- email - `kane.mckenzie65@ethereal.email`
+- email - `anika.grant31@ethereal.email`
 
-- password - `aab8zKVKPU4yM8NC2K`
+- password - `password`
 
 ## Deployment Link
 
