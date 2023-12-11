@@ -197,7 +197,9 @@ const BlogPage = () => {
               {/* <span style={{ fontSize: "0.7rem", lineHeight: "6.4px" }}>
                 {blog.likes?.length}
               </span> */}
-              <FavoriteRoundedIcon />
+              <FavoriteRoundedIcon sx={{
+                color: blog?.likes?.some((like)=> like.userId===userId) ? "red" : "black"
+              }}/>
             </Button>
           </ButtonGroup>
           {/* <Fab
