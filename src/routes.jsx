@@ -30,6 +30,9 @@ const AddBlog = Loadable(lazy(() => import("./pages/dashboard/blog/AddBlog")));
 const EditBlog = Loadable(
   lazy(() => import("./pages/dashboard/blog/EditBlog"))
 );
+const ErrorPage = Loadable(
+  lazy(() => import("./pages/others/ErrorPage"))
+);
 
 const routes = [
   {
@@ -90,6 +93,10 @@ const routes = [
       },
     ],
   },
+  {
+    path:"*",
+    element: <ErrorPage />
+  }
 ];
 
 export default routes;

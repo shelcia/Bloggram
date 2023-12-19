@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 0;
+}
+
+.page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.page h1{
+    font-size: 10rem;
+}
+
+.page p{
+    font-size: 2rem;
+}
+
+button{
+    margin-top: 2rem;
+    border: 0.1rem solid #fff;
+    background-color: transparent;
+    color: #ffffff;
+    padding: 1rem;
+}
+
+button:hover{
+    background-color: #ffffff;
+    color: #091922;
+}
