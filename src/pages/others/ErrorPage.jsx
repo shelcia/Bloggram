@@ -1,5 +1,6 @@
 import React from "react";
 import './ErrorPage.css'
+import { Button } from "@mui/material";
 
 const ErrorPage = () => {
   return (
@@ -8,7 +9,7 @@ const ErrorPage = () => {
         <div className="page">
           <h1>404</h1>
           <p>Page not found!</p>
-           <a href="https://bloggram-beta.vercel.app/"><button>Go to Home</button></a>
+           <a href="https://bloggram-beta.vercel.app/"><Button variant="contained">Go To Home</Button></a>
         </div>
       </div>
     </>
