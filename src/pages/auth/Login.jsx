@@ -9,13 +9,17 @@ import {
   Button,
   TextField,
   useMediaQuery,
+  InputAdornment,
 } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AuthLayout from "../../layout/AuthLayout";
 import { PREFIX } from "../../constants";
 import Cookies from "js-cookie";
-
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 const Login = () => {
+  const [isPasswordVisible, setisPasswordVisible] = useState(false);
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -99,7 +103,23 @@ const Login = () => {
           name="password"
           value={user.password}
           onChange={(e) => handleInputs(e)}
-          type="password"
+          type={`${isPasswordVisible ? "text" : "password"}`}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  onClick={() => setisPasswordVisible(!isPasswordVisible)}
+                  edge="end"
+                >
+                  {isPasswordVisible ? (
+                    <VisibilityIcon style={{ color: "#4CAAF1" }} />
+                  ) : (
+                    <VisibilityOffIcon />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <div className="text-center mt-4">
           {isLoading ? (
