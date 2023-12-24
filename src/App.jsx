@@ -53,6 +53,7 @@ const App = () => {
     style: {
       fontWeight: 500,
       fontFamily: "'Figtree', sans-serif",
+      background: darkTheme ? '#f3f4f9' : '#091922',
     },
   };
 
