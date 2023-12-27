@@ -19,6 +19,8 @@ const EditProfile = () => {
   const [user, setUser] = useState({
     name: "",
     desc: "",
+    bio: "",               // New state for bio
+    instagramHandle: "",   // New state for Instagram handle
     date: "",
     email: "",
   });
@@ -48,10 +50,11 @@ const EditProfile = () => {
     const body = {
       name: user.name,
       desc: user.desc,
-      // avatar: avatar,
+      bio: user.bio,                   // Include bio in the body
+      instagramHandle: user.instagramHandle,  // Include Instagram handle in the body
     };
+
     apiUsers.put(body, `edit/${userId}`).then((res) => {
-      //   console.log(res);
       if (res.status === "200") {
         toast.success(res.message);
         _getProfile(userId);
@@ -83,6 +86,24 @@ const EditProfile = () => {
                 variant="standard"
                 value={user.desc}
                 onChange={(e) => setUser({ ...user, desc: e.target.value })}
+                fullWidth
+                className="mb-4"
+              />
+              <TextField
+                label="Bio"
+                variant="standard"
+                value={user.bio}
+                onChange={(e) => setUser({ ...user, bio: e.target.value })}
+                fullWidth
+                className="mb-4"
+              />
+              <TextField
+                label="Instagram Handle"
+                variant="standard"
+                value={user.instagramHandle}
+                onChange={(e) =>
+                  setUser({ ...user, instagramHandle: e.target.value })
+                }
                 fullWidth
                 className="mb-4"
               />

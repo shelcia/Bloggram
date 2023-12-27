@@ -92,6 +92,9 @@ const Profile = () => {
                     {user.email}
                   </Typography>
                   <Typography variant="subtitle2" className="text-muted">
+                    {user.bio}
+                  </Typography>
+                  <Typography variant="subtitle2" className="text-muted">
                     Joined {convertSimpleDate(user.date)}
                   </Typography>
                 </Box>
@@ -105,9 +108,21 @@ const Profile = () => {
                   </Typography>
                 </Box> */}
 
-                {/* <Typography variant="body2" className="text-muted">
-                  Joined {convertSimpleDate(user.date)}
-                </Typography> */}
+                <Typography variant="subtitle-2" className="text-muted">
+                  {`Instagram: ${user.instagramHandle || 'No Instagram Handle Provided'}`}
+                </Typography>
+                <Typography variant="body2" className="text-muted">
+                {user.bio ? (
+                  <>
+                    <strong>Instagram:</strong> {user.instagramHandle || 'No Instagram Handle Provided'} <br />
+                    <strong>Bio:</strong> {user.bio}
+                  </>
+                ) : (
+                  'No Bio Information Available'
+                )}
+              </Typography>
+
+
               </Box>
               {localStorage.getItem(`${PREFIX}Token`) && (
                 <Button

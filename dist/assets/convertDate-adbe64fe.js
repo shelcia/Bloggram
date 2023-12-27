@@ -1,0 +1,1 @@
+import{ay as r}from"./index-cd888a92.js";const a="user",u=new r({getAll:!0,getSingle:!0,getByParams:!1,post:!0,postFormData:!0,put:!0,putById:!0,patch:!0,patchByParams:!0,remove:!0,url:a}),n=t=>{if(!t)return"";const e=new Date(t);return Intl.DateTimeFormat("en-US",{year:"numeric",month:"short",day:"2-digit"}).format(e)};export{u as a,n as c};
