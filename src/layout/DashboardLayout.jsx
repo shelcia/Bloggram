@@ -29,7 +29,9 @@ const DashboardLayout = () => {
 
   const logout = () => {
     Cookies.remove(`${PREFIX}Token`);
+    const darkTheme = localStorage.getItem(`${PREFIX}theme`);
     localStorage.clear();
+    localStorage.setItem(`${PREFIX}theme`, darkTheme);
     Promise.resolve().then(() => {
       navigate("/");
       setAnchorEl(null);
