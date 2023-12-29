@@ -17,9 +17,11 @@ const AddBlog = () => {
   // console.log({ file });
 
   const handleChange = (content) => {
-    // console.log(content); //Get Content Inside Editor
-    setBlog({ ...blog, content: content });
-  };
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      content: content,
+    }));
+  };  
 
   const [loading, setLoading] = useState(false);
 

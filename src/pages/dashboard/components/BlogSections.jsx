@@ -20,7 +20,7 @@ const BlogSections = ({
 }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
-
+  const hasBlogContent = blog.title && blog.content.length && blog.desc && blog.tags.length;
   return (
     <section className="p-5">
       <Box className="d-flex justify-content-between">
@@ -32,12 +32,14 @@ const BlogSections = ({
         </Box>
         {!loading ? (
           <Box>
+          
             <Button
               onClick={() => handleBlog("DRAFT")}
               variant="outlined"
               color="primary"
               size="small"
               className="me-2"
+              disabled={!hasBlogContent}
             >
               Save as Draft
             </Button>
