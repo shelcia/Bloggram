@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import { Box, Button, Input, TextField } from "@mui/material";
+import { Box, Button, Input, TextField, useMediaQuery } from "@mui/material";
 import CustomEditor from "../../../components/CustomEditor";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
@@ -21,24 +21,28 @@ const BlogSections = ({
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const hasBlogContent = blog.title && blog.content.length && blog.desc && blog.tags.length;
+  const matches = useMediaQuery("(max-width:500px)");
   return (
-    <section className="p-5">
-      <Box className="d-flex justify-content-between">
+    <section className="p-sm-5 p-3">
+      <Box className="d-flex justify-content-between align-items-center">
         <Box>
-          <Button onClick={page === 1 ? () => navigate(-1) : () => setPage(1)}>
+          <Button 
+          onClick={page === 1 ? () => navigate(-1) : () => setPage(1)}
+          className="px-sm-4 px-2 border"
+          >
             <ArrowBackIcon sx={{ fontSize: "0.9rem" }} />
             <span className="mb-0">Go Back</span>
           </Button>
         </Box>
         {!loading ? (
-          <Box>
+          <Box sx={{ display: matches ? 'flex' : '' }}>
           
             <Button
               onClick={() => handleBlog("DRAFT")}
               variant="outlined"
               color="primary"
               size="small"
-              className="me-2"
+              className="px-sm-4 px-2 me-2"
               disabled={!hasBlogContent}
             >
               Save as Draft
@@ -49,6 +53,7 @@ const BlogSections = ({
                 onClick={() => setPage(2)}
                 variant="contained"
                 color="secondary"
+                className="px-sm-4 px-2"
                 size="small"
               >
                 Go to Publish
@@ -58,6 +63,7 @@ const BlogSections = ({
                 onClick={() => handleBlog("PUBLISHED")}
                 variant="contained"
                 color="secondary"
+                className="px-sm-4 px-3"
                 size="small"
               >
                 Publish
