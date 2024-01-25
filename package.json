@@ -9,7 +9,7 @@
     "@mui/lab": "^5.0.0-alpha.153",
     "@mui/material": "^5.15.2",
     "aos": "^2.3.4",
-    "axios": "^1.6.3",
+    "axios": "^1.6.7",
     "html-react-parser": "^4.2.10",
     "js-cookie": "^3.0.5",
     "lodash.merge": "^4.6.2",
